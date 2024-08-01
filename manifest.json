@@ -1,0 +1,64 @@
+{
+  "name": "AdditionalAchievements",
+  "version": "0.1.0",
+  "namespace": "Flyga.AdditionalAchievements",
+  "package": "AdditionalAchievements.dll",
+  "manifest_version": 1,
+
+  "description": "A module that adds even more achievements to Guild Wars 2.",
+  "dependencies": {
+    "bh.blishhud": "^1.0.0",
+    "Flyga.PositionEvents": "^0.3.0"
+  },
+  "url": "https://github.com/Flyga-M/AdditionalAchievements",
+  "contributors": [
+    {
+      "name": "Flyga",
+      "url": "https://github.com/Flyga-M"
+    }
+  ],
+  "api_permissions": {
+    "account": {
+      "optional": true,
+      "details": "Needed if an achievement needs this info."
+    },
+    "builds": {
+      "optional": true,
+      "details": "Needed if an achievement needs this info."
+    },
+    "characters": {
+      "optional": true,
+      "details": "Needed if an achievement needs this info."
+    },
+    "guilds": {
+      "optional": true,
+      "details": "Needed if an achievement needs this info."
+    },
+    "inventories": {
+      "optional": true,
+      "details": "Needed if an achievement needs this info."
+    },
+    "progression": {
+      "optional": true,
+      "details": "Needed if an achievement needs this info."
+    },
+    "pvp": {
+      "optional": true,
+      "details": "Needed if an achievement needs this info."
+    },
+    "tradingpost": {
+      "optional": true,
+      "details": "Needed if an achievement needs this info."
+    },
+    "unlocks": {
+      "optional": true,
+      "details": "Needed if an achievement needs this info."
+    },
+    "wallet": {
+      "optional": true,
+      "details": "Needed if an achievement needs this info."
+    }
+  },
+  "directories": [ "additionalAchievements" ],
+  "enabled_without_gw2": false
+}
