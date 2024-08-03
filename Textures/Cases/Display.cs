@@ -9,6 +9,7 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
         private readonly Back _back;
         private readonly Selection _selection;
         private readonly Description _description;
+        private readonly Repo _repo;
 
         private readonly TextureReference _moduleIconCorner;
         private readonly TextureReference _moduleIconCornerHover;
@@ -31,6 +32,8 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
         public Selection Selection => _selection;
 
         public Description Description => _description;
+
+        public Repo Repo => _repo;
 
         /// <summary>
         /// The corner icon for the module.
@@ -77,6 +80,7 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
             _back = new Back();
             _selection = new Selection();
             _description = new Description();
+            _repo = new Repo();
 
             _moduleIconCorner = new TextureReference("png/moduleIcon64.png");
             _moduleIconCornerHover = new TextureReference("png/moduleIcon_grown64.png");
@@ -100,6 +104,7 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
             _back?.Dispose();
             _selection?.Dispose();
             _description?.Dispose();
+            _repo?.Dispose();
 
             _moduleIconCorner?.Dispose();
 

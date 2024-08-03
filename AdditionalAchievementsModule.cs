@@ -7,10 +7,13 @@ using Blish_HUD.Input;
 using Blish_HUD.Modules;
 using Blish_HUD.Modules.Managers;
 using Blish_HUD.Settings;
+using Flyga.AdditionalAchievements.Repo;
+using Flyga.AdditionalAchievements.Resources;
 using Flyga.AdditionalAchievements.Status;
 using Flyga.AdditionalAchievements.Status.Provider;
 using Flyga.AdditionalAchievements.Textures;
 using Flyga.AdditionalAchievements.Textures.Fonts;
+using Flyga.AdditionalAchievements.UI.Controls;
 using Flyga.AdditionalAchievements.UI.Views;
 using Flyga.AdditionalAchievements.UI.Windows;
 using Microsoft.Xna.Framework;
@@ -59,6 +62,7 @@ namespace Flyga.AdditionalAchievements
 
         AchievementPackInitiator _packInitiator;
         Solve.Handler.AchievementHandler _achievementHandler;
+        AchievementPackRepo _achievementPackRepo;
 
         private readonly Dictionary<IAchievementPackManager, TaskCompletionSource<bool>> _packsLoadedCompletionSources = new Dictionary<IAchievementPackManager, TaskCompletionSource<bool>>(); 
 
@@ -133,6 +137,7 @@ namespace Flyga.AdditionalAchievements
             }
         }
 
+        public AchievementPackInitiator PackInitiator => _packInitiator;
 
         #region Service Managers
         internal SettingsManager SettingsManager => this.ModuleParameters.SettingsManager;
@@ -198,6 +203,9 @@ namespace Flyga.AdditionalAchievements
             await InitializeAchievementsFromWatchPath();
 
             Logger.Info("  -- done");
+
+            _achievementPackRepo = new AchievementPackRepo();
+            await _achievementPackRepo.Load(GetModuleProgressHandler());
 
             SetupNotificationView();
             BuildAchievementWindow();
@@ -294,7 +302,7 @@ namespace Flyga.AdditionalAchievements
             pack.Dispose();
         }
 
-        private async Task InitializeAchievementsFromWatchPath()
+        internal async Task InitializeAchievementsFromWatchPath()
         {
             Directory.CreateDirectory(WatchPath);
 
@@ -426,14 +434,14 @@ namespace Flyga.AdditionalAchievements
         {
             if (pack == null )
             {
-                Logger.Warn("Attempting to register pack failed. Pack must be set to an " +
-                    "instance.");
+                Logger.Warn($"Attempt to register pack failed. Pack must be set to an instance.");
                 return false;
             }
 
             if (!_packInitiator.TryRegisterPack(pack, out PackException exception))
             {
-                Logger.Warn($"Attempting to register pack failed. An exception occured: {exception}");
+                Logger.Warn($"Attempt to register pack {pack.Manifest.GetDetailedName()} at " +
+                    $"{pack.Manifest.PackFilePath} failed. An exception occured: {exception}");
                 return false;
             }
 
@@ -466,7 +474,7 @@ namespace Flyga.AdditionalAchievements
 
             if (!_packInitiator.TryRegisterPack(filepath, out PackException exception, out pack))
             {
-                Logger.Warn($"Attempting to register pack failed. An exception occured: {exception}");
+                Logger.Warn($"Attempt to register pack at {filepath} failed. An exception occured: {exception}");
                 return false;
             }
 
@@ -502,13 +510,34 @@ namespace Flyga.AdditionalAchievements
         {
             if (!_packInitiator.TryDeletePack(pack, out PackException ex))
             {
-                Logger.Warn($"Unable to delete pack with namespace {pack.Manifest.GetDetailedName()}. {ex}");
+                Logger.Warn($"Unable to delete pack with namespace {pack.Manifest.GetDetailedName()} at " +
+                    $"{pack.Manifest.PackFilePath}. {ex}");
                 return false;
             }
 
             FinalizeDeletedPack(pack);
 
             return true;
+        }
+
+        public IProgress<string> GetModuleProgressHandler()
+        {
+            // TODO: Consider enforcing a source so that multiple items can be shown in the loading tooltip.
+            return new Progress<string>(UpdateModuleLoading);
+        }
+
+        private void UpdateModuleLoading(string loadingMessage)
+        {
+            if (this.RunState == ModuleRunState.Loaded && _cornerIcon != null)
+            {
+                _cornerIcon.LoadingMessage = loadingMessage;
+                bool packsLoading = !string.IsNullOrWhiteSpace(loadingMessage);
+
+                if (!packsLoading)
+                {
+                    _cornerIcon.BasicTooltipText = null;
+                }
+            }
         }
 
         protected override void OnModuleLoaded(EventArgs e)
@@ -519,10 +548,25 @@ namespace Flyga.AdditionalAchievements
         }
 
         bool _once = false;
+        double _elapsed = 0;
 
         protected override void Update(GameTime gameTime)
         {
             _achievementHandler?.Update(gameTime);
+
+            //_elapsed += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            //if (!_once && _elapsed > 10_000)
+            //{
+            //    _once = true;
+            //    PkgBody pkgBody = new PkgBody(_achievementPackRepo.AchievementPackages.First())
+            //    {
+            //        Width = 500,
+            //        Height = 200,
+            //        Top = 60,
+            //        Parent = GameService.Graphics.SpriteScreen
+            //    };
+            //}
         }
 
         // TODO: only do this when already ingame. Gets wrong values when in loading screen
@@ -602,7 +646,7 @@ namespace Flyga.AdditionalAchievements
 
         private void BuildAchievementWindow()
         {
-            _achievementWindow = new AchievementWindow(_achievementHandler)
+            _achievementWindow = new AchievementWindow(_achievementHandler, _achievementPackRepo)
             {
                 Parent = GameService.Graphics.SpriteScreen
             };

@@ -162,4 +162,13 @@
   <data name="AchievementObjectives" xml:space="preserve">
     <value>Ziele</value>
   </data>
+  <data name="Download" xml:space="preserve">
+    <value>Herunterladen</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
 </root>

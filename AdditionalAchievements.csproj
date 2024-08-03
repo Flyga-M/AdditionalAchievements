@@ -160,6 +160,10 @@
     <Compile Include="Integration\PositionEventsContextProvider.cs" />
     <Compile Include="Integration\_Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Integration\_Type\IntegrationState.cs" />
+    <Compile Include="Repo\AchievementPackPkg.cs" />
+    <Compile Include="Repo\AchievementPackRepo.cs" />
+    <Compile Include="Repo\PkgState.cs" />
+    <Compile Include="Repo\_Util\PackHandlingUtil.cs" />
     <Compile Include="Resources\Status\Provider.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -196,6 +200,7 @@
     <Compile Include="Textures\Cases\_Display\Back.cs" />
     <Compile Include="Textures\Cases\_Display\Description.cs" />
     <Compile Include="Textures\Cases\_Display\Progress.cs" />
+    <Compile Include="Textures\Cases\_Display\Repo.cs" />
     <Compile Include="Textures\Cases\_Display\Selection.cs" />
     <Compile Include="Textures\Colors\ColorManager.cs" />
     <Compile Include="Textures\Fonts\FontManager.cs" />
@@ -205,6 +210,7 @@
     <Compile Include="UI\Controller\AchievementProgressSquareController.cs" />
     <Compile Include="UI\Controller\AchievementProgressTextController.cs" />
     <Compile Include="UI\Controller\AchievementSelectionController.cs" />
+    <Compile Include="UI\Controller\PkgBodyController.cs" />
     <Compile Include="UI\Controller\StatusDisplayController.cs" />
     <Compile Include="UI\Controls\AchievementCompletedNotification.cs" />
     <Compile Include="UI\Controls\AchievementDescription.cs" />
@@ -214,6 +220,7 @@
     <Compile Include="UI\Controls\BackBar.cs" />
     <Compile Include="UI\Controls\MenuItemWithData.cs" />
     <Compile Include="UI\Controls\PanelWithRightBorder.cs" />
+    <Compile Include="UI\Controls\PkgBody.cs" />
     <Compile Include="UI\Controls\StatusDisplay.cs" />
     <Compile Include="UI\Controls\WatchIcon.cs" />
     <Compile Include="UI\Control[TController].cs" />
@@ -229,8 +236,12 @@
     <Compile Include="UI\Presenters\AchievementWindowPresenter.cs" />
     <Compile Include="Textures\TextureManager.cs" />
     <Compile Include="Textures\TextureReference.cs" />
+    <Compile Include="UI\Presenters\RepoPresenter.cs" />
+    <Compile Include="UI\Presenters\_RepoView\PkgViewPresenter.cs" />
     <Compile Include="UI\Presenters\StatusPresenter.cs" />
+    <Compile Include="UI\Views\RepoView.cs" />
     <Compile Include="UI\Views\StatusView.cs" />
+    <Compile Include="UI\Views\_RepoView\PkgView.cs" />
     <Compile Include="UI\Views\_WindowView\AchievementCollectionView.cs" />
     <Compile Include="UI\Views\_WindowView\AchievementMenuView.cs" />
     <Compile Include="UI\Views\AchievementNotificationsView.cs" />
@@ -268,12 +279,17 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Flurl, Version=2.8.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Flurl.2.8.2\lib\net40\Flurl.dll</HintPath>
+    </Reference>
+    <Reference Include="Flurl.Http, Version=2.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Flurl.Http.2.4.2\lib\net46\Flurl.Http.dll</HintPath>
+    </Reference>
     <Reference Include="Gw2Sharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Gw2Sharp.1.7.4\lib\netstandard2.0\Gw2Sharp.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Win32.Primitives" />
     <Reference Include="MonoGame.Extended, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -395,9 +411,8 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Runtime" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Extensions" />
     <Reference Include="System.Runtime.InteropServices" />
@@ -411,13 +426,11 @@
       <HintPath>packages\System.ServiceModel.Primitives.4.9.0\lib\net461\System.ServiceModel.Primitives.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Text.Encodings.Web, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Text.Encodings.Web.5.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Json, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Text.Json.5.0.0\lib\net461\System.Text.Json.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="System.Text.Json, Version=6.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Json.6.0.4\lib\net461\System.Text.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Text.RegularExpressions" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -447,9 +460,7 @@
     <None Include="README.md" />
     <None Include="ref\_instructions.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repo\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resources\Status\Provider.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -490,8 +501,10 @@
     <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.117.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.117.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+    <Error Condition="!Exists('packages\System.Text.Json.6.0.4\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Text.Json.6.0.4\build\System.Text.Json.targets'))" />
   </Target>
   <Import Project="packages\BlishHUD.1.0.0\build\BlishHUD.targets" Condition="Exists('packages\BlishHUD.1.0.0\build\BlishHUD.targets')" />
   <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.117.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.117.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <Import Project="packages\System.Text.Json.6.0.4\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.4\build\System.Text.Json.targets')" />
 </Project>
