@@ -83,10 +83,13 @@ namespace Flyga.AdditionalAchievements.Repo
             // TODO: Localize 'Finalizing new pack download...'
             progress.Report("Finalizing new pack download...");
 
+            bool existingPackEnabled = false;
+
             // ignore exception, because it only occurs if the pack does not exist.
             if (_packInitiator.TryGetPack(achievementPackPkg.Namespace, out PackException _, out IAchievementPackManager existingPack))
             {
                 Logger.Debug($"A pack with the namespace {achievementPackPkg.Namespace} already exists. Comparing versions.");
+                existingPackEnabled = existingPack.IsEnabled;
 
                 if (existingPack.Manifest.Version < achievementPackPkg.Version)
                 {
@@ -100,7 +103,10 @@ namespace Flyga.AdditionalAchievements.Repo
                         achievementPackPkg.State.InProgress = false;
                         return;
                     }
+
+                    achievementPackPkg.State.IsInstalled = false;
                 }
+                // TODO: if the existing pack already has the current version, then we don't need to redownload it
             }
 
             // move tmp file to target destination
@@ -141,17 +147,27 @@ namespace Flyga.AdditionalAchievements.Repo
                 return;
             }
 
+            string @namespace = newPack.Manifest.Namespace;
+
             if (!skipReload)
             {
                 // TODO: localize
                 progress.Report("Reloading all packs...");
 
+                // TODO: this way all externally added (e.g. via context) packs will be lost.
+                //       They need to be saved in the main module. This needs to be addressed, when
+                //       a context is added.
                 await _module.InitializeAchievementsFromWatchPath();
             }
 
+            if (existingPackEnabled)
+            {
+                await _module.EnablePackAsync(@namespace);
+            }
+
             progress.Report(null);
-            achievementPackPkg.State.IsInstalled = true;
             achievementPackPkg.State.IsUpdateAvailable = false;
+            achievementPackPkg.State.IsInstalled = true;
             achievementPackPkg.State.InProgress = false;
         }
 
@@ -180,8 +196,6 @@ namespace Flyga.AdditionalAchievements.Repo
             }
 
             achievementPackPkg.State.InProgress = true;
-
-            string packPath = Path.Combine(_module.WatchPath, achievementPackPkg.FileName);
 
             if (!_module.TryDeletePack(achievementPackPkg.Namespace))
             {

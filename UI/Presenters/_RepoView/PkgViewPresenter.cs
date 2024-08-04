@@ -1,15 +1,10 @@
 ﻿using Blish_HUD.Graphics.UI;
+using Flurl;
 using Flyga.AdditionalAchievements.Repo;
+using Flyga.AdditionalAchievements.UI.Controls;
 using Flyga.AdditionalAchievements.UI.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Flyga.AdditionalAchievements.UI.Controls;
-using Blish_HUD;
 using System.Diagnostics;
-using Flurl;
 
 namespace Flyga.AdditionalAchievements.UI.Presenters
 {
@@ -72,8 +67,7 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
         {
             View.LockAllButtons = true;
 
-            //PackHandlingUtil.DeletePack(Model);
-            AdditionalAchievementsModule.Instance.TryDeletePack(Model.Namespace);
+            PackHandlingUtil.DeletePack(Model);
 
             View.LockAllButtons = false;
         }

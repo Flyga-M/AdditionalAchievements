@@ -206,7 +206,10 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
         public virtual bool TryRegisterActions(IEnumerable<TAction> actions, out TAction[] failedActions)
         {
             failedActions = Array.Empty<TAction>();
-            
+
+            Logger.Debug($"Attempting to register {actions.Count()} action(s). Currently there are " +
+                $"{Actions.Count()} action(s) registered.");
+
             if (actions == null || !actions.Any())
             {
                 return false;
@@ -235,7 +238,35 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
                 return false;
             }
 
-            return actions.All(action => TryUnregisterAction(action));
+            bool eval = true;
+
+            foreach (TAction action in actions)
+            {
+                if (!TryUnregisterAction(action))
+                {
+                    eval = false;
+                }
+            }
+
+            return eval;
+        }
+
+        public virtual bool TryUnregisterActions(IAchievementPackManager pack)
+        {
+            bool eval = true;
+
+            foreach (IAction action in Actions)
+            {
+                if (action.Root == pack)
+                {
+                    if (!TryUnregisterAction((TAction)action))
+                    {
+                        eval = false;
+                    }
+                }
+            }
+
+            return eval;
         }
 
         /// <summary>

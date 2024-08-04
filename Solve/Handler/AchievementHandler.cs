@@ -4,7 +4,6 @@ using AchievementLib.Pack.PersistantData;
 using AchievementLib.Reset;
 using AchievementLib.Reset.Default;
 using Blish_HUD;
-using Blish_HUD.Modules.Managers;
 using Flyga.AdditionalAchievements.Status.Provider;
 using Flyga.AdditionalAchievements.Textures;
 using Flyga.AdditionalAchievements.UI.Models;
@@ -277,13 +276,16 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
             return _achievements.Contains(achievement);
         }
         
+        /// <remarks>
+        /// Make sure the pack is loaded before adding.
+        /// </remarks>
         public bool TryAddPack(IAchievementPackManager pack)
         {
             if (pack == null)
             {
                 return false;
             }
-            
+
             if (_packs.Contains(pack))
             {
                 return false;
@@ -296,13 +298,15 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
                 return false;
             }
 
-            pack.PackLoaded += OnPackLoaded;
+            if (pack.State != PackLoadState.Loaded)
+            {
+                Logger.Warn($"Unable to add pack {pack.GetFullName()} to {nameof(AchievementHandler)}. Pack " +
+                    $"is not loaded (current state: {pack.State}).");
+                return false;
+            }
             pack.PackUnloaded += OnPackUnloaded;
 
-            if (pack.State == PackLoadState.Loaded)
-            {
-                OnPackLoaded(pack, null);
-            }
+            OnPackLoaded(pack, null);
 
             _packs.Add(pack);
             PackAddedOrRemoved?.Invoke(this, true);
@@ -310,7 +314,6 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
             return true;
         }
 
-        // TODO: should be called when a pack is deleted
         public bool TryRemovePack(IAchievementPackManager pack)
         {
             if (pack == null)
@@ -323,7 +326,6 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
                 return false;
             }
 
-            pack.PackLoaded -= OnPackLoaded;
             pack.PackUnloaded -= OnPackUnloaded;
 
             if (pack.State != PackLoadState.Unloaded)
@@ -386,28 +388,10 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
                 return;
             }
 
-            // TODO: evaluate if this throws, if the collections or any children have already been disposed
-            IAchievement[] achievements = pack.Categories.SelectMany(category => category.GetAchievements()).ToArray();
-
-            foreach (IAchievement achievement in achievements)
+            if (!_actionHandlers.TryUnregisterActions(pack))
             {
-                if (achievement.IsFulfilled && achievement.ResetType == ResetType.Permanent && !achievement.IsRepeatable)
-                {
-                    // TODO: this currently excludes objectives that grant partial completion from being able to be 
-                    // fully completed, if achievement.MaxObjectives < the sum of potential objective.MaxAmount(s)
-                    continue;
-                }
-
-                IAction[] actions = achievement.GetActions();
-
-                achievement.FulfilledChanged -= OnAchievementFulfilledChanged;
-
-                if (!_actionHandlers.TryUnregisterActions(actions))
-                {
-                    Logger.Warn($"Some actions for the achievement {achievement.GetFullName()} could not be " +
+                Logger.Warn($"Some actions for the achievement pack could not be " +
                         $"removed from the action handler after pack {pack.GetFullName()} was unloaded.");
-                    continue;
-                }
             }
 
             PackLoadedOrUnloaded?.Invoke(this, false);

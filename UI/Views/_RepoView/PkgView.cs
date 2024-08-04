@@ -279,7 +279,7 @@ namespace Flyga.AdditionalAchievements.UI.Views
 
         private void OnDownloadButtonClick(object _, MouseEventArgs e)
         {
-            if (CanDownload)
+            if (CanDownload || CanUpdate)
             {
                 DownloadClicked?.Invoke(this, null);
             }

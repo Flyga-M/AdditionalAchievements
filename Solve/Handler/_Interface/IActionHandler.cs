@@ -94,6 +94,18 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
         bool TryUnregisterActions(IEnumerable<IAction> actions);
 
         /// <summary>
+        /// Attempts to remove the <see cref="IAction"/>s of the <paramref name="pack"/> from 
+        /// the <see cref="IActionHandler"/>.
+        /// </summary>
+        /// <remarks>
+        /// Continues to attempt to remove every <see cref="IAction"/>, even if one fails.
+        /// </remarks>
+        /// <param name="pack"></param>
+        /// <returns><see langword="true"/>, if each one of the <see cref="IAction"/>s was successfully 
+        /// removed. Otherwise <see langword="false"/>.</returns>
+        bool TryUnregisterActions(IAchievementPackManager pack);
+
+        /// <summary>
         /// Updates the <see cref="IActionHandler"/>.
         /// </summary>
         /// <param name="gameTime"></param>

@@ -8,12 +8,10 @@ using Blish_HUD.Modules;
 using Blish_HUD.Modules.Managers;
 using Blish_HUD.Settings;
 using Flyga.AdditionalAchievements.Repo;
-using Flyga.AdditionalAchievements.Resources;
 using Flyga.AdditionalAchievements.Status;
 using Flyga.AdditionalAchievements.Status.Provider;
 using Flyga.AdditionalAchievements.Textures;
 using Flyga.AdditionalAchievements.Textures.Fonts;
-using Flyga.AdditionalAchievements.UI.Controls;
 using Flyga.AdditionalAchievements.UI.Views;
 using Flyga.AdditionalAchievements.UI.Windows;
 using Microsoft.Xna.Framework;
@@ -83,7 +81,7 @@ namespace Flyga.AdditionalAchievements
             get
             {
                 List<IAchievementPackManager> packs = new List<IAchievementPackManager>();
-                if (_packInitiator != null || _packInitiator.Packs != null)
+                if (_packInitiator != null && _packInitiator.Packs != null)
                 {
                     packs.AddRange(_packInitiator.Packs);
                 }
@@ -198,11 +196,9 @@ namespace Flyga.AdditionalAchievements
             _achievementHandler.PackAddedOrRemoved += OnPackAddedOrRemoved; // TODO: remove before going live
             _achievementHandler.PackLoadedOrUnloaded += OnPackLoadedOrUnloaded; // TODO: remove before going live
 
-            Logger.Info("Initializing achievements from watchpack..");
+            Logger.Debug("Initializing achievements from watchpack..");
 
             await InitializeAchievementsFromWatchPath();
-
-            Logger.Info("  -- done");
 
             _achievementPackRepo = new AchievementPackRepo();
             await _achievementPackRepo.Load(GetModuleProgressHandler());
@@ -211,6 +207,8 @@ namespace Flyga.AdditionalAchievements
             BuildAchievementWindow();
             BuildCornerIcon();
         }
+
+        #region sqlite dll stuff
 
         const uint LOAD_LIBRARY_SEARCH_DEFAULT_DIRS = 0x00001000;
 
@@ -275,6 +273,8 @@ namespace Flyga.AdditionalAchievements
             }
         }
 
+        #endregion
+
         private void FinalizeRegisteredPack(IAchievementPackManager pack)
         {
             if (!_hierarchyResolveContext.TryAdd(pack, out AchievementLibException exception))
@@ -293,11 +293,14 @@ namespace Flyga.AdditionalAchievements
                 Logger.Debug($"Cancelling previous pack load completion source, because " +
                 $"pack was deleted before completing.");
                 _packsLoadedCompletionSources[pack]?.TrySetResult(false);
+                _packsLoadedCompletionSources.Remove(pack);
                 pack.Disable(true);
             }
             pack.PackLoadStateChanged -= OnPackLoadStateChanged;
 
             _achievementHandler.TryRemovePack(pack);
+
+            _hierarchyResolveContext.TryRemove(pack);
 
             pack.Dispose();
         }
@@ -306,6 +309,9 @@ namespace Flyga.AdditionalAchievements
         {
             Directory.CreateDirectory(WatchPath);
 
+            Logger.Debug($"Disabling all packs: {Packs.Length}");
+            TryDisableAllPacks();
+            _hierarchyResolveContext?.Clear();
             Logger.Debug($"Disposing previous packInitiatior if not null: {_packInitiator != null}");
             _packInitiator?.Dispose();
 
@@ -333,7 +339,7 @@ namespace Flyga.AdditionalAchievements
 
                 if (pack.IsEnabled)
                 {
-                    if (!await EnablePackAsync(pack))
+                    if (!await EnablePackAsync(pack.Manifest.Namespace))
                     {
                         Logger.Warn($"Attempt to enable pack {pack.Manifest?.GetDetailedName()}, " +
                             $"that was enabled in the last session failed.");
@@ -343,20 +349,25 @@ namespace Flyga.AdditionalAchievements
 
         }
 
-        // TODO: maybe change parameter to string namespace. Only packs that are registered should 
-        // be able to be enabled. This way we can also make sure, that the PackLoadStateChanged 
-        // event subscription will be cleared properly.
         /// <summary>
         /// Waits for the pack to be fully loaded.
         /// </summary>
-        /// <param name="pack"></param>
+        /// <param name="namespace"></param>
         /// <returns></returns>
-        internal async Task<bool> EnablePackAsync(IAchievementPackManager pack)
+        internal async Task<bool> EnablePackAsync(string @namespace)
         {
+            if (string.IsNullOrWhiteSpace(@namespace))
+            {
+                Logger.Error("EnablePackAsync(string @namespace) with " +
+                    "@namespace null or whitespace called.");
+                return false;
+            }
+
+            IAchievementPackManager pack = Packs.FirstOrDefault(pck => pck.Manifest.Namespace == @namespace);
+
             if (pack == null)
             {
-                Logger.Error("EnablePackAsync(IAchievementPackManager pack) with " +
-                    "pack == null called.");
+                Logger.Warn($"Unable to enable pack with namespace {@namespace}. No such pack registered.");
                 return false;
             }
 
@@ -388,7 +399,7 @@ namespace Flyga.AdditionalAchievements
                 }
                 catch (Exception ex)
                 {
-                    Logger.Warn(ex, $"Unable to enable achievement pack {pack.Manifest.Namespace} " +
+                    Logger.Warn(ex, $"Unable to enable achievement pack {pack.Manifest?.Namespace} " +
                         $"from watch path.");
                     return;
                 }
@@ -419,10 +430,41 @@ namespace Flyga.AdditionalAchievements
             return true;
         }
 
+        /// <summary>
+        /// Attempts to disable all packs.
+        /// </summary>
+        private void TryDisableAllPacks()
+        {
+            IAchievementPackManager[] packs = Packs;
+
+            foreach(IAchievementPackManager pack in packs)
+            {
+                DisablePack(pack, true);
+            }
+        }
+
         ///<inheritdoc cref="IAchievementPackManager.Disable(bool)"/>
         internal bool DisablePack(IAchievementPackManager pack, bool forceDisable)
         {
-            return pack.Disable(forceDisable);
+            if (pack.State != PackLoadState.Loaded && pack.State != PackLoadState.Loading)
+            {
+                return false;
+            }
+            
+            if (!pack.Disable(forceDisable))
+            {
+                Logger.Warn($"Unable to disable pack {pack.Manifest.GetDetailedName()}, " +
+                    $"because it's not eligible to be disabled.");
+                return false;
+            }
+
+            if (_achievementHandler?.TryRemovePack(pack) != true)
+            {
+                Logger.Warn($"Unable to remove enabled pack {pack.Manifest?.GetDetailedName()} " +
+                    $"from the achievement handler.");
+            }
+
+            return true;
         }
 
         /// <summary>
