@@ -27,6 +27,10 @@ namespace Flyga.AdditionalAchievements.UI.Controls
         private bool _keepUpdated;
         private bool _showKeepUpdated;
 
+        private bool _isDownloaded;
+        private bool _isEnabled;
+        private Color _indicatorColor = Color.Transparent;
+
         private string _lastUpdatedMessage;
 
         private Checkbox _keepUpdatedCheckbox;
@@ -40,9 +44,13 @@ namespace Flyga.AdditionalAchievements.UI.Controls
         private Rectangle _titleBounds;
         private Rectangle _descriptionBounds;
 
+        private Rectangle _indicatorBounds;
+
         #endregion
 
         public event EventHandler<bool> KeepUpdatedChanged;
+        public event EventHandler<bool> IsDownloadedChanged;
+        public event EventHandler<bool> IsEnabledChanged;
 
         /// <summary>
         /// Determines whether the 'Keep Updated' checkbox is checked.
@@ -111,6 +119,52 @@ namespace Flyga.AdditionalAchievements.UI.Controls
         /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// Determines whether a gray bar is rendered to signal that the package is downloaded.
+        /// </summary>
+        public bool IsDownloaded
+        {
+            get => _isDownloaded;
+            set
+            {
+                bool oldValue = _isDownloaded;
+                _isDownloaded = value;
+
+                if (oldValue != value)
+                {
+                    UpdateIndicatorColor();
+                    IsDownloadedChanged?.Invoke(this, value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Determines whether a green bar is rendered to signal that the package is enabled.
+        /// </summary>
+        /// <remarks>
+        /// Will always be <see langword="false"/>, if <see cref="IsDownloaded"/> is <see langword="false"/>.
+        /// </remarks>
+        public bool IsEnabled
+        {
+            get => IsDownloaded && _isEnabled;
+            set
+            {
+                if (value && !IsDownloaded)
+                {
+                    return;
+                }
+
+                bool oldValue = _isEnabled;
+                _isEnabled = value;
+
+                if (oldValue != value)
+                {
+                    UpdateIndicatorColor();
+                    IsEnabledChanged?.Invoke(this, value);
+                }
+            }
+        }
+
         public PkgBody()
         {
             // TODO: localize
@@ -152,6 +206,8 @@ namespace Flyga.AdditionalAchievements.UI.Controls
             _titleBounds = new Rectangle(EDGE_PADDING, EDGE_PADDING, this.Width - _lastUpdatedBounds.Width - EDGE_PADDING, 40);
 
             _descriptionBounds = new Rectangle(EDGE_PADDING, _titleBounds.Bottom + EDGE_PADDING/2, this.Width - EDGE_PADDING, this.Height - _titleBounds.Bottom - EDGE_PADDING/2);
+
+            _indicatorBounds = new Rectangle(0, 0, 12, this.Height);
         }
 
         private void RecalculateLastUpdatedLayout()
@@ -167,12 +223,35 @@ namespace Flyga.AdditionalAchievements.UI.Controls
             _lastUpdatedBounds = new Rectangle(this.Width - offsetRight - messageWidth, EDGE_PADDING, messageWidth, 40);
         }
 
+        private void UpdateIndicatorColor()
+        {
+            if (IsEnabled)
+            {
+                _indicatorColor = Color.Green * 0.8f;
+                return;
+            }
+
+            if (IsDownloaded)
+            {
+                _indicatorColor = Color.Gray * 0.8f;
+                return;
+            }
+
+            _indicatorColor = Color.Transparent;
+        }
+
         public override void PaintBeforeChildren(SpriteBatch spriteBatch, Rectangle bounds)
         {
             // background
             spriteBatch.DrawOnCtrl(this,
                 TextureManager.Display.Repo.PkgBodyBackground,
                 _backgroundBounds);
+
+            // indicator
+            spriteBatch.DrawOnCtrl(this,
+                ContentService.Textures.Pixel,
+                _indicatorBounds,
+                _indicatorColor);
 
             // title
             spriteBatch.DrawStringOnCtrl(this,
@@ -198,7 +277,8 @@ namespace Flyga.AdditionalAchievements.UI.Controls
                 _lastUpdatedBounds,
                 ContentService.Colors.Chardonnay,
                 false,
-                HorizontalAlignment.Right);
+                HorizontalAlignment.Right,
+                VerticalAlignment.Top);
         }
 
         protected override void DisposeControl()

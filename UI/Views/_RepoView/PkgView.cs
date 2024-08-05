@@ -15,7 +15,7 @@ using System;
 namespace Flyga.AdditionalAchievements.UI.Views
 {
     // heavily inspired by https://github.com/blish-hud/Pathing/blob/main/UI/Controls/MarkerPackHero.cs
-    public class PkgView : View<PkgViewPresenter>
+    public class PkgView : View<PkgPresenter>
     {
         private const int DEFAULT_WIDTH = 500;
         private const int DEFAULT_HEIGHT = 170;
@@ -31,6 +31,8 @@ namespace Flyga.AdditionalAchievements.UI.Views
         private bool _canDelete;
         private bool _lockAllButtons;
 
+        private bool _isEnabled;
+
         private string _downloadTooltip;
         private string _deleteTooltip;
 
@@ -44,12 +46,14 @@ namespace Flyga.AdditionalAchievements.UI.Views
         private StandardButton _downloadButton;
         private StandardButton _infoButton;
         private StandardButton _deleteButton;
+        private StandardButton _enableButton;
         private Panel _bottomPanel;
         private Label _tagsLabel;
 
         public event EventHandler DownloadClicked;
         public event EventHandler InfoClicked;
         public event EventHandler DeleteClicked;
+        public event EventHandler EnableClicked;
 
         #region calculated fields
 
@@ -147,6 +151,27 @@ namespace Flyga.AdditionalAchievements.UI.Views
             }
         }
 
+        /// <summary>
+        /// Determines whether the enable button shows the "Enable" or "Disable" text.
+        /// </summary>
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+            set
+            {
+                bool oldValue = _isEnabled;
+                _isEnabled = value;
+
+                if (oldValue != value)
+                {
+                    UpdateButtons();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Overrides the tooltip on the download button if it's disabled.
+        /// </summary>
         public string DownloadTooltip
         {
             get => _downloadTooltip;
@@ -160,6 +185,10 @@ namespace Flyga.AdditionalAchievements.UI.Views
             }
         }
 
+        /// <summary>
+        /// Overrides the tooltip on the delete button if it's disabled. 
+        /// [Currently useless, since it's also hidden]
+        /// </summary>
         public string DeleteTooltip
         {
             get => _deleteTooltip;
@@ -203,7 +232,7 @@ namespace Flyga.AdditionalAchievements.UI.Views
 
         public PkgView(AchievementPackPkg pkg) : this()
         {
-            this.WithPresenter(new PkgViewPresenter(this, pkg));
+            this.WithPresenter(new PkgPresenter(this, pkg));
         }
 
         protected override void Build(Container buildPanel)
@@ -243,7 +272,7 @@ namespace Flyga.AdditionalAchievements.UI.Views
                 Text = Strings.Download,
                 Width = 90,
                 Parent = buildPanel,
-                Enabled = _canDownload
+                Enabled = _canDownload && !_lockAllButtons
             };
 
             _infoButton = new StandardButton()
@@ -252,7 +281,8 @@ namespace Flyga.AdditionalAchievements.UI.Views
                 Width = 90,
                 Visible = !string.IsNullOrWhiteSpace(PackInfoUrl),
                 BasicTooltipText = PackInfoUrl,
-                Parent = buildPanel
+                Parent = buildPanel,
+                Enabled =  !_lockAllButtons
             };
 
             _deleteButton = new StandardButton()
@@ -260,13 +290,23 @@ namespace Flyga.AdditionalAchievements.UI.Views
                 Text = Strings.Delete,
                 Width = 90,
                 Parent = buildPanel,
-                Enabled = _canDelete,
+                Enabled = _canDelete && !_lockAllButtons,
                 Visible = _canDelete
+            };
+
+            _enableButton = new StandardButton()
+            {
+                Text = Strings.Enable,
+                Width = 90,
+                Parent = buildPanel,
+                Enabled = !_lockAllButtons,
+                Visible = true
             };
 
             _downloadButton.Click += OnDownloadButtonClick;
             _infoButton.Click += OnInfoButtonClick;
             _deleteButton.Click += OnDeleteButtonClick;
+            _enableButton.Click += OnEnableButtonClick;
 
             UpdateButtonStates(); // button layout will be updated by recalculateLayout
             RecalculateLayout();
@@ -299,6 +339,11 @@ namespace Flyga.AdditionalAchievements.UI.Views
             {
                 DeleteClicked?.Invoke(this, null);
             }
+        }
+
+        private void OnEnableButtonClick(object _, MouseEventArgs e)
+        {
+            EnableClicked?.Invoke(this, null);
         }
 
         private void RecalculateLayout()
@@ -392,6 +437,12 @@ namespace Flyga.AdditionalAchievements.UI.Views
                 _deleteButton.Visible = CanDelete && !_lockAllButtons;
             }
 
+            if (_enableButton != null)
+            {
+                _enableButton.Enabled = !_lockAllButtons;
+
+                _enableButton.Text = IsEnabled ? Strings.Disable : Strings.Enable;
+            }
         }
 
         private void UpdateButtonLayout()
@@ -438,7 +489,31 @@ namespace Flyga.AdditionalAchievements.UI.Views
                 _deleteButton.Location = new Point(spaceWidth - _deleteButton.Width - paddingRight, _bottomPartTop + buttonPaddingTop);
             }
 
-            if (_deleteButton?.Visible == true)
+            if (_enableButton != null)
+            {
+                int paddingRight = EDGE_PADDING / 2;
+                if (_downloadButton != null && _downloadButton.Visible)
+                {
+                    paddingRight += _downloadButton.Width + EDGE_PADDING / 2;
+                }
+                if (_infoButton != null && _infoButton.Visible)
+                {
+                    paddingRight += _infoButton.Width + EDGE_PADDING / 2;
+                }
+                if (_deleteButton != null && _deleteButton.Visible)
+                {
+                    paddingRight += _deleteButton.Width + EDGE_PADDING / 2;
+                }
+
+                int buttonPaddingTop = (BOTTOM_HEIGHT - _enableButton.Height) / 2;
+                _enableButton.Location = new Point(spaceWidth - _enableButton.Width - paddingRight, _bottomPartTop + buttonPaddingTop);
+            }
+
+            if (_enableButton?.Visible == true)
+            {
+                _buttonsLeft = _enableButton.Left;
+            }
+            else if (_deleteButton?.Visible == true)
             {
                 _buttonsLeft = _deleteButton.Left;
             }

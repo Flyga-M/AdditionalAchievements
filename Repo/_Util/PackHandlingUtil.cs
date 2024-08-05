@@ -104,6 +104,7 @@ namespace Flyga.AdditionalAchievements.Repo
                         return;
                     }
 
+                    achievementPackPkg.State.CurrentManager = null;
                     achievementPackPkg.State.IsInstalled = false;
                 }
                 // TODO: if the existing pack already has the current version, then we don't need to redownload it
@@ -167,6 +168,7 @@ namespace Flyga.AdditionalAchievements.Repo
 
             progress.Report(null);
             achievementPackPkg.State.IsUpdateAvailable = false;
+            achievementPackPkg.State.CurrentManager = newPack;
             achievementPackPkg.State.IsInstalled = true;
             achievementPackPkg.State.InProgress = false;
         }
@@ -205,6 +207,7 @@ namespace Flyga.AdditionalAchievements.Repo
 
             achievementPackPkg.State.InProgress = false;
 
+            achievementPackPkg.State.CurrentManager = null;
             achievementPackPkg.State.IsInstalled = false;
         }
     }

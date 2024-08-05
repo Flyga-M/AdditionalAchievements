@@ -8,9 +8,9 @@ using System.Diagnostics;
 
 namespace Flyga.AdditionalAchievements.UI.Presenters
 {
-    public class PkgViewPresenter : Presenter<PkgView, AchievementPackPkg>
+    public class PkgPresenter : Presenter<PkgView, AchievementPackPkg>
     {
-        public PkgViewPresenter(PkgView view, AchievementPackPkg model) : base(view, model)
+        public PkgPresenter(PkgView view, AchievementPackPkg model) : base(view, model)
         {
             View.PkgBody = new PkgBody(model);
 
@@ -21,6 +21,20 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
             View.DownloadClicked += OnViewDownloadClicked;
             View.InfoClicked += OnViewInfoClicked;
             View.DeleteClicked += OnViewDeleteClicked;
+            View.EnableClicked += OnViewEnableClicked;
+
+            if (Model.State.CurrentManager != null)
+            {
+                Model.State.CurrentManager.PackUnloaded += OnPackUnloaded;
+                if (Model.State.CurrentManager.State == AchievementLib.Pack.PackLoadState.Loaded)
+                {
+                    OnPackLoaded(null, null);
+                }
+                else
+                {
+                    Model.State.CurrentManager.PackLoaded += OnPackLoaded;
+                }
+            }
         }
 
         private void OnModelInstalledChanged(object _, bool isInstalled)
@@ -29,6 +43,19 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
             View.CanUpdate = Model.State.IsUpdateAvailable;
 
             View.CanDelete = isInstalled;
+
+            if (isInstalled && Model.State.CurrentManager != null)
+            {
+                Model.State.CurrentManager.PackUnloaded += OnPackUnloaded;
+                if (Model.State.CurrentManager.State == AchievementLib.Pack.PackLoadState.Loaded)
+                {
+                    OnPackLoaded(null, null);
+                }
+                else
+                {
+                    Model.State.CurrentManager.PackLoaded += OnPackLoaded;
+                }
+            }
         }
 
         private void OnModelInstallError(object _, string message)
@@ -72,6 +99,37 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
             View.LockAllButtons = false;
         }
 
+        private async void OnViewEnableClicked(object _, EventArgs _1)
+        {
+            View.LockAllButtons = true;
+
+            if (Model.State.CurrentManager != null)
+            {
+                if (Model.State.CurrentManager.State == AchievementLib.Pack.PackLoadState.Loaded)
+                {
+                    AdditionalAchievementsModule.Instance.DisablePack(Model.State.CurrentManager, true);
+                }
+                else if (Model.State.CurrentManager.State == AchievementLib.Pack.PackLoadState.Unloaded)
+                {
+                    await AdditionalAchievementsModule.Instance.EnablePackAsync(Model.Namespace);
+                }
+
+                // TODO: give user some feedback why nothing is happening
+            }
+
+            View.LockAllButtons = false;
+        }
+
+        private void OnPackLoaded(object _, EventArgs _1)
+        {
+            View.IsEnabled = true;
+        }
+
+        private void OnPackUnloaded(object _, EventArgs _1)
+        {
+            View.IsEnabled = false;
+        }
+
         protected override void UpdateView()
         {
             View.PackInfoUrl = Model.InfoUrl;
@@ -81,6 +139,8 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
             View.CanUpdate = Model.State.IsUpdateAvailable;
 
             View.CanDelete = Model.State.IsInstalled;
+
+            View.IsEnabled = Model.State.CurrentManager?.State == AchievementLib.Pack.PackLoadState.Loaded;
         }
 
         protected override void Unload()
@@ -92,6 +152,12 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
             View.DownloadClicked -= OnViewDownloadClicked;
             View.InfoClicked -= OnViewInfoClicked;
             View.DeleteClicked -= OnViewDeleteClicked;
+
+            if (Model.State.CurrentManager != null)
+            {
+                Model.State.CurrentManager.PackLoaded -= OnPackLoaded;
+                Model.State.CurrentManager.PackUnloaded -= OnPackUnloaded;
+            }
         }
     }
 }

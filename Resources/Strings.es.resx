@@ -171,4 +171,10 @@
   <data name="Delete" xml:space="preserve">
     <value>Eliminar</value>
   </data>
+  <data name="Disable" xml:space="preserve">
+    <value>Activar</value>
+  </data>
+  <data name="Enable" xml:space="preserve">
+    <value>Desactivar</value>
+  </data>
 </root>

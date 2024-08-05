@@ -1,12 +1,6 @@
-﻿using Blish_HUD;
-using Flyga.AdditionalAchievements.Repo;
+﻿using Flyga.AdditionalAchievements.Repo;
 using Flyga.AdditionalAchievements.UI.Controls;
-using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.UI.Controller
 {
@@ -18,6 +12,19 @@ namespace Flyga.AdditionalAchievements.UI.Controller
             Model.KeepUpdatedChanged += OnModelKeepUpdatedChanged;
 
             Model.State.InstalledChanged += OnModelInstalledChanged;
+
+            if (Model.State.CurrentManager != null)
+            {
+                Model.State.CurrentManager.PackUnloaded += OnPackUnloaded;
+                if (Model.State.CurrentManager.State == AchievementLib.Pack.PackLoadState.Loaded)
+                {
+                    OnPackLoaded(null, null);
+                }
+                else
+                {
+                    Model.State.CurrentManager.PackLoaded += OnPackLoaded;
+                }
+            }
         }
 
         private void OnControlKeepUpdatedChanged(object _, bool keepUpdated)
@@ -33,6 +40,30 @@ namespace Flyga.AdditionalAchievements.UI.Controller
         private void OnModelInstalledChanged(object _, bool isInstalled)
         {
             Control.ShowKeepUpdated = isInstalled;
+            Control.IsDownloaded = isInstalled;
+
+            if (isInstalled && Model.State.CurrentManager != null)
+            {
+                Model.State.CurrentManager.PackUnloaded += OnPackUnloaded;
+                if (Model.State.CurrentManager.State == AchievementLib.Pack.PackLoadState.Loaded)
+                {
+                    OnPackLoaded(null, null);
+                }
+                else
+                {
+                    Model.State.CurrentManager.PackLoaded += OnPackLoaded;
+                }
+            }
+        }
+
+        private void OnPackLoaded(object _, EventArgs _1)
+        {
+            Control.IsEnabled = true;
+        }
+
+        private void OnPackUnloaded(object _, EventArgs _1)
+        {
+            Control.IsEnabled = false;
         }
 
         protected override void UpdateControl()
@@ -41,6 +72,8 @@ namespace Flyga.AdditionalAchievements.UI.Controller
             Control.Description = Model.Description.Replace(@"\n", "\n");
             Control.KeepUpdated = Model.KeepUpdated;
             Control.ShowKeepUpdated = Model.State.IsInstalled;
+            Control.IsDownloaded = Model.State.IsInstalled;
+            Control.IsEnabled = Model.State.CurrentManager?.State == AchievementLib.Pack.PackLoadState.Loaded;
 
             // TODO: localize
             Control.LastUpdateMessage = $"Last Update: {Model.LastUpdate.ToShortDateString()}";
@@ -54,6 +87,12 @@ namespace Flyga.AdditionalAchievements.UI.Controller
             Model.KeepUpdatedChanged -= OnModelKeepUpdatedChanged;
 
             Model.State.InstalledChanged -= OnModelInstalledChanged;
+
+            if (Model.State.CurrentManager != null)
+            {
+                Model.State.CurrentManager.PackLoaded -= OnPackLoaded;
+                Model.State.CurrentManager.PackUnloaded -= OnPackUnloaded;
+            }
         }
     }
 }

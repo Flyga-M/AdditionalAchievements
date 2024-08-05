@@ -237,7 +237,7 @@
     <Compile Include="Textures\TextureManager.cs" />
     <Compile Include="Textures\TextureReference.cs" />
     <Compile Include="UI\Presenters\RepoPresenter.cs" />
-    <Compile Include="UI\Presenters\_RepoView\PkgViewPresenter.cs" />
+    <Compile Include="UI\Presenters\_RepoView\PkgPresenter.cs" />
     <Compile Include="UI\Presenters\StatusPresenter.cs" />
     <Compile Include="UI\Views\RepoView.cs" />
     <Compile Include="UI\Views\StatusView.cs" />

@@ -1,4 +1,5 @@
-﻿using Blish_HUD;
+﻿using AchievementLib.Pack;
+using Blish_HUD;
 using System;
 
 namespace Flyga.AdditionalAchievements.Repo
@@ -45,6 +46,15 @@ namespace Flyga.AdditionalAchievements.Repo
                 _isUpdateAvailable = value;
             }
         }
+
+        /// <summary>
+        /// Holds a reference to the current <see cref="IAchievementPackManager"/> associated with the 
+        /// <see cref="AchievementPackPkg"/>, if there is one.
+        /// </summary>
+        /// <remarks>
+        /// Might be <see langword="null"/>, or even disposed when the module is unloading.
+        /// </remarks>
+        public IAchievementPackManager CurrentManager { get; internal set; }
 
         internal void ReportInstallError(string message)
         {
