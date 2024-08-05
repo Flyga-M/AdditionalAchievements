@@ -533,7 +533,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1
                 return;
             }
 
-            action.Parent.Parent.CurrentAmount = copyValue;
+            action.ParentCondition.ParentObjective.CurrentAmount = copyValue;
         }
 
         /// <summary>
@@ -570,7 +570,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1
 
             int count = relevantData.Length;
 
-            action.Parent.Parent.CurrentAmount = count;
+            action.ParentCondition.ParentObjective.CurrentAmount = count;
         }
 
         /// <summary>

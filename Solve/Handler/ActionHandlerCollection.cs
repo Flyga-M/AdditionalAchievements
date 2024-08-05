@@ -14,8 +14,6 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
 
         private readonly SafeList<IActionHandler> _handlers = new SafeList<IActionHandler>();
         
-
-
         public override IEnumerable<IAction> Actions => _handlers.SelectMany(handler => handler.Actions);
 
         //{ "achievement", typeof(AchievementAction) }, // solves itself

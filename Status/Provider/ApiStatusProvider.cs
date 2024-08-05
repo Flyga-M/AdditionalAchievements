@@ -176,7 +176,7 @@ namespace Flyga.AdditionalAchievements.Status.Provider
 
             lock (_permissionLock)
             {
-                foreach (TokenPermission permission in _requestedPermissionsAndActions.Keys)
+                foreach (TokenPermission permission in _requestedPermissionsAndActions.Keys.ToArray())
                 {
                     if (!_requestedPermissionsAndActions[permission].Contains(action))
                     {
