@@ -82,6 +82,7 @@ namespace Flyga.AdditionalAchievements.Repo
                 }
 
                 pkg.State.IsInstalled = true;
+                pkg.State.CurrentManager = _initiator.Packs.FirstOrDefault(pack => pack.Manifest.Namespace == pkg.Namespace);
 
                 if (existingPack.Version < pkg.Version)
                 {
