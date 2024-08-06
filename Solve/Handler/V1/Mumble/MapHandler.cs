@@ -53,8 +53,9 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1.Mumble
             _actionsByMapId = new ConcurrentDictionary<int, SafeList<MapAction>>();
             _actionsByMapType = new ConcurrentDictionary<MapType, SafeList<MapAction>>();
             
-            _context.CurrentMap.MapChanged += OnMumbleMapChange;
+            _context.CurrentMap.MapChanged += OnMumbleMapChanged;
         }
+
         public override bool TryRegisterAction(MapAction action)
         {
             if (!base.TryRegisterAction(action))
@@ -109,10 +110,11 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1.Mumble
 
             return eval;
         }
+
         public override void Update(GameTime gameTime)
         { /** NOOP **/}
 
-        private void OnMumbleMapChange(object _, ValueEventArgs<int> _1)
+        private void OnMumbleMapChanged(object _, ValueEventArgs<int> _1)
         {
             CurrentMapId = _context.CurrentMap.Id;
             CurrentMapType = _context.CurrentMap.Type;
@@ -170,7 +172,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1.Mumble
 
             if (_context != null)
             {
-                _context.CurrentMap.MapChanged -= OnMumbleMapChange;
+                _context.CurrentMap.MapChanged -= OnMumbleMapChanged;
             }
             base.Cleanup();
         }

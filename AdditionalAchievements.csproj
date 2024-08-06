@@ -182,6 +182,7 @@
     <Compile Include="Solve\Handler\V1\Api\FilterQueryData.cs" />
     <Compile Include="Solve\Handler\V1\Api\_Util\ComparisonUtil.cs" />
     <Compile Include="Solve\Handler\V1\Api\_Util\EnumerableUtil.cs" />
+    <Compile Include="Solve\Handler\V1\Mumble\IdentityHandler.cs" />
     <Compile Include="Solve\Handler\V1\Mumble\LookingAtHandler.cs" />
     <Compile Include="Solve\Handler\V1\MumbleHandler.cs" />
     <Compile Include="Solve\Handler\V1\Mumble\MapHandler.cs" />
