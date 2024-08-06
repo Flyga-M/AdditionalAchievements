@@ -12,6 +12,7 @@ using Flyga.AdditionalAchievements.Status;
 using Flyga.AdditionalAchievements.Status.Provider;
 using Flyga.AdditionalAchievements.Textures;
 using Flyga.AdditionalAchievements.Textures.Fonts;
+using Flyga.AdditionalAchievements.UI.Controls;
 using Flyga.AdditionalAchievements.UI.Views;
 using Flyga.AdditionalAchievements.UI.Windows;
 using Microsoft.Xna.Framework;
@@ -38,7 +39,7 @@ namespace Flyga.AdditionalAchievements
         public const string SUB_FOLDER = "additionalAchievements";
 
         // TODO: use a ViewContainerInstead?
-        AchievementNotificationsView _notificationView;
+        ViewContainer _notificationsViewContainer;
 
         private AchievementWindow _achievementWindow;
 
@@ -191,8 +192,7 @@ namespace Flyga.AdditionalAchievements
             ApiStatusProvider = new ApiStatusProvider(Gw2ApiManager);
             PositionEventsModuleStatusProvider = new PositionEventsModuleStatusProvider(GameService.Module);
 
-            StatusManager.AddStatusProvider(apiStatusProvider);
-            StatusManager.AddStatusProvider(positionEventsModuleStatusProvider);
+            MumbleStatusProvider.UiChanged += OnUiChanged;
 
             StatusManager.AddStatusProvider(MumbleStatusProvider);
             StatusManager.AddStatusProvider(ApiStatusProvider);
@@ -620,10 +620,31 @@ namespace Flyga.AdditionalAchievements
             //}
         }
 
-        // TODO: only do this when already ingame. Gets wrong values when in loading screen
-        // TODO: should also update when the minimap position changes, or is resized
+        private void OnUiChanged(object _, EventArgs _1)
+        {
+            UpdateNotificationViewLayout();
+        }
+
         private void SetupNotificationView()
         {
+            _notificationsViewContainer = new ViewContainerWithoutCaptureBlock()
+            {
+                ShowBorder = true,
+                Parent = GameService.Graphics.SpriteScreen,
+            };
+
+            UpdateNotificationViewLayout();
+
+            _notificationsViewContainer.Show(new AchievementNotificationsView(_achievementHandler));
+        }
+
+        private void UpdateNotificationViewLayout()
+        {
+            if (_notificationsViewContainer == null)
+            {
+                return;
+            }
+            
             int totalWidth = GameService.Graphics.SpriteScreen.Width;
             int totalHeight = GameService.Graphics.SpriteScreen.Height;
 
@@ -639,37 +660,20 @@ namespace Flyga.AdditionalAchievements
                 resultBottom -= (minimapHeight + minimapPaddingBotton);
             }
 
-            Container buildPanel = new Panel()
-            {
-                Width = 214,
-                Height = 600,
-                Right = totalWidth,
-                Bottom = resultBottom,
-                ShowBorder = true,
-                CanScroll = false,
-                CanCollapse = false,
-                Visible = true,
-                Parent = GameService.Graphics.SpriteScreen
-            };
-
-
-            _notificationView = new AchievementNotificationsView(_achievementHandler);
-            IProgress<string> progress = new Progress<string>();
-            _notificationView.DoLoad(progress);
-            _notificationView.DoBuild(buildPanel);
-            buildPanel.Show();
+            _notificationsViewContainer.Width = (int)(totalWidth * 0.115f);
+            _notificationsViewContainer.Height = (int)(totalHeight * 0.33f);
+            _notificationsViewContainer.Right = totalWidth;
+            _notificationsViewContainer.Bottom = resultBottom;
         }
 
         private void RemoveNotificationView()
         {
-            if (_notificationView == null)
+            if (_notificationsViewContainer == null)
             {
                 return;
             }
 
-            _notificationView.NotificationsFlowPanel.Parent.Dispose();
-
-            _notificationView.DoUnload();
+            _notificationsViewContainer.Dispose();
         }
 
         private void BuildCornerIcon()
@@ -730,6 +734,11 @@ namespace Flyga.AdditionalAchievements
             // disposing the packs.
             _packInitiator?.Dispose();
             _achievementHandler?.Dispose();
+
+            if (MumbleStatusProvider != null)
+            {
+                MumbleStatusProvider.UiChanged -= OnUiChanged;
+            }
 
             StatusManager?.Dispose();
 

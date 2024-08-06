@@ -220,10 +220,12 @@
     <Compile Include="UI\Controls\AchievementProgressText.cs" />
     <Compile Include="UI\Controls\AchievementSelection.cs" />
     <Compile Include="UI\Controls\BackBar.cs" />
-    <Compile Include="UI\Controls\MenuItemWithData.cs" />
-    <Compile Include="UI\Controls\PanelWithRightBorder.cs" />
+    <Compile Include="UI\Controls\_CoreOverrides\FlowPanelWithoutCaptureBlock.cs" />
+    <Compile Include="UI\Controls\_CoreOverrides\MenuItemWithData.cs" />
+    <Compile Include="UI\Controls\_CoreOverrides\PanelWithRightBorder.cs" />
     <Compile Include="UI\Controls\PkgBody.cs" />
     <Compile Include="UI\Controls\StatusDisplay.cs" />
+    <Compile Include="UI\Controls\_CoreOverrides\ViewContainerWithoutCaptureBlock.cs" />
     <Compile Include="UI\Controls\WatchIcon.cs" />
     <Compile Include="UI\Control[TController].cs" />
     <Compile Include="UI\IController.cs" />
