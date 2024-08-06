@@ -184,6 +184,7 @@
     <Compile Include="Solve\Handler\V1\Api\_Util\EnumerableUtil.cs" />
     <Compile Include="Solve\Handler\V1\Mumble\LookingAtHandler.cs" />
     <Compile Include="Solve\Handler\V1\MumbleHandler.cs" />
+    <Compile Include="Solve\Handler\V1\Mumble\MapHandler.cs" />
     <Compile Include="Solve\Handler\V1\Mumble\MountHandler.cs" />
     <Compile Include="Solve\Handler\V1\PositionAreaHandler.cs" />
     <Compile Include="Solve\Handler\V1\Api\_Util\FilterUtil.cs" />
