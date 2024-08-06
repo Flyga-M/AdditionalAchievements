@@ -81,8 +81,8 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
             _resetManager.Reset += OnReset;
         }
 
-        public AchievementHandler(string storagePath, Gw2MumbleService gw2Mumble, PositionEventsModuleStatusProvider positionEventsModuleStatusProvider, ApiStatusProvider apiStatusProvider, ResetManager resetManager = null)
-            : this(storagePath, new ActionHandlerCollection(gw2Mumble, positionEventsModuleStatusProvider, apiStatusProvider), resetManager) { /** NOOP **/ }
+        public AchievementHandler(string storagePath, MumbleStatusProvider mumbleStatusProvider, PositionEventsModuleStatusProvider positionEventsModuleStatusProvider, ApiStatusProvider apiStatusProvider, ResetManager resetManager = null)
+            : this(storagePath, new ActionHandlerCollection(mumbleStatusProvider, positionEventsModuleStatusProvider, apiStatusProvider), resetManager) { /** NOOP **/ }
 
         public string[] GetCategoryNames(Gw2Sharp.WebApi.Locale locale, Gw2Sharp.WebApi.Locale fallbackLocale = Gw2Sharp.WebApi.Locale.English)
         {

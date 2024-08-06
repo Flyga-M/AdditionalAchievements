@@ -182,7 +182,8 @@
     <Compile Include="Solve\Handler\V1\Api\FilterQueryData.cs" />
     <Compile Include="Solve\Handler\V1\Api\_Util\ComparisonUtil.cs" />
     <Compile Include="Solve\Handler\V1\Api\_Util\EnumerableUtil.cs" />
-    <Compile Include="Solve\Handler\V1\LookingAtHandler.cs" />
+    <Compile Include="Solve\Handler\V1\Mumble\LookingAtHandler.cs" />
+    <Compile Include="Solve\Handler\V1\MumbleHandler.cs" />
     <Compile Include="Solve\Handler\V1\PositionAreaHandler.cs" />
     <Compile Include="Solve\Handler\V1\Api\_Util\FilterUtil.cs" />
     <Compile Include="Solve\Handler\_Interface\IActionHandler.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Status\Provider\ActionHandlerStatusProvider.cs" />
     <Compile Include="Status\Provider\ApiStatusProvider.cs" />
     <Compile Include="Status\Provider\ModuleDependencyStatusProvider.cs" />
+    <Compile Include="Status\Provider\MumbleStatusProvider.cs" />
     <Compile Include="Status\Provider\PositionEventsModuleStatusProvider.cs" />
     <Compile Include="Status\StatusManager.cs" />
     <Compile Include="Status\_Interface\IStatusProvider.cs" />
@@ -465,6 +467,7 @@
     <EmbeddedResource Include="Resources\Status\Provider.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Provider.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings.de.resx" />
     <EmbeddedResource Include="Resources\Strings.es.resx" />

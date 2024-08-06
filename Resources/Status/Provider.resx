@@ -168,4 +168,7 @@
   <data name="ModuleDependencyDisabled" xml:space="preserve">
     <value>The module is installed, but currently disabled.</value>
   </data>
+  <data name="MumbleNotReady" xml:space="preserve">
+    <value>Mumble Link is not yet available.</value>
+  </data>
 </root>

@@ -1,47 +1,22 @@
 ﻿using System;
 using AchievementLib.Pack.V1.Models;
 using Blish_HUD;
+using Flyga.AdditionalAchievements.Status.Models;
+using Flyga.AdditionalAchievements.Status.Provider;
 using Microsoft.Xna.Framework;
 
-namespace Flyga.AdditionalAchievements.Solve.Handler.V1
+namespace Flyga.AdditionalAchievements.Solve.Handler.V1.Mumble
 {
-    public class LookingAtHandler : ActionHandler<LookingAtAction>
+    public class LookingAtHandler : MumbleHandler<LookingAtAction>
     {
         private static readonly Logger Logger = Logger.GetLogger<LookingAtHandler>();
 
-        private readonly Gw2MumbleService _context;
-
-        private void UpdateState()
-        {
-            if (State == HandlerState.Fatal)
-            {
-                return;
-            }
-            
-            if (_context == null)
-            {
-                State = HandlerState.Fatal;
-                return;
-            }
-            if (_context.IsAvailable)
-            {
-                State = HandlerState.Working;
-                return;
-            }
-
-            State = HandlerState.Suspended;
-        }
-
-        public LookingAtHandler(Gw2MumbleService mumbleService)
-        {
-            _context = mumbleService ?? throw new ArgumentNullException(nameof(mumbleService));
-        }
+        public LookingAtHandler(MumbleStatusProvider mumbleStatusProvider) : base (mumbleStatusProvider)
+        { /** NOOP **/}
 
         /// <inheritdoc/>
         public override void Update(GameTime gameTime)
         {
-            UpdateState();
-
             if (State != HandlerState.Working)
             {
                 return;

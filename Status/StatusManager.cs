@@ -43,6 +43,9 @@ namespace Flyga.AdditionalAchievements.Status
             StatusChanged?.Invoke(this, null);
         }
 
+        /// <remarks>
+        /// Disposed the added <see cref="IStatusProvider"/>s.
+        /// </remarks>
         public void Dispose()
         {
             StatusChanged = null;

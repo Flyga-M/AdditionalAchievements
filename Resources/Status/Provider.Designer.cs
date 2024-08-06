@@ -212,5 +212,14 @@ namespace Flyga.AdditionalAchievements.Resources.Status {
                 return ResourceManager.GetString("ModuleDependencyMissing", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mumble Link is not yet available..
+        /// </summary>
+        internal static string MumbleNotReady {
+            get {
+                return ResourceManager.GetString("MumbleNotReady", resourceCulture);
+            }
+        }
     }
 }

@@ -57,9 +57,9 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
             UpdateState();
         }
 
-        public ActionHandlerCollection(Gw2MumbleService gw2Mumble, PositionEventsModuleStatusProvider positionEventsModuleStatusProvider, ApiStatusProvider apiStatusProvider)
+        public ActionHandlerCollection(MumbleStatusProvider mumbleStatusProvider, PositionEventsModuleStatusProvider positionEventsModuleStatusProvider, ApiStatusProvider apiStatusProvider)
         {
-            V1.LookingAtHandler lookingAtHandler = new V1.LookingAtHandler(gw2Mumble);
+            V1.Mumble.LookingAtHandler lookingAtHandler = new V1.Mumble.LookingAtHandler(mumbleStatusProvider);
             V1.PositionAreaHandler positionAreaHandler = new V1.PositionAreaHandler(positionEventsModuleStatusProvider);
             V1.ApiHandler apiHandler = new V1.ApiHandler(apiStatusProvider);
 

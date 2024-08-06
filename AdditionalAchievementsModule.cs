@@ -44,6 +44,10 @@ namespace Flyga.AdditionalAchievements
 
         private CornerIcon _cornerIcon;
 
+        internal ApiStatusProvider ApiStatusProvider;
+        internal PositionEventsModuleStatusProvider PositionEventsModuleStatusProvider;
+        internal MumbleStatusProvider MumbleStatusProvider;
+
         internal StatusManager StatusManager;
 
         /// <summary>
@@ -183,16 +187,20 @@ namespace Flyga.AdditionalAchievements
             TextureManager.Initialize(); // TODO: we could wait for every texture to load, if we wanted
             FontManager.Initialize();
 
-            // TODO: statusProvider should probably be private fields
-            ApiStatusProvider apiStatusProvider = new ApiStatusProvider(Gw2ApiManager);
-            PositionEventsModuleStatusProvider positionEventsModuleStatusProvider = new PositionEventsModuleStatusProvider(GameService.Module);
+            MumbleStatusProvider = new MumbleStatusProvider(GameService.Gw2Mumble);
+            ApiStatusProvider = new ApiStatusProvider(Gw2ApiManager);
+            PositionEventsModuleStatusProvider = new PositionEventsModuleStatusProvider(GameService.Module);
 
             StatusManager.AddStatusProvider(apiStatusProvider);
             StatusManager.AddStatusProvider(positionEventsModuleStatusProvider);
 
+            StatusManager.AddStatusProvider(MumbleStatusProvider);
+            StatusManager.AddStatusProvider(ApiStatusProvider);
+            StatusManager.AddStatusProvider(PositionEventsModuleStatusProvider);
+
             // TODO: this currently does not add custom ActionHandlers
             //       AchievementHandler needs a method for that
-            _achievementHandler = new Solve.Handler.AchievementHandler(AchievementPackDataPath, GameService.Gw2Mumble, positionEventsModuleStatusProvider, apiStatusProvider);
+            _achievementHandler = new Solve.Handler.AchievementHandler(AchievementPackDataPath, MumbleStatusProvider, PositionEventsModuleStatusProvider, ApiStatusProvider);
             _achievementHandler.PackAddedOrRemoved += OnPackAddedOrRemoved; // TODO: remove before going live
             _achievementHandler.PackLoadedOrUnloaded += OnPackLoadedOrUnloaded; // TODO: remove before going live
 
@@ -594,6 +602,7 @@ namespace Flyga.AdditionalAchievements
 
         protected override void Update(GameTime gameTime)
         {
+            this.MumbleStatusProvider?.Update();
             _achievementHandler?.Update(gameTime);
 
             //_elapsed += gameTime.ElapsedGameTime.TotalMilliseconds;
