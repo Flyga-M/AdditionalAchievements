@@ -60,14 +60,12 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
         public ActionHandlerCollection(MumbleStatusProvider mumbleStatusProvider, PositionEventsModuleStatusProvider positionEventsModuleStatusProvider, ApiStatusProvider apiStatusProvider)
         {
             V1.Mumble.LookingAtHandler lookingAtHandler = new V1.Mumble.LookingAtHandler(mumbleStatusProvider);
+            V1.Mumble.MountHandler mountHandler = new V1.Mumble.MountHandler(mumbleStatusProvider);
             V1.PositionAreaHandler positionAreaHandler = new V1.PositionAreaHandler(positionEventsModuleStatusProvider);
             V1.ApiHandler apiHandler = new V1.ApiHandler(apiStatusProvider);
 
-            AdditionalAchievementsModule.Instance.StatusManager.AddStatusProvider(new ActionHandlerStatusProvider(lookingAtHandler));
-            AdditionalAchievementsModule.Instance.StatusManager.AddStatusProvider(new ActionHandlerStatusProvider(positionAreaHandler));
-            AdditionalAchievementsModule.Instance.StatusManager.AddStatusProvider(new ActionHandlerStatusProvider(apiHandler));
-
             _handlers.Add(lookingAtHandler);
+            _handlers.Add(mountHandler);
             _handlers.Add(positionAreaHandler);
             _handlers.Add(apiHandler);
         }
