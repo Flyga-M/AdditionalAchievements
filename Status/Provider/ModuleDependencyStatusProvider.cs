@@ -3,10 +3,6 @@ using Blish_HUD.Graphics.UI;
 using Flyga.AdditionalAchievements.Integration;
 using Flyga.AdditionalAchievements.Status.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.Status.Provider
 {
@@ -60,15 +56,17 @@ namespace Flyga.AdditionalAchievements.Status.Provider
 
             _contextProvider.StateChanged += OnContextStateChanged;
 
-            if (_contextProvider.State != IntegrationState.None)
-            {
-                OnContextStateChanged(_contextProvider, _contextProvider.State);
-            }
+            UpdateStatus();
         }
 
-        protected virtual void OnContextStateChanged(object _, IntegrationState state)
+        private void OnContextStateChanged(object _, IntegrationState _1)
         {
-            switch (state)
+            UpdateStatus();
+        }
+
+        protected virtual void UpdateStatus()
+        {
+            switch (_contextProvider.State)
             {
                 case IntegrationState.None:
                     {
