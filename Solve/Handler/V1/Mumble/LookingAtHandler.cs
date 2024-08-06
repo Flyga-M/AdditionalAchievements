@@ -1,7 +1,5 @@
-﻿using System;
-using AchievementLib.Pack.V1.Models;
+﻿using AchievementLib.Pack.V1.Models;
 using Blish_HUD;
-using Flyga.AdditionalAchievements.Status.Models;
 using Flyga.AdditionalAchievements.Status.Provider;
 using Microsoft.Xna.Framework;
 

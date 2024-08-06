@@ -2,7 +2,6 @@
 using AchievementLib.Pack.V1.Models;
 using ApiParser;
 using ApiParser.Endpoint;
-using ApiParser.Settings;
 using Blish_HUD;
 using Blish_HUD.Modules.Managers;
 using Flyga.AdditionalAchievements.Solve.Handler.V1.Api;

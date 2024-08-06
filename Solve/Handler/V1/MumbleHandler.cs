@@ -3,10 +3,6 @@ using Blish_HUD;
 using Flyga.AdditionalAchievements.Status.Models;
 using Flyga.AdditionalAchievements.Status.Provider;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.Solve.Handler.V1
 {

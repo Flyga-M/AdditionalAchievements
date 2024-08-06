@@ -1,6 +1,5 @@
 ﻿using AchievementLib.Pack;
 using Blish_HUD;
-using Blish_HUD.Modules.Managers;
 using Flyga.AdditionalAchievements.Status.Provider;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -61,11 +60,13 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
         {
             V1.Mumble.LookingAtHandler lookingAtHandler = new V1.Mumble.LookingAtHandler(mumbleStatusProvider);
             V1.Mumble.MountHandler mountHandler = new V1.Mumble.MountHandler(mumbleStatusProvider);
+            V1.Mumble.MapHandler mapHandler = new V1.Mumble.MapHandler(mumbleStatusProvider);
             V1.PositionAreaHandler positionAreaHandler = new V1.PositionAreaHandler(positionEventsModuleStatusProvider);
             V1.ApiHandler apiHandler = new V1.ApiHandler(apiStatusProvider);
 
             _handlers.Add(lookingAtHandler);
             _handlers.Add(mountHandler);
+            _handlers.Add(mapHandler);
             _handlers.Add(positionAreaHandler);
             _handlers.Add(apiHandler);
         }

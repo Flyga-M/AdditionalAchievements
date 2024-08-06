@@ -1,5 +1,6 @@
 ﻿using AchievementLib.Pack;
 using AchievementLib.Pack.V1.Models;
+using Blish_HUD;
 using Flyga.AdditionalAchievements.Status.Provider;
 using Microsoft.Xna.Framework;
 using System.Collections.Concurrent;
@@ -32,6 +33,8 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1.Mumble
         public MountHandler(MumbleStatusProvider mumbleStatusProvider) : base(mumbleStatusProvider)
         {
             _actionsByMountType = new ConcurrentDictionary<MountType, SafeList<MountAction>>();
+
+            _context.PlayerCharacter.CurrentMountChanged += OnMumbleMountChanged;
         }
 
         public override bool TryRegisterAction(MountAction action)
@@ -68,12 +71,10 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1.Mumble
         }
 
         public override void Update(GameTime gameTime)
-        {
-            if (State != HandlerState.Working)
-            {
-                return;
-            }
+        { /** NOOP **/}
 
+        private void OnMumbleMountChanged(object _, ValueEventArgs<Gw2Sharp.Models.MountType> _1)
+        {
             CurrentMount = _context.PlayerCharacter.CurrentMount;
         }
 
@@ -111,6 +112,11 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1.Mumble
         protected override void Cleanup()
         {
             _actionsByMountType.Clear();
+
+            if (_context != null)
+            {
+                _context.PlayerCharacter.CurrentMountChanged -= OnMumbleMountChanged;
+            }
             base.Cleanup();
         }
     }
