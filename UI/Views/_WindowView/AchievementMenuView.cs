@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Blish_HUD;
+﻿using Blish_HUD;
 using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
 using Flyga.AdditionalAchievements.Resources;
-using Microsoft.Xna.Framework;
 using Flyga.AdditionalAchievements.Solve.Handler;
-using Flyga.AdditionalAchievements.UI.Presenters;
-using Flyga.AdditionalAchievements.UI.Models;
 using Flyga.AdditionalAchievements.UI.Controls;
+using Flyga.AdditionalAchievements.UI.Presenters;
+using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Flyga.AdditionalAchievements.UI.Views
 {
@@ -35,6 +34,7 @@ namespace Flyga.AdditionalAchievements.UI.Views
         protected override void Build(Container buildPanel)
         {
             _parent = buildPanel;
+            _parent.Resized += OnParentResized;
 
             int spaceWidth = buildPanel.ContentRegion.Width;
             int spaceHeight = buildPanel.ContentRegion.Height;
@@ -42,7 +42,7 @@ namespace Flyga.AdditionalAchievements.UI.Views
             _searchBox = new TextBox()
             {
                 PlaceholderText = Strings.PlaceholderSearch,
-                Size = new Point(spaceHeight - 30, 30),
+                Size = new Point(spaceWidth - 30, 30),
                 //Font = GameService.Content.DefaultFont16,
                 Location = new Point(0, 0),
                 Parent = buildPanel
@@ -66,6 +66,35 @@ namespace Flyga.AdditionalAchievements.UI.Views
             };
 
             _menu.ItemSelected += OnMenuItemSelected;
+        }
+
+        private void OnParentResized(object _, ResizedEventArgs _1)
+        {
+            RecalculateLayout();
+        }
+
+        private void RecalculateLayout()
+        {
+            int spaceWidth = _parent.ContentRegion.Width;
+            int spaceHeight = _parent.ContentRegion.Height;
+
+            if (_searchBox == null)
+            {
+                return;
+            }
+
+            _searchBox.Size = new Point(spaceWidth - 30, 30);
+
+            if (_menuPanel != null)
+            {
+                _menuPanel.Size = new Point(spaceWidth, spaceHeight - (_searchBox.Height + SEARCH_BAR_GAP));
+                _menuPanel.Location = new Point(0, _searchBox.Height + SEARCH_BAR_GAP);
+            }
+
+            if (_menu != null)
+            {
+                _menu.Width = spaceWidth;
+            }
         }
 
         public void SetContent(IEnumerable<MenuItem> menuItems)
@@ -114,7 +143,11 @@ namespace Flyga.AdditionalAchievements.UI.Views
         {
             Selected = null;
 
-            _parent = null;
+            if (_parent != null)
+            {
+                _parent.Resized -= OnParentResized;
+                _parent = null;
+            }
 
             if (_searchBox != null)
             {

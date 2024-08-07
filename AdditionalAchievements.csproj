@@ -238,7 +238,7 @@
     <Compile Include="UI\Models\RelativeBitmapFont.cs" />
     <Compile Include="UI\Models\RelativeInt.cs" />
     <Compile Include="UI\Models\ViewCreationData.cs" />
-    <Compile Include="UI\Presenters\AchievementMenuPresenter.cs" />
+    <Compile Include="UI\Presenters\_WindowView\AchievementMenuPresenter.cs" />
     <Compile Include="UI\Presenters\AchievementNotificationsPresenter.cs" />
     <Compile Include="UI\Presenters\AchievementWindowPresenter.cs" />
     <Compile Include="Textures\TextureManager.cs" />
