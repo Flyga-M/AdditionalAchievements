@@ -1,8 +1,5 @@
 ﻿using Blish_HUD.Controls;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.UI
@@ -40,7 +37,16 @@ namespace Flyga.AdditionalAchievements.UI
             }
 
             this.Controller = controller;
-            Show(); // Control.Visible is defaulted to true, so make sure the Controller has been loaded.
+            if (this.Visible)
+            {
+                // this is necessary, because Control.Visible is defaulted to true, so we need to make sure the
+                // controller is properly loaded
+                // it's imperfect, because the controller and control should be loaded BEFORE the first time the 
+                // control is shown, but i don't see any way around this other than defaulting Visible to false,
+                // which i don't wan't to do
+                Initialize();
+            }
+
             return this;
         }
 
@@ -67,6 +73,13 @@ namespace Flyga.AdditionalAchievements.UI
             }
 
             return loadResult;
+        }
+
+        private void Initialize()
+        {
+            Controller.DoUpdateControl();
+
+            _ = DoLoad(new Progress<string>());
         }
 
         public override void Show()
