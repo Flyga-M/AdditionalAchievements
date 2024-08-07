@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using SharpDX.MediaFoundation;
 using System;
 using System.Threading.Tasks;
 

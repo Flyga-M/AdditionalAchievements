@@ -1,12 +1,7 @@
-﻿using Blish_HUD;
-using Blish_HUD.Graphics.UI;
+﻿using Blish_HUD.Graphics.UI;
 using Flyga.AdditionalAchievements.Repo;
 using Flyga.AdditionalAchievements.UI.Views;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.UI.Presenters
 {

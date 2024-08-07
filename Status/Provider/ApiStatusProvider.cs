@@ -1,5 +1,4 @@
 ﻿using AchievementLib.Pack;
-using AchievementLib.Pack.V1.Models;
 using ApiParser;
 using ApiParser.Settings;
 using Blish_HUD;
@@ -9,11 +8,8 @@ using Blish_HUD.Modules.Managers;
 using Flyga.AdditionalAchievements.Status.Models;
 using Gw2Sharp.WebApi.V2.Models;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.Status.Provider
 {

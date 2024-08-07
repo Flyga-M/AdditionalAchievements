@@ -165,7 +165,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
             {
                 return false;
             }
-
+            
             if (_actions.Contains(action))
             {
                 return false;

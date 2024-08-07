@@ -1,10 +1,5 @@
 ﻿using AchievementLib.Pack;
 using Flyga.AdditionalAchievements.UI.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.UI.Controller
 {

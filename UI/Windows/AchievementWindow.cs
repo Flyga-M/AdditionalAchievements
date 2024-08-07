@@ -1,6 +1,5 @@
 ﻿using Blish_HUD;
 using Blish_HUD.Controls;
-using Blish_HUD.Graphics.UI;
 using Flyga.AdditionalAchievements.Repo;
 using Flyga.AdditionalAchievements.Solve.Handler;
 using Flyga.AdditionalAchievements.Textures;

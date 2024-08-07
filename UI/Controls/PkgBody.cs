@@ -2,17 +2,10 @@
 using Blish_HUD.Controls;
 using Flyga.AdditionalAchievements.Repo;
 using Flyga.AdditionalAchievements.Textures;
-using Flyga.AdditionalAchievements.Textures.Fonts;
 using Flyga.AdditionalAchievements.UI.Controller;
-using Flyga.AdditionalAchievements.UI.Models;
-using Gw2Sharp.Json.Converters;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.UI.Controls
 {

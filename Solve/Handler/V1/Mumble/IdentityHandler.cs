@@ -1,15 +1,10 @@
 ﻿using AchievementLib.Pack;
 using AchievementLib.Pack.V1.Models;
 using Blish_HUD;
-using Blish_HUD.Gw2Mumble;
 using Flyga.AdditionalAchievements.Status.Provider;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.Solve.Handler.V1.Mumble
 {

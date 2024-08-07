@@ -3,14 +3,11 @@ using Blish_HUD;
 using Blish_HUD.Controls;
 using Flyga.AdditionalAchievements.Textures;
 using Flyga.AdditionalAchievements.Textures.Colors;
-using Flyga.AdditionalAchievements.Textures.Fonts;
 using Flyga.AdditionalAchievements.UI.Controller;
 using Flyga.AdditionalAchievements.UI.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended.BitmapFonts;
 using System;
-using System.Linq;
 
 namespace Flyga.AdditionalAchievements.UI.Controls
 {

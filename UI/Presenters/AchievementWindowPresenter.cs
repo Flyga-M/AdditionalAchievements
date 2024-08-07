@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Blish_HUD;
+﻿using Blish_HUD;
 using Blish_HUD.Graphics.UI;
 using Flyga.AdditionalAchievements.Solve.Handler;
 using Flyga.AdditionalAchievements.UI.Views;

@@ -1,15 +1,12 @@
-﻿using Blish_HUD;
-using Blish_HUD.Controls;
+﻿using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
 using Blish_HUD.Input;
 using Flurl;
 using Flyga.AdditionalAchievements.Repo;
 using Flyga.AdditionalAchievements.Resources;
-using Flyga.AdditionalAchievements.UI.Controller;
 using Flyga.AdditionalAchievements.UI.Controls;
 using Flyga.AdditionalAchievements.UI.Presenters;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace Flyga.AdditionalAchievements.UI.Views

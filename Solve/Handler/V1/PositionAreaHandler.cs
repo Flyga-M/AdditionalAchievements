@@ -1,14 +1,11 @@
 ﻿using AchievementLib.Pack.V1.Models;
 using Blish_HUD;
-using Blish_HUD.Controls;
-using Flyga.AdditionalAchievements.Integration;
 using Flyga.AdditionalAchievements.Status.Models;
 using Flyga.AdditionalAchievements.Status.Provider;
 using Flyga.PositionEventsModule.Contexts;
 using Microsoft.Xna.Framework;
 using PositionEvents;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Flyga.AdditionalAchievements.Solve.Handler.V1
