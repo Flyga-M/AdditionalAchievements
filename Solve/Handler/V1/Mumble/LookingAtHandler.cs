@@ -20,7 +20,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1.Mumble
                 return;
             }
             
-            foreach(LookingAtAction action in _actions)
+            foreach(LookingAtAction action in _actions.ToArray())
             {
                 UpdateAction(action);
             }

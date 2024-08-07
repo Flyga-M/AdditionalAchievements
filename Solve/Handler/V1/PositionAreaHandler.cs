@@ -79,7 +79,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1
 
         private void OnModuleAvailable()
         {
-            AddAreasToContext(_actions);
+            AddAreasToContext(_actions.ToArray());
         }
 
         private void AddAreasToContext(IEnumerable<PositionAreaAction> actions)

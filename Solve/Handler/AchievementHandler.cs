@@ -26,7 +26,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
 
         private SafeList<IAchievementPackManager> _packs = new SafeList<IAchievementPackManager>();
 
-        public int CurrentPacks => _packs.Count;
+        public int CurrentPackCount => _packs.Count;
 
         // specifically calculated when it's called, just so we don't keep a collection in memory all the time
         private IEnumerable<IAchievement> _achievements => _packs.SelectMany(pack => pack.Categories).SelectMany(category => category.AchievementCollections).SelectMany(collection => collection.Achievements);

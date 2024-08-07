@@ -179,7 +179,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1
 
             _elapsed = 0;
 
-            foreach (ApiAction action in _actions)
+            foreach (ApiAction action in _actions.ToArray())
             {
                 _ = UpdateActionAsync(action);
             }
