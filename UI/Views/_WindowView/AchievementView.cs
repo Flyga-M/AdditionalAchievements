@@ -233,10 +233,29 @@ namespace Flyga.AdditionalAchievements.UI.Views
                 _description = null;
             }
 
-            Logger.Info("AchievementView unloaded.");
+            if (_achievementCompletedHighlight != null)
+            {
+                _achievementCompletedHighlight.Dispose();
+                _achievementCompletedHighlight = null;
+            }
 
-            // TODO: dispose content column
-            // dispose _achievementCompletedHighlight
+            if (_leftColumn != null)
+            {
+                _leftColumn.Dispose();
+                _leftColumn = null;
+            }
+
+            if (_rightColumn != null)
+            {
+                _rightColumn.Dispose();
+                _rightColumn = null;
+            }
+
+            if (_content != null)
+            {
+                _content.Dispose();
+                _content = null;
+            }
 
             if (_backBar != null)
             {
