@@ -1,10 +1,6 @@
 ﻿using AchievementLib.Pack;
 using Flyga.AdditionalAchievements.UI.Controls;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.UI.Controller
 {
@@ -44,6 +40,9 @@ namespace Flyga.AdditionalAchievements.UI.Controller
         {
             Model.CurrentObjectivesChanged += OnCurrentObjectivesChanged;
             Model.FulfilledChanged += OnFulfilledChanged;
+            Model.IsUnlockedChanged += OnIsUnlockedChanged;
+
+            Control.IsLocked = !Model.IsUnlocked;
 
             if (Model.Color != null)
             {
@@ -67,15 +66,21 @@ namespace Flyga.AdditionalAchievements.UI.Controller
             UpdateCompletedDisplay();
         }
 
-        private void OnFulfilledChanged(object _, bool _1)
+        private void OnCurrentObjectivesChanged(object _, int i)
+        {
+            UpdateFill();
+            UpdateTier();
+            UpdateCompletedDisplay();
+        }
+
+        private void OnFulfilledChanged(object _, bool s)
         {
             UpdateCompletedDisplay();
         }
 
-        private void OnCurrentObjectivesChanged(object _, int _1)
+        private void OnIsUnlockedChanged(object _, bool isUnlocked)
         {
-            UpdateFill();
-            UpdateTier();
+            Control.IsLocked = !isUnlocked;
         }
 
         private void UpdateFill()
@@ -132,6 +137,7 @@ namespace Flyga.AdditionalAchievements.UI.Controller
         {
             Model.CurrentObjectivesChanged -= OnCurrentObjectivesChanged;
             Model.FulfilledChanged -= OnFulfilledChanged;
+            Model.IsUnlockedChanged -= OnIsUnlockedChanged;
 
             base.Unload();
         }

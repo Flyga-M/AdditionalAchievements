@@ -35,6 +35,9 @@ namespace Flyga.AdditionalAchievements.UI.Controls
         private int _iconPadding;
         private Point _iconPosition;
         private RelativeInt _iconHeight;
+        private int _lockPadding;
+        private Point _lockPosition;
+        private RelativeInt _lockHeight;
         private RelativeInt _tierHeight;
         private RelativeInt _tierFontHeight;
         private RelativeBitmapFont _tierFont;
@@ -205,9 +208,12 @@ namespace Flyga.AdditionalAchievements.UI.Controls
 
         public int CurrentTier { get; set; }
 
+        public bool IsLocked { get; set; }
+
         public AchievementProgressSquare()
         {
             _iconHeight = new RelativeInt(0.65f, () => this.Height); //(int)Math.Floor(((float)this.Height * 0.75f));
+            _lockHeight = new RelativeInt(0.8f, () => this.Height);
 
             _tierHeight = new RelativeInt(0.183f, () => this.Height); //(int)(this.Height * 0.183);
             _tierFontHeight = new RelativeInt(0.85f, () => this._tierHeight);
@@ -272,8 +278,12 @@ namespace Flyga.AdditionalAchievements.UI.Controls
             _iconHeight.Update();
             _iconPadding = (int)Math.Floor(((float)(this.Height - _iconHeight) / 2.0f));
             _iconPosition = new Point(_center.X - _iconHeight / 2, _center.Y - _iconHeight / 2);
-            _tierHeight.Update();
 
+            _lockHeight.Update();
+            _lockPadding = (int)Math.Floor(((float)(this.Height - _lockHeight) / 2.0f));
+            _lockPosition = new Point(_center.X - _lockHeight / 2, _center.Y - _lockHeight / 2);
+
+            _tierHeight.Update();
             _tierFont.Update();
 
             _fillFractionHeight.Update();
@@ -404,6 +414,15 @@ namespace Flyga.AdditionalAchievements.UI.Controls
 
         private void PaintIcon(SpriteBatch spriteBatch)
         {   
+            // only the lock, if IsLocked is true
+            if (IsLocked)
+            {
+                spriteBatch.DrawOnCtrl(this,
+                    TextureManager.Display.Progress.Lock,
+                    new Rectangle(_lockPosition, new Point(_lockHeight, _lockHeight)));
+                return;
+            }
+
             // full icon, if partial fill should not be visible
             if (!ShowFill)
             {
@@ -436,7 +455,7 @@ namespace Flyga.AdditionalAchievements.UI.Controls
 
         private void PaintFill(SpriteBatch spriteBatch)
         {
-            if (!ShowFill)
+            if (!ShowFill || IsLocked)
             {
                 return;
             }
@@ -473,7 +492,7 @@ namespace Flyga.AdditionalAchievements.UI.Controls
 
         private void PaintTier(SpriteBatch spriteBatch)
         {
-            if (!ShowTier)
+            if (!ShowTier || IsLocked)
             {
                 return;
             }
@@ -514,7 +533,7 @@ namespace Flyga.AdditionalAchievements.UI.Controls
             _animatedFill?.Cancel();
             _animatedFill = null;
 
-            base.DisposeControl(); // redundant
+            base.DisposeControl();
         }
     }
 }
