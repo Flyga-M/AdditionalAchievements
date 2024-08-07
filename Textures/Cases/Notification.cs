@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Flyga.AdditionalAchievements.Textures.Cases
@@ -23,6 +24,16 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
             _background = new TextureReference("png/achievementNotifBackground214x70.png");
 
             _defaultAchievement = new TextureReference(42684);
+        }
+
+        public async Task WaitUntilResolved()
+        {
+            await _shine.WaitUntilResolved();
+            await _shine2.WaitUntilResolved();
+
+            await _background.WaitUntilResolved();
+
+            await _defaultAchievement.WaitUntilResolved();
         }
 
         public void Dispose()

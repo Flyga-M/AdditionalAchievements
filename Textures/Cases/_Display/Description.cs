@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using SharpDX.MediaFoundation;
 using System;
+using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.Textures.Cases
 {
@@ -21,6 +23,13 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
             _titleBackground = new TextureReference(784279);
 
             _completedBackgroundHighlight = new TextureReference(605007);
+        }
+
+        public async Task WaitUntilResolved()
+        {
+            await _verticalDivider.WaitUntilResolved();
+            await _titleBackground.WaitUntilResolved();
+            await _completedBackgroundHighlight.WaitUntilResolved();
         }
 
         public void Dispose()

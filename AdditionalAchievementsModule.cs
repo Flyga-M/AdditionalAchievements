@@ -185,7 +185,9 @@ namespace Flyga.AdditionalAchievements
             ExtractSQLiteStuff();
             AddUnmanagedDllDirectory();
 
-            TextureManager.Initialize(); // TODO: we could wait for every texture to load, if we wanted
+            TextureManager.Initialize();
+            await TextureManager.WaitUntilResolved();
+
             FontManager.Initialize();
 
             MumbleStatusProvider = new MumbleStatusProvider(GameService.Gw2Mumble);

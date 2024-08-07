@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.Textures.Cases
 {
@@ -24,6 +25,15 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
             _completedShineHighlight = new TextureReference(605008);
             _completedShine2Highlight = new TextureReference(605009);
             _completedBackgroundHighlight = new TextureReference(605007);
+        }
+
+        public async Task WaitUntilResolved()
+        {
+            await _completedShineHighlight.WaitUntilResolved();
+
+            await _bottomSeparator.WaitUntilResolved();
+            await _completedShine2Highlight.WaitUntilResolved();
+            await _completedBackgroundHighlight.WaitUntilResolved();
         }
 
         public void Dispose()

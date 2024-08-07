@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Flyga.AdditionalAchievements.Textures.Cases
@@ -98,6 +99,29 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
             _watchBackgroundHighlight = new TextureReference(605000);
         }
 
+        public async Task WaitUntilResolved()
+        {
+            await _progress.WaitUntilResolved();
+            await _back.WaitUntilResolved();
+            await _selection.WaitUntilResolved();
+            await _description.WaitUntilResolved();
+            await _repo.WaitUntilResolved();
+
+            await _moduleIconCorner.WaitUntilResolved();
+            await _moduleIconCornerHover.WaitUntilResolved();
+
+            await _moduleEmblem.WaitUntilResolved();
+            await _achievementWindowBackground.WaitUntilResolved();
+
+            await _tabStatusIcon.WaitUntilResolved();
+            await _tabRepositoryIcon.WaitUntilResolved();
+            await _tabAchievementsIcon.WaitUntilResolved();
+
+            await _watchIcon.WaitUntilResolved();
+            await _watchIconSelected.WaitUntilResolved();
+            await _watchBackgroundHighlight.WaitUntilResolved();
+        }
+
         public void Dispose()
         {
             _progress?.Dispose();
@@ -107,11 +131,9 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
             _repo?.Dispose();
 
             _moduleIconCorner?.Dispose();
-
             _moduleIconCornerHover?.Dispose();
 
             _moduleEmblem?.Dispose();
-
             _achievementWindowBackground?.Dispose();
 
             _tabStatusIcon?.Dispose();

@@ -1,7 +1,9 @@
 ﻿using Blish_HUD;
 using Blish_HUD.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json.Bson;
 using System;
+using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.Textures
 {
@@ -141,6 +143,34 @@ namespace Flyga.AdditionalAchievements.Textures
                     _assetCacheReference.TextureSwapped += OnTextureSwapped;
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns an awaitable <see cref="Task"/> that contains the <see cref="Texture"/>, after 
+        /// it was resolved.
+        /// </summary>
+        /// <remarks>
+        /// Will syncronously return, if the <see cref="Texture"/> is local.
+        /// </remarks>
+        /// <returns>A <see cref="Task"/> with the resolved <see cref="Texture2D"/>.</returns>
+        public async Task<Texture2D> WaitUntilResolved()
+        {
+            if (IsResolved)
+            {
+                return Texture;
+            }
+
+            TaskCompletionSource<Texture2D> completionSource = new TaskCompletionSource<Texture2D>();
+
+            EventHandler resolvedEventHandler = new EventHandler((o, s) => completionSource.SetResult(Texture));
+
+            Resolved += resolvedEventHandler;
+
+            await completionSource.Task;
+
+            Resolved -= resolvedEventHandler;
+
+            return Texture;
         }
 
         public TextureReference(int assetId, bool applySelfMask)

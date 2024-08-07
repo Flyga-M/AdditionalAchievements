@@ -18,6 +18,11 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
             _pkgBodyBackground = new TextureReference(155209);
         }
 
+        public async Task WaitUntilResolved()
+        {
+            await _pkgBodyBackground.WaitUntilResolved();
+        }
+
         public void Dispose()
         {
             _pkgBodyBackground?.Dispose();

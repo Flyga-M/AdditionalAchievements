@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.Textures.Cases
 {
@@ -21,6 +22,14 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
             _vignette = new TextureReference(605003);
             _tierBackground = new TextureReference("png/achievementTier.png");
             _lock = new TextureReference(240704);
+        }
+
+        public async Task WaitUntilResolved()
+        {
+            await _fillCrest.WaitUntilResolved();
+            await _vignette.WaitUntilResolved();
+            await _tierBackground.WaitUntilResolved();
+            await _lock.WaitUntilResolved();
         }
 
         public void Dispose()

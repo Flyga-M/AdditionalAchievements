@@ -1,4 +1,5 @@
 ﻿using Flyga.AdditionalAchievements.Textures.Cases;
+using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.Textures
 {
@@ -19,7 +20,13 @@ namespace Flyga.AdditionalAchievements.Textures
             _notification = new Notification();
             _display = new Display();
         }
-       
+
+        public static async Task WaitUntilResolved()
+        {
+            await _notification.WaitUntilResolved();
+            await _display.WaitUntilResolved();
+        }
+
         public static void FreeResources()
         {
             _notification?.Dispose();
