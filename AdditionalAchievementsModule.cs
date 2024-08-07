@@ -409,6 +409,7 @@ namespace Flyga.AdditionalAchievements
                 {
                     Logger.Warn(ex, $"Unable to enable achievement pack {pack.Manifest?.Namespace} " +
                         $"from watch path.");
+                    _packsLoadedCompletionSources[pack]?.TrySetResult(false);
                     return;
                 }
             });
@@ -419,8 +420,14 @@ namespace Flyga.AdditionalAchievements
                 sw.Start();
                 Logger.Info("Waiting for pack completion source.");
                 bool result = await _packsLoadedCompletionSources[pack].Task;
+                _packsLoadedCompletionSources[pack] = null;
                 sw.Stop();
                 Logger.Info($"result: {result}. {sw.Elapsed.TotalMilliseconds}ms");
+
+                if (!result)
+                {
+                    return false;
+                }
 
                 if (_achievementHandler?.TryAddPack(pack) != true)
                 {

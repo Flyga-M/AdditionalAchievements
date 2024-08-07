@@ -2,40 +2,84 @@
 using Blish_HUD;
 using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
-using Flyga.AdditionalAchievements.Textures.Colors;
+using Blish_HUD.Input;
 using Flyga.AdditionalAchievements.UI.Controls;
+using Flyga.AdditionalAchievements.UI.Models;
+using Flyga.AdditionalAchievements.UI.Presenters;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Flyga.AdditionalAchievements.UI.Views
 {
-    public class AchievementCollectionView : View
+    public class AchievementCollectionView : View, IViewSelection
     {
         private static Logger Logger = Logger.GetLogger<AchievementCollectionView>();
 
         private Container _parent;
         private FlowPanel _flowPanel;
 
-        private IAchievement[] _achievements;
+        private string _title;
+        private Texture2D _icon;
 
         private int _achievementWidth;
 
-        public event EventHandler<IAchievement> AchievementSelected;
-
-        private void OnAchievementSelected(IAchievement achievement)
+        /// <summary>
+        /// The title of the collection.
+        /// </summary>
+        public string Title
         {
-            AchievementSelected?.Invoke(this, achievement);
+            get => _title ?? "";
+            set => _title = value;
         }
 
-        public AchievementCollectionView(IEnumerable<IAchievement> achievements)
+        /// <summary>
+        /// The icon for the collection.
+        /// </summary>
+        public Texture2D Icon
         {
-            _achievements = achievements.ToArray();
+            get
+            {
+                if (_icon == null || _icon.IsDisposed)
+                {
+                    return ContentService.Textures.Error;
+                }
+
+                return _icon;
+            }
+            set => _icon = value;
         }
 
-        public AchievementCollectionView(IAchievementCollection collection) : this(collection.Achievements)
+        public event EventHandler<Func<IView>> Selected;
+
+        private void OnAchievementSelected(AchievementSelection achievementSelection)
+        {
+            if (achievementSelection == null)
+            {
+                // TODO: log error
+                return;
+            }
+
+            BackData backData = new BackData(Icon, Title);
+
+            Func<IView> getView = () => null;
+            if (achievementSelection.GetSelectedView != null)
+            {
+                getView = () => achievementSelection.GetSelectedView(new object[] { backData });
+            }
+
+            Selected?.Invoke(this, getView);
+        }
+
+        public AchievementCollectionView()
         { /** NOOP **/ }
+
+        public AchievementCollectionView(IAchievementCollection collection) : this()
+        {
+            this.WithPresenter(new AchievementCollectionPresenter(this, collection));
+        }
 
         private void RecalculateLayout()
         {
@@ -81,55 +125,69 @@ namespace Flyga.AdditionalAchievements.UI.Views
             };
 
             _achievementWidth = (int)((float)_flowPanel.Width / 2.0f) - 5;
+        }
 
-            foreach (IAchievement achievement in _achievements)
+        public void SetContent(IEnumerable<Control> achievementSelections)
+        {
+            if (_flowPanel == null)
             {
-                AchievementSelection<IAchievement> achievementSelection;
+                return;
+            }
 
-                try
-                {
-                    achievementSelection = new AchievementSelection<IAchievement>(achievement)
-                    {
-                        Parent = _flowPanel,
-                        Width = _achievementWidth,
-                        Height = (int)((float)_achievementWidth / (AchievementSelection.DEFAULT_WIDTH_HEIGHT_RATIO))
-                    };
-                }
-                catch (Exception ex) // TODO: remove at some point? Should not be neccessary
-                {
-                    Logger.Error($"Exception: {ex}");
-                    return;
-                }
+            ClearPanel();
 
-                achievementSelection.Selected += OnAchievementSelectionSelected;
-                achievementSelection.WatchedChanged += OnAchievementWatchedChanged;
+            foreach (Control achievementSelection in achievementSelections)
+            {
+                achievementSelection.Parent = _flowPanel;
+                achievementSelection.Click += OnAchievementSelectionSelected;
 
-                _flowPanel.AddChild(achievementSelection);
+                float widthHeightRatio = (float)achievementSelection.Width / (float)achievementSelection.Height;
+
+                achievementSelection.Width = _achievementWidth;
+                achievementSelection.Height = (int)((float)_achievementWidth / widthHeightRatio);
+
+                Logger.Info($"added achSel to View: visible: {achievementSelection.Visible}");
             }
         }
 
-        private void OnAchievementSelectionSelected(object _, IAchievement achievement)
+        private void ClearPanel()
         {
-            OnAchievementSelected(achievement);
+            if (_flowPanel == null)
+            {
+                return;
+            }
+
+            Control[] currentContent = _flowPanel.GetChildrenOfType<Control>().ToArray();
+            _flowPanel.ClearChildren();
+
+            foreach (Control control in currentContent)
+            {
+                control.Click -= OnAchievementSelectionSelected;
+                control.Dispose();
+            }
         }
 
-        private void OnAchievementWatchedChanged(object _, (bool IsWatched, IAchievement Achievement) e)
+        private void OnAchievementSelectionSelected(object sender, MouseEventArgs _1)
         {
-            e.Achievement.IsWatched = e.IsWatched;
+            OnAchievementSelected(sender as AchievementSelection);
         }
 
         protected override void Unload()
         {
-            AchievementSelected = null;
+            Selected = null;
             
             if (_parent != null)
             {
                 _parent.Resized -= OnParentResized;
+                _parent = null;
             }
 
-            // TODO: implement
-
-            // TODO: unsubscribe from achievementSelection.Selected
+            if (_flowPanel != null)
+            {
+                ClearPanel();
+                _flowPanel.Dispose();
+                _flowPanel = null;
+            }
 
             base.Unload();
         }

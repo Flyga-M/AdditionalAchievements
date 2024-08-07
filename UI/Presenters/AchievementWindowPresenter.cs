@@ -15,22 +15,9 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
         public AchievementWindowPresenter(AchievementWindowView view, AchievementHandler model) : base(view, model)
         { /** NOOP **/ }
 
-        protected override Task<bool> Load(IProgress<string> progress)
+        protected override void UpdateView()
         {
-            Model.PackAddedOrRemoved += OnPackAddedOrRemoved;
-            Model.ResetOccured += OnReset;
-
-            return Task.FromResult(true);
-        }
-
-        private void OnPackAddedOrRemoved(object _, bool _1)
-        {
-           // currently NOOP
-        }
-
-        private void OnReset(object _, string _1)
-        {
-            // currently NOOP
+            View.MenuView = new AchievementMenuView(Model);
         }
     }
 }

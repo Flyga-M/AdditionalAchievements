@@ -28,6 +28,11 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
 
         public int CurrentPackCount => _packs.Count;
 
+        /// <summary>
+        /// Currently registered categories (from enabled achievement packs).
+        /// </summary>
+        public IAchievementCategory[] CurrentCategories => _packs.SelectMany(pack => pack.Categories).ToArray();
+
         // specifically calculated when it's called, just so we don't keep a collection in memory all the time
         private IEnumerable<IAchievement> _achievements => _packs.SelectMany(pack => pack.Categories).SelectMany(category => category.AchievementCollections).SelectMany(collection => collection.Achievements);
 

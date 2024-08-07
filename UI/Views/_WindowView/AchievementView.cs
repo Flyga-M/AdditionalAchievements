@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework;
 
 namespace Flyga.AdditionalAchievements.UI.Views
 {
-    public class AchievementView : View
+    public class AchievementView : View, IBack
     {
         private static readonly Logger Logger = Logger.GetLogger<AchievementView>();
 
@@ -220,6 +220,20 @@ namespace Flyga.AdditionalAchievements.UI.Views
             {
                 _parent.Resized -= OnParentResized;
             }
+            
+            if (_progressSquare != null)
+            {
+                _progressSquare.Dispose();
+                _progressSquare = null;
+            }
+
+            if (_description != null)
+            {
+                _description.Dispose();
+                _description = null;
+            }
+
+            Logger.Info("AchievementView unloaded.");
 
             // TODO: dispose content column
             // dispose _achievementCompletedHighlight

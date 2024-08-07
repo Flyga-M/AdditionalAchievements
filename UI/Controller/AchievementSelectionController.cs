@@ -1,6 +1,9 @@
 ﻿using AchievementLib.Pack;
+using Blish_HUD.Graphics.UI;
 using Flyga.AdditionalAchievements.Textures.Colors;
 using Flyga.AdditionalAchievements.UI.Controls;
+using Flyga.AdditionalAchievements.UI.Models;
+using Flyga.AdditionalAchievements.UI.Views;
 
 namespace Flyga.AdditionalAchievements.UI.Controller
 {
@@ -11,9 +14,14 @@ namespace Flyga.AdditionalAchievements.UI.Controller
             Model.FulfilledChanged += OnAchievementCompleted;
             Model.IsWatchedChanged += OnAchievementIsWatchedChanged;
 
+            Control.WatchedChanged += OnControlWatchedChanged;
+
             Control.HighlightColor = Model.Color ?? ColorManager.AchievementFallbackColor;
 
+            // will be disposed by the control, does not need to be disposed by the controller
             Control.ProgressIndicator = new AchievementProgressSquare(Model, false);
+
+            Control.GetSelectedView = GetAchievementView;
         }
 
         protected override void UpdateControl()
@@ -65,10 +73,33 @@ namespace Flyga.AdditionalAchievements.UI.Controller
             UpdateIsWatchedStatus();
         }
 
+        private void OnControlWatchedChanged(object _, bool controlIsWatched)
+        {
+            Model.IsWatched = controlIsWatched;
+        }
+
+        private IView GetAchievementView(object[] @params)
+        {
+            if (@params.Length != 1)
+            {
+                // TODO: could log here, instead of just failing silently
+                return null;
+            }
+
+            if (!(@params[0] is BackData backData))
+            {
+                return null;
+            }
+
+            return new AchievementView(Model, backData);
+        }
+
         protected override void Unload()
         {
             Model.FulfilledChanged -= OnAchievementCompleted;
             Model.IsWatchedChanged -= OnAchievementIsWatchedChanged;
+
+            Control.WatchedChanged -= OnControlWatchedChanged;
         }
     }
 }

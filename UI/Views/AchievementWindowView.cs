@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Blish_HUD;
+﻿using Blish_HUD;
 using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
 using Flyga.AdditionalAchievements.Solve.Handler;
-using Flyga.AdditionalAchievements.UI.Presenters;
-using AchievementLib.Pack;
 using Flyga.AdditionalAchievements.UI.Models;
+using Flyga.AdditionalAchievements.UI.Presenters;
+using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Flyga.AdditionalAchievements.UI.Views
 {
@@ -26,116 +23,120 @@ namespace Flyga.AdditionalAchievements.UI.Views
         private int _contentWidth;
         private int _contentHeight;
 
-        private AchievementMenuView _menuView;
+        private IViewSelection _menuView;
+
         private ViewContainer _menuViewContainer;
 
         private ViewContainer _contentViewContainer;
 
         private Stack<ViewCreationData> _history;
-        private CollectionMenuData _currentCollection;
 
-        public AchievementWindowView(AchievementHandler achievementHandler)
+        /// <remarks>
+        /// Will unload the previous <see cref="MenuView"/> when overwritten. 
+        /// Will be unloaded when the <see cref="AchievementWindowView"/> is unloaded.
+        /// </remarks>
+        public IViewSelection MenuView
         {
-            this.WithPresenter(new AchievementWindowPresenter(this, achievementHandler));
+            get => _menuView;
+            set
+            {
+                if (_menuView != null)
+                {
+                    _menuView.Selected -= OnSubViewClearSelected;
+                    _menuView.DoUnload();
+                }
 
-            _menuView = GetMenuView(achievementHandler);
-            _menuView.CollectionSelected += OnCollectionSelected;
+                _menuView = value;
+                if (_menuView != null)
+                {
+                    _menuView.Selected += OnSubViewClearSelected;
+                }
 
+                if (_menuViewContainer != null)
+                {
+                    _menuViewContainer.Show(_menuView);
+                }
+            }
+        }
+
+        public AchievementWindowView()
+        {
             _history = new Stack<ViewCreationData>();
         }
 
-        private void OnCollectionSelected(object _, CollectionMenuData collection)
+        public AchievementWindowView(AchievementHandler achievementHandler) : this()
         {
-            IView currentView = _contentViewContainer.CurrentView;
-            if (currentView != null)
-            {
-                // TODO: maybe make an interface (or abstract Control) for views that have a back bar
-                if (currentView is AchievementView achievementView)
-                {
-                    achievementView.Back -= OnBack;
-                }
-                else if (currentView is AchievementCollectionView previousCollectionView)
-                {
-                    previousCollectionView.AchievementSelected -= OnAchievementSelected;
-                }
-            }
-
-
-            AchievementCollectionView collectionView = GetCollectionView(collection);
-            _contentViewContainer.Show(collectionView);
-
-            _currentCollection = collection;
-
-            _history.Clear();
-            _history.Push(new ViewCreationData<CollectionMenuData>(GetCollectionView, collection));
+            this.WithPresenter(new AchievementWindowPresenter(this, achievementHandler));
         }
 
         private void OnBack(object _, EventArgs _1) 
         {
             _history.Pop();
 
-            IView currentView = _contentViewContainer.CurrentView;
-            if (currentView != null)
-            {
-                // TODO: maybe make an interface (or abstract Control) for views that have a back bar
-                if (currentView is AchievementView achievementView)
-                {
-                    achievementView.Back -= OnBack;
-                }
-            }
+            ClearContentViewEventListeners(_contentViewContainer.CurrentView);
 
             if (!_history.Any())
             {
                 _contentViewContainer.Hide();
-                Logger.Error($"Unable to go back to last view, because the stack is empty. Hiding content view.");
+                Logger.Error($"Unable to go back to last subView, because the stack is empty. Hiding content subView.");
                 return;
             }
 
-            _contentViewContainer.Show(_history.Peek().GetView());
+            IView newView = _history.Peek().GetView();
+            AddContentViewEventListeners(newView);
+            _contentViewContainer.Show(newView);
         }
 
-        private void OnAchievementSelected(object _, IAchievement achievement)
+        private void OnSubViewClearSelected(object sender, Func<IView> getSubView)
         {
-            AchievementView achievementView = GetAchievementView(achievement);
-            _contentViewContainer.Show(achievementView);
+            _history.Clear();
 
-            _history.Push(new ViewCreationData<IAchievement>(GetAchievementView, achievement));
+            OnSubViewSelected(sender, getSubView);
         }
 
-        private AchievementView GetAchievementView(IAchievement achievement)
+        private void OnSubViewSelected(object _, Func<IView> getSubView)
         {
-            Texture2D icon = _currentCollection?.Icon;
-            if (icon == null)
+            ClearContentViewEventListeners(_contentViewContainer.CurrentView);
+
+            IView subView = getSubView();
+            AddContentViewEventListeners(subView);
+            _contentViewContainer.Show(subView);
+
+            _history.Push(new ViewCreationData(getSubView));
+        }
+
+        private void AddContentViewEventListeners(IView subView)
+        {
+            if (subView == null)
             {
-                icon = ContentService.Textures.Error;
-                Logger.Error("Unable to set icon for back bar. _currentCollection?.Icon is null. Using Placeholder instead.");
+                return;
             }
-
-            string name = _currentCollection?.Name;
-            if (name == null)
-            {
-                name = "Error: Contact Module Author";
-                Logger.Error("Unable to set name for back bar. _currentCollection?.Name is null. Using Placeholder instead.");
-            }
-
-            AchievementView achievementView = new AchievementView(achievement, new BackData(icon, name));
-            achievementView.Back += OnBack;
-
-            return achievementView;
-        }
-
-        private AchievementCollectionView GetCollectionView(CollectionMenuData collection)
-        {
-            AchievementCollectionView collectionView = new AchievementCollectionView(((AchievementWindowPresenter)this.Presenter).Model.GetAchievementsForCollection(collection.Id));
             
-            collectionView.AchievementSelected += OnAchievementSelected;
-
-            return collectionView;
+            if (subView is IBack newBackableAchievementView)
+            {
+                newBackableAchievementView.Back += OnBack;
+            }
+            if (subView is IViewSelection newViewSelection)
+            {
+                newViewSelection.Selected += OnSubViewSelected;
+            }
         }
 
-        private AchievementMenuView GetMenuView(AchievementHandler achievementHandler)
+        private void ClearContentViewEventListeners(IView subView)
         {
-            return new AchievementMenuView(achievementHandler);
+            if (subView == null)
+            {
+                return;
+            }
+
+            if (subView is IBack newBackableAchievementView)
+            {
+                newBackableAchievementView.Back -= OnBack;
+            }
+            if (subView is IViewSelection newViewSelection)
+            {
+                newViewSelection.Selected -= OnSubViewSelected;
+            }
         }
 
         public void RecalculateLayout()
@@ -168,11 +169,6 @@ namespace Flyga.AdditionalAchievements.UI.Views
             RecalculateLayout();
         }
 
-        protected override Task<bool> Load(IProgress<string> progress)
-        {
-            return _menuView.DoLoad(progress);
-        }
-
         protected override void Build(Container buildPanel)
         {
             // should be the window itself
@@ -182,7 +178,10 @@ namespace Flyga.AdditionalAchievements.UI.Views
             buildPanel.Resized += OnParentResize;
 
             _menuViewContainer = BuildMenu(buildPanel);
-            _menuViewContainer.Show(_menuView);
+            if (MenuView != null)
+            {
+                _menuViewContainer.Show(MenuView);
+            }
 
             _contentViewContainer = BuildContent(buildPanel);
         }
@@ -225,33 +224,18 @@ namespace Flyga.AdditionalAchievements.UI.Views
 
             if (_menuViewContainer != null)
             {
+                // will unload the view and unsubscribe from events
+                MenuView = null;
+
                 _menuViewContainer?.Dispose();
                 _menuViewContainer = null;
             }
 
-            if (_menuView != null)
-            {
-                _menuView.DoUnload(); // should already be taken care of by the _menuViewContainer, but whatever
-                _menuView = null;
-            }
-
             if (_contentViewContainer != null)
             {
-                // TODO: put in method instead of using multiple times
                 IView currentView = _contentViewContainer.CurrentView;
 
-                if (currentView != null)
-                {
-                    // TODO: maybe make an interface (or abstract Control) for views that have a back bar
-                    if (currentView is AchievementView achievementView)
-                    {
-                        achievementView.Back -= OnBack;
-                    }
-                    else if (currentView is AchievementCollectionView previousCllectionView)
-                    {
-                        previousCllectionView.AchievementSelected -= OnAchievementSelected;
-                    }
-                }
+                ClearContentViewEventListeners(currentView);
 
                 _contentViewContainer?.Dispose();
                 _contentViewContainer = null;

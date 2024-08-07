@@ -246,8 +246,11 @@
     <Compile Include="UI\Presenters\RepoPresenter.cs" />
     <Compile Include="UI\Presenters\_RepoView\PkgPresenter.cs" />
     <Compile Include="UI\Presenters\StatusPresenter.cs" />
+    <Compile Include="UI\Presenters\_WindowView\AchievementCollectionPresenter.cs" />
     <Compile Include="UI\Views\RepoView.cs" />
     <Compile Include="UI\Views\StatusView.cs" />
+    <Compile Include="UI\Views\_Interface\IBack.cs" />
+    <Compile Include="UI\Views\_Interface\IViewSelection.cs" />
     <Compile Include="UI\Views\_RepoView\PkgView.cs" />
     <Compile Include="UI\Views\_WindowView\AchievementCollectionView.cs" />
     <Compile Include="UI\Views\_WindowView\AchievementMenuView.cs" />

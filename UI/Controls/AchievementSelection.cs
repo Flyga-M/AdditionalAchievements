@@ -2,6 +2,7 @@
 using Blish_HUD;
 using Blish_HUD.Controls;
 using Blish_HUD.Controls.Effects;
+using Blish_HUD.Graphics.UI;
 using Blish_HUD.Input;
 using Flyga.AdditionalAchievements.Textures;
 using Flyga.AdditionalAchievements.Textures.Colors;
@@ -13,63 +14,6 @@ using System;
 
 namespace Flyga.AdditionalAchievements.UI.Controls
 {
-    /// <summary>
-    /// <inheritdoc/> 
-    /// Also holds data of the type <see cref="TAchievement"/>, that is provided via the 
-    /// <see cref="Selected"/> and <see cref="WatchedChanged"/> events.
-    /// </summary>
-    public class AchievementSelection<TAchievement> : AchievementSelection
-    {
-        private readonly TAchievement _achievement;
-        
-        public event EventHandler<TAchievement> Selected;
-        public new event EventHandler<(bool IsWatched, TAchievement Achievement)> WatchedChanged;
-
-        public AchievementSelection(TAchievement achievement) : base()
-        {
-            _achievement = achievement;
-
-            if (achievement is IAchievement ach)
-            {
-                WithController(new AchievementSelectionController(this, ach));
-            }
-        }
-
-        private void OnAchievementSelected()
-        {
-            Selected?.Invoke(this, _achievement);
-        }
-
-        protected override void OnWatchedChanged()
-        {
-            base.OnWatchedChanged();
-
-            WatchedChanged?.Invoke(this, (IsWatched, _achievement));
-        }
-
-        protected override void OnClick(MouseEventArgs e)
-        {
-            if (_watchIcon != null)
-            {
-                if (_watchIcon.AbsoluteBounds.Contains(e.MousePosition) && _watchIcon.Visible)
-                {
-                    return;
-                }
-            }
-
-            OnAchievementSelected();
-            base.OnClick(e);
-        }
-
-        protected override void DisposeControl()
-        {
-            Selected = null;
-            WatchedChanged = null;
-
-            base.DisposeControl();
-        }
-    }
-
     /// <summary>
     /// Attempts to recreate the selectable achievement overview when viewing a collection of achievements.
     /// </summary>
@@ -240,6 +184,18 @@ namespace Flyga.AdditionalAchievements.UI.Controls
             }
         }
 
+        /// <summary>
+        /// A method, that returns an <see cref="IView"/> that should be rendered, when the 
+        /// <see cref="AchievementSelection"/> is selected.
+        /// </summary>
+        /// <remarks>
+        /// Might be <see langword="null"/> and might return <see langword="null"/>. Make sure to set a proper 
+        /// method before using. 
+        /// Make sure the method returns <see langword="null"/> and does not throw if the 
+        /// provided parameters are invalid.
+        /// </remarks>
+        public Func<object[], IView> GetSelectedView { get; set; } = null;
+
         #region calculated fields
 
         private RelativeInt _bottomHeight;
@@ -301,7 +257,7 @@ namespace Flyga.AdditionalAchievements.UI.Controls
             this.EffectBehind = _scrollEffect;
         }
 
-        public AchievementSelection(IAchievement achievement)
+        public AchievementSelection(IAchievement achievement) : this()
         {
             WithController(new AchievementSelectionController(this, achievement));
         }
