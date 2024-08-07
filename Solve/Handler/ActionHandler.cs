@@ -16,7 +16,9 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
         protected readonly SafeList<TAction> _actions = new SafeList<TAction>();
 
         /// <inheritdoc/>
-        public virtual IEnumerable<IAction> Actions => _actions.ToArray();
+        public virtual IEnumerable<TAction> Actions => _actions.ToArray();
+
+        IEnumerable<IAction> IActionHandler.Actions => Actions;
 
         /// <inheritdoc/>
         public event EventHandler<HandlerState> StateChanged;
@@ -166,7 +168,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
                 return false;
             }
             
-            if (_actions.Contains(action))
+            if (Actions.Contains(action))
             {
                 return false;
             }
@@ -194,7 +196,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
                 return false;
             }
 
-            if (!_actions.Contains(action))
+            if (!Actions.Contains(action))
             {
                 return false;
             }

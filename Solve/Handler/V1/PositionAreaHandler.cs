@@ -76,7 +76,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1
 
         private void OnModuleAvailable()
         {
-            AddAreasToContext(_actions.ToArray());
+            AddAreasToContext(Actions);
         }
 
         private void AddAreasToContext(IEnumerable<PositionAreaAction> actions)
@@ -187,7 +187,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1
                 // no need to dispose the _statusProvider, since it will be disposed by the main StatusManager.
             }
 
-            foreach (PositionAreaAction action in _actions)
+            foreach (PositionAreaAction action in Actions)
             {
                 FinalizeUnregistering(action);
             }
