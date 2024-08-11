@@ -48,7 +48,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1
         // TODO: should the cache be cleared, when the subtoken updates?
         private async void OnSubtokenUpdated(object _, ValueEventArgs<IEnumerable<TokenPermission>> permissions)
         {
-            foreach (ApiAction action in _recoverableActionsPermission)
+            foreach (ApiAction action in _recoverableActionsPermission.ToArray())
             {
                 EndpointQuery query = ConstructQuery(action);
                 if (query == null)

@@ -20,6 +20,7 @@ namespace Flyga.AdditionalAchievements.UI.Controls
         private const int DEFAULT_HEIGHT = 620;
 
         private Control _progressTextIndicator;
+        private Control _details;
 
         private int _elementPadding = 12;
 
@@ -62,6 +63,30 @@ namespace Flyga.AdditionalAchievements.UI.Controls
         }
 
         /// <summary>
+        /// The details, that will be displayed under the <see cref="Description"/>. May be <see langword="null"/>.
+        /// </summary>
+        /// <remarks>
+        /// Disposes the previous <see cref="Details"/>, if it's not <see langword="null"/> and overwritten. 
+        /// Will also be disposed, when the <see cref="AchievementDescription"/> is disposed.
+        /// </remarks>
+        public Control Details
+        {
+            get => _details;
+            set
+            {
+                if (_details != null)
+                {
+                    _details.Parent = null;
+                    _details.Dispose();
+                }
+
+                _details = value;
+                _details.Parent = this;
+                RecalculateLayout();
+            }
+        }
+
+        /// <summary>
         /// The title of the achievement.
         /// </summary>
         public string Title { get; set; }
@@ -70,6 +95,11 @@ namespace Flyga.AdditionalAchievements.UI.Controls
         /// The description of the achievement.
         /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// [Will change] Determines whether the objectives will be displayed as a list.
+        /// </summary>
+        public bool ShowObjectives { get; set; }
 
         public AchievementDescription()
         {
@@ -96,12 +126,19 @@ namespace Flyga.AdditionalAchievements.UI.Controls
 
             if (ProgressTextIndicator != null)
             {
-                ProgressTextIndicator.Location = new Point(0, _titleBounds.Y + _titleBounds.Height + _elementPadding);
+                ProgressTextIndicator.Location = new Point(0, _titleBounds.Bottom + _elementPadding);
                 ProgressTextIndicator.Size = new Point(this.Width, _progressOngoingHeight);
             }
 
-            _descriptionBounds = new Rectangle(0, ProgressTextIndicator?.Bottom ?? 0 + _elementPadding, this.Width - _descriptionPaddingRight, this.Height - _titleHeight - _elementPadding - ProgressTextIndicator?.Height ?? 0 - _elementPadding);
-            
+            _descriptionBounds = new Rectangle(0, ProgressTextIndicator?.Bottom ?? _titleBounds.Bottom + _elementPadding, this.Width - _descriptionPaddingRight, this.Height - _titleHeight - _elementPadding - ProgressTextIndicator?.Height ?? 0 - _elementPadding);
+
+            _descriptionBounds.Height = GetActualDescriptionHeight() + 20;
+
+            if (Details != null)
+            {
+                Details.Width = this.Width;
+                Details.Location = new Point(0, _descriptionBounds.Bottom + _elementPadding);
+            }
         }
 
         public override void PaintBeforeChildren(SpriteBatch spriteBatch, Rectangle bounds)
@@ -146,14 +183,15 @@ namespace Flyga.AdditionalAchievements.UI.Controls
                 VerticalAlignment.Top);
         }
 
+        private int GetActualDescriptionHeight()
+        {
+            string descriptionWrap = DrawUtil.WrapText(_descriptionFont, Description, _descriptionBounds.Width);
+            return (int)_descriptionFont.MeasureString(descriptionWrap).Height;
+        }
+
         public int GetActualHeight()
         {
-            int actualDescriptionHeight;
-
-            string descriptionWrap = DrawUtil.WrapText(_descriptionFont, Description, _descriptionBounds.Width);
-            actualDescriptionHeight = (int)_descriptionFont.MeasureString(descriptionWrap).Height;
-
-            return _descriptionBounds.Top + actualDescriptionHeight;
+            return Details != null ? Details.Bottom + _elementPadding : _descriptionBounds.Bottom + _elementPadding;
         }
 
         protected override void DisposeControl()
@@ -163,6 +201,13 @@ namespace Flyga.AdditionalAchievements.UI.Controls
                 RemoveChild(_progressTextIndicator);
                 _progressTextIndicator.Dispose();
                 _progressTextIndicator = null;
+            }
+
+            if (_details != null)
+            {
+                _details.Parent = null;
+                _details.Dispose();
+                _details = null;
             }
 
             base.DisposeControl();

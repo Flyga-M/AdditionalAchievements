@@ -145,9 +145,27 @@ namespace Flyga.AdditionalAchievements.UI.Views
 
                 achievementSelection.Width = _achievementWidth;
                 achievementSelection.Height = (int)((float)_achievementWidth / widthHeightRatio);
-
-                Logger.Info($"added achSel to View: visible: {achievementSelection.Visible}");
             }
+        }
+
+        public void SortContent<TControl>(Comparison<TControl> comparison) where TControl : Control
+        {
+            if (_flowPanel == null || !_flowPanel.Children.Any())
+            {
+                return;
+            }
+
+            _flowPanel.SortChildren(comparison);
+        }
+
+        public void FilterContent<TControl>(Func<TControl, bool> filter) where TControl : Control
+        {
+            if (_flowPanel == null || !_flowPanel.Children.Any())
+            {
+                return;
+            }
+
+            _flowPanel.FilterChildren<TControl>(filter);
         }
 
         private void ClearPanel()

@@ -223,6 +223,7 @@
     <Compile Include="UI\Controls\AchievementProgressText.cs" />
     <Compile Include="UI\Controls\AchievementSelection.cs" />
     <Compile Include="UI\Controls\BackBar.cs" />
+    <Compile Include="UI\Controls\Checklist.cs" />
     <Compile Include="UI\Controls\_CoreOverrides\FlowPanelWithoutCaptureBlock.cs" />
     <Compile Include="UI\Controls\_CoreOverrides\MenuItemWithData.cs" />
     <Compile Include="UI\Controls\_CoreOverrides\PanelWithRightBorder.cs" />
@@ -247,6 +248,7 @@
     <Compile Include="UI\Presenters\_RepoView\PkgPresenter.cs" />
     <Compile Include="UI\Presenters\StatusPresenter.cs" />
     <Compile Include="UI\Presenters\_WindowView\AchievementCollectionPresenter.cs" />
+    <Compile Include="UI\Presenters\_WindowView\AchievementPresenter.cs" />
     <Compile Include="UI\Views\RepoView.cs" />
     <Compile Include="UI\Views\StatusView.cs" />
     <Compile Include="UI\Views\_Interface\IBack.cs" />

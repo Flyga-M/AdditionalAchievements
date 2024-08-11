@@ -3,10 +3,6 @@ using Blish_HUD.Graphics.UI;
 using Flyga.AdditionalAchievements.UI.Controls;
 using Flyga.AdditionalAchievements.UI.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.UI.Presenters
 {
@@ -15,14 +11,21 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
         public AchievementPresenter(AchievementView view, IAchievement model) : base(view, model)
         {
             View.ParentResized += OnViewParentResized;
+
+            Model.FulfilledChanged += OnModelFulfilledChanged;
         }
 
         private void OnViewParentResized(object _, EventArgs _1)
         {
             if (View.AchievementContent != null && View.AchievementContent is AchievementDescription description)
             {
-                description.Height = description.GetActualHeight() + 30;
+                description.Height = description.GetActualHeight();
             }
+        }
+
+        private void OnModelFulfilledChanged(object _, bool isFulfilled)
+        {
+            View.ShowCompletedHighlight = isFulfilled;
         }
 
         protected override void UpdateView()
@@ -32,13 +35,20 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
             
             AchievementDescription description = new AchievementDescription(Model);
             View.AchievementContent = description;
-            description.Height = description.GetActualHeight() + 30;
+            description.Height = description.GetActualHeight();
 
+            View.ShowCompletedHighlight = Model.IsFulfilled;
+            if (Model.Color.HasValue)
+            {
+                View.CompletedHighlightColor = Model.Color.Value;
+            }
         }
 
         protected override void Unload()
         {
             View.ParentResized -= OnViewParentResized;
+
+            Model.FulfilledChanged -= OnModelFulfilledChanged;
         }
     }
 }

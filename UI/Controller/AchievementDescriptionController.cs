@@ -8,6 +8,18 @@ namespace Flyga.AdditionalAchievements.UI.Controller
         public AchievementDescriptionController(AchievementDescription control, IAchievement model) : base(control, model)
         {
             Control.ProgressTextIndicator = new AchievementProgressText(Model);
+            
+            if (Model.ObjectiveDisplay == AchievementLib.ObjectiveDisplay.Checklist)
+            {
+                Checklist checklist = new Checklist();
+                Control.Details = checklist;
+
+                foreach(IObjective objective in Model.Objectives)
+                {
+                    // TODO: make fallback locale an option
+                    checklist.AddChecklistItem(objective.IsFulfilled, objective.Name.GetLocalizedForUserLocale());
+                }
+            }
         }
 
         protected override void UpdateControl()

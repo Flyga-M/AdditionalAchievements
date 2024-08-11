@@ -15,10 +15,10 @@ namespace Flyga.AdditionalAchievements.UI.Windows
         private AchievementHandler _achievementHandler;
         private AchievementPackRepo _achievementPackRepo;
 
-        private const int TAB_WIDTH = 84;
+        private const int TAB_WIDTH = 64;
 
         private static readonly Rectangle _fixedWindowRegion = new Rectangle(40, 26, 913, 691);
-        private static readonly Rectangle _fixedContentRegion = new Rectangle(45 + TAB_WIDTH, 31, 903 - TAB_WIDTH, 675);
+        private static readonly Rectangle _fixedContentRegion = new Rectangle(40 + TAB_WIDTH, 31, 903 - TAB_WIDTH, 675);
 
         public AchievementWindow(AchievementHandler achievementHandler, AchievementPackRepo achievementPackRepo) : base(TextureManager.Display.AchievementWindowBackground, _fixedWindowRegion, _fixedContentRegion)
         {
