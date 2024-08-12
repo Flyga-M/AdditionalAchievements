@@ -1,4 +1,5 @@
 ﻿using AchievementLib.Pack;
+using Flyga.AdditionalAchievements.Textures.Colors;
 using Flyga.AdditionalAchievements.UI.Controls;
 using System.Linq;
 
@@ -44,10 +45,7 @@ namespace Flyga.AdditionalAchievements.UI.Controller
 
             Control.IsLocked = !Model.IsUnlocked;
 
-            if (Model.Color != null)
-            {
-                Control.FillColor = Model.Color.Value;
-            }
+            Control.FillColor = Model.Color ?? (Model.Parent as IAchievementCollection)?.Color ?? ColorManager.AchievementFallbackColor;
 
             if (Model.Icon != null)
             {

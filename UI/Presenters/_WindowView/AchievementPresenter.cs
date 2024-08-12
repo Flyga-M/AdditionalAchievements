@@ -1,5 +1,6 @@
 ﻿using AchievementLib.Pack;
 using Blish_HUD.Graphics.UI;
+using Flyga.AdditionalAchievements.Textures.Colors;
 using Flyga.AdditionalAchievements.UI.Controls;
 using Flyga.AdditionalAchievements.UI.Views;
 using System;
@@ -38,10 +39,8 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
             description.Height = description.GetActualHeight();
 
             View.ShowCompletedHighlight = Model.IsFulfilled;
-            if (Model.Color.HasValue)
-            {
-                View.CompletedHighlightColor = Model.Color.Value;
-            }
+
+            View.CompletedHighlightColor = Model.Color ?? (Model.Parent as IAchievementCollection)?.Color ?? ColorManager.AchievementFallbackColor;
         }
 
         protected override void Unload()

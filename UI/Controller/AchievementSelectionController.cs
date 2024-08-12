@@ -16,7 +16,7 @@ namespace Flyga.AdditionalAchievements.UI.Controller
 
             Control.WatchedChanged += OnControlWatchedChanged;
 
-            Control.HighlightColor = Model.Color ?? ColorManager.AchievementFallbackColor;
+            Control.HighlightColor = Model.Color ?? (Model.Parent as IAchievementCollection)?.Color ?? ColorManager.AchievementFallbackColor;
             Control.IsPinned = Model.IsPinned;
 
             // will be disposed by the control, does not need to be disposed by the controller
