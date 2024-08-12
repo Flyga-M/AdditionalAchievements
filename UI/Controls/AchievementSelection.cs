@@ -17,7 +17,7 @@ namespace Flyga.AdditionalAchievements.UI.Controls
     /// <summary>
     /// Attempts to recreate the selectable achievement overview when viewing a collection of achievements.
     /// </summary>
-    public class AchievementSelection : Container<AchievementSelectionController>
+    public class AchievementSelection : Container<AchievementSelectionController>, IPinnable
     {
         #region default constants
 
@@ -196,6 +196,8 @@ namespace Flyga.AdditionalAchievements.UI.Controls
         /// </remarks>
         public Func<object[], IView> GetSelectedView { get; set; } = null;
 
+        public bool IsPinned { get; set; }
+
         #region calculated fields
 
         private RelativeInt _bottomHeight;
@@ -257,10 +259,13 @@ namespace Flyga.AdditionalAchievements.UI.Controls
             this.EffectBehind = _scrollEffect;
         }
 
-        public AchievementSelection(IAchievement achievement) : this()
+        public AchievementSelection(IAchievement achievement, bool autoHide) : this()
         {
-            WithController(new AchievementSelectionController(this, achievement));
+            WithController(new AchievementSelectionController(this, achievement, autoHide));
         }
+
+        public AchievementSelection(IAchievement achievement) : this(achievement, false)
+        { /** NOOP **/ }
 
         private void OnWatchIconSelectedChanged(object _, bool isSelected)
         {

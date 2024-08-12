@@ -18,20 +18,12 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
 
             foreach (IAchievement achievement in Model.Achievements.ToArray())
             {
-                achievement.IsUnlockedChanged += OnAchievementUnlockedChanged;
                 achievement.CurrentObjectivesChanged += OnAchievementCurrentObjectivesChanged;
             }
         }
 
         protected override void UpdateView()
         {
-            SetContent();
-        }
-
-        private void OnAchievementUnlockedChanged(object _, bool isUnlocked)
-        {
-            // The easiest way to (un)hide the correct AchievementSelections is to just rebuild them all.
-            // View.SetContent() will take care to dispose the previous AchievementSelections.
             SetContent();
         }
 
@@ -49,14 +41,9 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
             foreach (IAchievement achievement in achievements)
             {
                 // will be disposed by the control, so does not need to be disposed here
-                AchievementSelection selection = new AchievementSelection(achievement)
-                {
-                    Visible = !achievement.IsHidden || achievement.IsUnlocked
-                };
+                AchievementSelection selection = new AchievementSelection(achievement, true);
 
                 achievementSelections.Add(selection);
-
-
             }
 
             View.SetContent(achievementSelections);
@@ -66,61 +53,47 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
         private void SortContent()
         {
             View.SortContent<AchievementSelection>(SortByCompletionPercent);
+            View.SortContent<AchievementSelection>(SortByLockedStatus);
+            View.SortContent<AchievementSelection>(SortByPinnedStatus);
         }
 
         /// <summary>
         /// Sorts the <see cref="AchievementSelection"/>s from highest completion percent to 
-        /// lowest completion percent, with the 100% completed (or locked) achievements at the end.
+        /// lowest completion percent, with the 100% completed achievements at the end.
         /// </summary>
         /// <remarks>
-        /// Will only work, if the <see cref="AchievementSelection.ProgressIndicator"/> is an 
-        /// <see cref="AchievementProgressSquare"/>.
+        /// Will only work, if the <see cref="AchievementSelection.ProgressIndicator"/> implements 
+        /// <see cref="IProgressIndicator"/>.
         /// </remarks>
         private int SortByCompletionPercent(AchievementSelection x, AchievementSelection y)
         {
-            if (!(x.ProgressIndicator is AchievementProgressSquare progressX)
-                || !(y.ProgressIndicator is AchievementProgressSquare progressY))
-            {
-                return 0;
-            }
-
-            float fillPercentX = (float)progressX.CurrentFill / (float)progressX.MaxFill;
-            float fillPercentY = (float)progressY.CurrentFill / (float)progressY.MaxFill;
-
-            bool isLockedX = progressX.IsLocked;
-            bool isLockedY = progressY.IsLocked;
-
-            // put locked achievements to the right
-            if (isLockedX && !isLockedY)
-            {
-                return 1;
-            }
-            if (!isLockedX && isLockedY)
-            {
-                return -1;
-            }
-            if (isLockedX && isLockedY)
+            if (!(x.ProgressIndicator is IProgressIndicator progressX)
+                || !(y.ProgressIndicator is IProgressIndicator progressY))
             {
                 return 0;
             }
 
             // put fully completed achievements to the right
-            if (fillPercentX == 1 && fillPercentY < 1)
+            if (progressX.IsCompleted && progressY.IsCompleted)
+            {
+                return 0;
+            }
+            if (progressX.IsCompleted && !progressY.IsCompleted)
             {
                 return 1;
             }
-            if (fillPercentY == 1 && fillPercentX < 1)
+            if (!progressX.IsCompleted && progressY.IsCompleted)
             {
                 return -1;
             }
 
             // sort not fully completed achievements from highest completion percent to lowest
-            if (fillPercentX < fillPercentY)
+            if (progressX.Progress < progressY.Progress)
             {
                 return 1;
             }
 
-            if (Math.Abs(fillPercentX - fillPercentY) < 0.0001f)
+            if (Math.Abs(progressX.Progress - progressY.Progress) < 0.0001f)
             {
                 return 0;
             }
@@ -128,11 +101,56 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
             return -1;
         }
 
+        /// <summary>
+        /// Sorts the <see cref="AchievementSelection"/>s from unlocked to locked.
+        /// </summary>
+        /// <remarks>
+        /// Will only work, if the <see cref="AchievementSelection.ProgressIndicator"/> implements 
+        /// <see cref="ILockable"/>.
+        /// </remarks>
+        private int SortByLockedStatus(AchievementSelection x, AchievementSelection y)
+        {
+            if (!(x.ProgressIndicator is ILockable lockableX)
+                || !(y.ProgressIndicator is ILockable lockableY))
+            {
+                return 0;
+            }
+
+            if (lockableX.IsLocked == lockableY.IsLocked)
+            {
+                return 0;
+            }
+
+            if (lockableX.IsLocked && !lockableY.IsLocked)
+            {
+                return 1;
+            }
+
+            return -1;
+        }
+
+        /// <summary>
+        /// Sorts the <see cref="AchievementSelection"/>s from pinned to not pinned.
+        /// </summary>
+        private int SortByPinnedStatus(AchievementSelection x, AchievementSelection y)
+        {
+            if (x.IsPinned == y.IsPinned)
+            {
+                return 0;
+            }
+
+            if (x.IsPinned && !y.IsPinned)
+            {
+                return -1;
+            }
+
+            return 1;
+        }
+
         protected override void Unload()
         {
             foreach (IAchievement achievement in Model.Achievements.ToArray())
             {
-                achievement.IsUnlockedChanged -= OnAchievementUnlockedChanged;
                 achievement.CurrentObjectivesChanged -= OnAchievementCurrentObjectivesChanged;
             }
         }

@@ -15,7 +15,7 @@ namespace Flyga.AdditionalAchievements.UI.Controls
     /// Attempts to recreate the progress square that is shown for an achievement in the collection view and when viewing 
     /// a single achievement.
     /// </summary>
-    public class AchievementProgressSquare : Control<AchievementProgressSquareController>
+    public class AchievementProgressSquare : Control<AchievementProgressSquareController>, IProgressIndicator, ILockable
     {
         private const int DEFAULT_WIDTH = 162;
         private const int DEFAULT_HEIGHT = 162;
@@ -206,6 +206,10 @@ namespace Flyga.AdditionalAchievements.UI.Controls
         public int CurrentTier { get; set; }
 
         public bool IsLocked { get; set; }
+
+        public bool IsCompleted => CurrentFill == MaxFill;
+
+        public float Progress => (float)CurrentFill / (float)MaxFill;
 
         public AchievementProgressSquare()
         {

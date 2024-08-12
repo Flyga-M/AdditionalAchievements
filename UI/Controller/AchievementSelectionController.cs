@@ -9,7 +9,7 @@ namespace Flyga.AdditionalAchievements.UI.Controller
 {
     public class AchievementSelectionController : Controller<AchievementSelection, IAchievement>
     {
-        public AchievementSelectionController(AchievementSelection control, IAchievement model) : base(control, model)
+        public AchievementSelectionController(AchievementSelection control, IAchievement model, bool autoHide) : base(control, model)
         {
             Model.FulfilledChanged += OnAchievementCompleted;
             Model.IsWatchedChanged += OnAchievementIsWatchedChanged;
@@ -17,18 +17,29 @@ namespace Flyga.AdditionalAchievements.UI.Controller
             Control.WatchedChanged += OnControlWatchedChanged;
 
             Control.HighlightColor = Model.Color ?? ColorManager.AchievementFallbackColor;
+            Control.IsPinned = Model.IsPinned;
 
             // will be disposed by the control, does not need to be disposed by the controller
             Control.ProgressIndicator = new AchievementProgressSquare(Model, false);
 
             Control.GetSelectedView = GetAchievementView;
+
+            if (autoHide)
+            {
+                Control.Visible = !Model.IsHidden || Model.IsUnlocked;
+                Model.IsUnlockedChanged += OnAchievementIsUnlockedChanged;
+            }
         }
+
+        public AchievementSelectionController(AchievementSelection control, IAchievement model) : this(control, model, false)
+        { /** NOOP **/ }
 
         protected override void UpdateControl()
         {
             UpdateLocaleDependentValues();
             UpdateCompletedStatus();
             UpdateIsWatchedStatus();
+            // don't update visibility here, because it is updated in the constructor, only when autoHide is true
         }
 
         private void UpdateLocaleDependentValues()
@@ -63,6 +74,11 @@ namespace Flyga.AdditionalAchievements.UI.Controller
             Control.IsWatched = Model.IsWatched;
         }
 
+        private void UpdateVisibility()
+        {
+            Control.Visible = !Model.IsHidden || Model.IsUnlocked;
+        }
+
         private void OnAchievementCompleted(object _, bool _1)
         {
             UpdateCompletedStatus();
@@ -71,6 +87,11 @@ namespace Flyga.AdditionalAchievements.UI.Controller
         private void OnAchievementIsWatchedChanged(object _, bool _1)
         {
             UpdateIsWatchedStatus();
+        }
+
+        private void OnAchievementIsUnlockedChanged(object _, bool _1)
+        {
+            UpdateVisibility();
         }
 
         private void OnControlWatchedChanged(object _, bool controlIsWatched)
@@ -98,6 +119,7 @@ namespace Flyga.AdditionalAchievements.UI.Controller
         {
             Model.FulfilledChanged -= OnAchievementCompleted;
             Model.IsWatchedChanged -= OnAchievementIsWatchedChanged;
+            Model.IsUnlockedChanged -= OnAchievementIsUnlockedChanged;
 
             Control.WatchedChanged -= OnControlWatchedChanged;
         }
