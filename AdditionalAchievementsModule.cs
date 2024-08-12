@@ -140,6 +140,34 @@ namespace Flyga.AdditionalAchievements
             }
         }
 
+        private void OnPackError(object pack, AchievementLibException exception)
+        {
+            if (!(pack is IAchievementPackManager manager))
+            {
+                Logger.Error("OnPackLoadStateChanged called from object that is not " +
+                    $"IAchievementPackManager: {pack.GetType()}.");
+                return;
+            }
+
+            Logger.Warn($"Error on pack loading for pack {manager.Manifest.Namespace}: {exception}.");
+
+            if (_packsLoadedCompletionSources.ContainsKey(manager))
+            {
+                Logger.Info("Attempting to set completion source to false...");
+                if (_packsLoadedCompletionSources[manager]?.TrySetResult(false) != true)
+                {
+                    Logger.Warn("Attempt to set result for completion source to false " +
+                        $"for pack {manager.Manifest.Namespace} failed.");
+                }
+            }
+            else
+            {
+                Logger.Warn($"pack state changed to fatal, but " +
+                    $"completion source can't be called, since it's set to null.");
+            }
+
+        }
+
         public AchievementPackInitiator PackInitiator => _packInitiator;
 
         #region Service Managers
@@ -307,6 +335,7 @@ namespace Flyga.AdditionalAchievements
                 pack.Disable(true);
             }
             pack.PackLoadStateChanged -= OnPackLoadStateChanged;
+            pack.PackError -= OnPackError;
 
             _achievementHandler.TryRemovePack(pack);
 
@@ -388,11 +417,13 @@ namespace Flyga.AdditionalAchievements
                 _packsLoadedCompletionSources[pack]?.TrySetResult(false);
                 pack.Disable(true);
                 pack.PackLoadStateChanged -= OnPackLoadStateChanged; // probably not neccessary
+                pack.PackError -= OnPackError;
             }
 
             _packsLoadedCompletionSources[pack] = new TaskCompletionSource<bool>();
 
             pack.PackLoadStateChanged += OnPackLoadStateChanged;
+            pack.PackError += OnPackError;
 
             GameService.Graphics.QueueMainThreadRender(async (graphicsDevice) =>
             {
