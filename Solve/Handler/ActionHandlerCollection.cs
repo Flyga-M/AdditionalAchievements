@@ -64,6 +64,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
             V1.Mumble.IdentityHandler identityHandler = new V1.Mumble.IdentityHandler(mumbleStatusProvider);
             V1.PositionAreaHandler positionAreaHandler = new V1.PositionAreaHandler(positionEventsModuleStatusProvider);
             V1.ApiHandler apiHandler = new V1.ApiHandler(apiStatusProvider);
+            V1.AchievementActionHandler achievementActionHandler = new V1.AchievementActionHandler();
 
             _handlers.Add(lookingAtHandler);
             _handlers.Add(mountHandler);
@@ -71,6 +72,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
             _handlers.Add(identityHandler);
             _handlers.Add(positionAreaHandler);
             _handlers.Add(apiHandler);
+            _handlers.Add(achievementActionHandler);
         }
 
         /// <summary>
