@@ -111,6 +111,7 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
                 }
                 else if (Model.State.CurrentManager.State == AchievementLib.Pack.PackLoadState.Unloaded)
                 {
+                    // TODO: inform user if this returns false
                     await AdditionalAchievementsModule.Instance.EnablePackAsync(Model.Namespace);
                 }
 

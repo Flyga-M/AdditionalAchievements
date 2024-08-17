@@ -156,6 +156,7 @@ namespace Flyga.AdditionalAchievements.Repo
 
             if (existingPackEnabled)
             {
+                // TODO: inform user if this returns false
                 await _module.EnablePackAsync(@namespace);
             }
 

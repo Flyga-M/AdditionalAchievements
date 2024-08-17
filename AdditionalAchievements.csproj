@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdditionalAchievementsModule.cs" />
+    <Compile Include="Integration\GraphicsDeviceProvider.cs" />
     <Compile Include="Integration\ModuleContextProvider.cs" />
     <Compile Include="Integration\PositionEventsContextProvider.cs" />
     <Compile Include="Integration\_Extensions\IEnumerableExtensions.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Solve\Handler\AchievementHandler.cs" />
     <Compile Include="Solve\Handler\ActionHandler.cs" />
     <Compile Include="Solve\Handler\ActionHandlerCollection.cs" />
+    <Compile Include="Solve\Handler\V1\AchievementActionHandler.cs" />
     <Compile Include="Solve\Handler\V1\ApiHandler.cs" />
     <Compile Include="Solve\Handler\V1\Api\FilterQuery.cs" />
     <Compile Include="Solve\Handler\V1\Api\FilterQueryData.cs" />
@@ -388,6 +390,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Console" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.117.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.117.0\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>

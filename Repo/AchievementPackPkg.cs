@@ -6,7 +6,7 @@ namespace Flyga.AdditionalAchievements.Repo
 {
     // mostly copied from https://github.com/blish-hud/Pathing/blob/main/MarkerPackRepo/MarkerPackPkg.cs
     [Store]
-    public class AchievementPackPkg
+    public class AchievementPackPkg : IRetrievable
     {
         private bool _keepUpdated;
 
@@ -23,6 +23,9 @@ namespace Flyga.AdditionalAchievements.Repo
         public Version Version { get; set; }
         public string Author { get; set; }
         public DateTime LastUpdate { get; set; }
+
+        [JsonIgnore]
+        public bool IsRetrieving { get; set; }
 
         [JsonIgnore]
         public string FileName

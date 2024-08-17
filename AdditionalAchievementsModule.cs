@@ -1,12 +1,14 @@
 ﻿using AchievementLib;
 using AchievementLib.Pack;
 using AchievementLib.Pack.PersistantData;
+using AchievementLib.Pack.PersistantData.SQLite;
 using Blish_HUD;
 using Blish_HUD.Controls;
 using Blish_HUD.Input;
 using Blish_HUD.Modules;
 using Blish_HUD.Modules.Managers;
 using Blish_HUD.Settings;
+using Flyga.AdditionalAchievements.Integration;
 using Flyga.AdditionalAchievements.Repo;
 using Flyga.AdditionalAchievements.Status;
 using Flyga.AdditionalAchievements.Status.Provider;
@@ -19,6 +21,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -66,8 +69,6 @@ namespace Flyga.AdditionalAchievements
         AchievementPackInitiator _packInitiator;
         Solve.Handler.AchievementHandler _achievementHandler;
         AchievementPackRepo _achievementPackRepo;
-
-        private readonly Dictionary<IAchievementPackManager, TaskCompletionSource<bool>> _packsLoadedCompletionSources = new Dictionary<IAchievementPackManager, TaskCompletionSource<bool>>(); 
 
         private readonly HierarchyResolveContext _hierarchyResolveContext = new HierarchyResolveContext();
 
@@ -117,27 +118,6 @@ namespace Flyga.AdditionalAchievements
             }
 
             Logger.Debug($"pack state changed for pack {manager.Manifest.Namespace}: {state}.");
-            
-            if (state == PackLoadState.Loaded)
-            {
-                if (_packsLoadedCompletionSources.ContainsKey(manager))
-                {
-                    Logger.Info("Attempting to set completion source to true...");
-                    if (_packsLoadedCompletionSources[manager]?.TrySetResult(true) != true)
-                    {
-                        Logger.Warn("Attempt to set result for completion source to true " +
-                            $"for pack {manager.Manifest.Namespace} failed.");
-                    }
-                }
-                else
-                {
-                    Logger.Warn($"pack state changed to {state}, but " +
-                        $"completion source can't be called, since it's set to null.");
-                }
-
-                _packsLoadedCompletionSources[manager] = null;
-                return;
-            }
         }
 
         private void OnPackError(object pack, AchievementLibException exception)
@@ -150,21 +130,6 @@ namespace Flyga.AdditionalAchievements
             }
 
             Logger.Warn($"Error on pack loading for pack {manager.Manifest.Namespace}: {exception}.");
-
-            if (_packsLoadedCompletionSources.ContainsKey(manager))
-            {
-                Logger.Info("Attempting to set completion source to false...");
-                if (_packsLoadedCompletionSources[manager]?.TrySetResult(false) != true)
-                {
-                    Logger.Warn("Attempt to set result for completion source to false " +
-                        $"for pack {manager.Manifest.Namespace} failed.");
-                }
-            }
-            else
-            {
-                Logger.Warn($"pack state changed to fatal, but " +
-                    $"completion source can't be called, since it's set to null.");
-            }
 
         }
 
@@ -217,6 +182,8 @@ namespace Flyga.AdditionalAchievements
             await TextureManager.WaitUntilResolved();
 
             FontManager.Initialize();
+
+            GraphicsDeviceProvider.Initialize();
 
             MumbleStatusProvider = new MumbleStatusProvider(GameService.Gw2Mumble);
             ApiStatusProvider = new ApiStatusProvider(Gw2ApiManager);
@@ -326,14 +293,12 @@ namespace Flyga.AdditionalAchievements
 
         private void FinalizeDeletedPack(IAchievementPackManager pack)
         {
-            if (_packsLoadedCompletionSources.ContainsKey(pack))
+            if (pack.State != PackLoadState.Unloaded && pack.State != PackLoadState.Unloading
+                && pack.State != PackLoadState.FatalError)
             {
-                Logger.Debug($"Cancelling previous pack load completion source, because " +
-                $"pack was deleted before completing.");
-                _packsLoadedCompletionSources[pack]?.TrySetResult(false);
-                _packsLoadedCompletionSources.Remove(pack);
                 pack.Disable(true);
             }
+
             pack.PackLoadStateChanged -= OnPackLoadStateChanged;
             pack.PackError -= OnPackError;
 
@@ -356,7 +321,21 @@ namespace Flyga.AdditionalAchievements
 
             _packInitiator = new AchievementPackInitiator(WatchPath);
 
-            PackException[] exceptions = _packInitiator.LoadWatchPath();
+            SQLiteConnection connection;
+            try
+            {
+                connection = ConnectionHandler.DefaultConnection;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Unable to initialize achievements from watch path, because " +
+                    $"default connection can not be established. {ex}");
+                return;
+            }
+
+            connection.Open();
+
+            PackException[] exceptions = _packInitiator.LoadWatchPath(connection, true);
             Logger.Debug($"Registered {_packInitiator.Packs.Length} achievement packs from watch path " +
                 $"{WatchPath} with {exceptions.Length} exceptions.");
 
@@ -378,7 +357,7 @@ namespace Flyga.AdditionalAchievements
 
                 if (pack.IsEnabled)
                 {
-                    if (!await EnablePackAsync(pack.Manifest.Namespace))
+                    if (!await EnablePackAsync(connection, true, pack.Manifest.Namespace))
                     {
                         Logger.Warn($"Attempt to enable pack {pack.Manifest?.GetDetailedName()}, " +
                             $"that was enabled in the last session failed.");
@@ -386,6 +365,30 @@ namespace Flyga.AdditionalAchievements
                 }
             }
 
+            connection.Close();
+            connection.Dispose();
+        }
+
+        internal async Task<bool> EnablePackAsync(string @namespace)
+        {
+            SQLiteConnection connection;
+            try
+            {
+                connection = ConnectionHandler.DefaultConnection;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Unable to enable pack with namespace {@namespace}, because " +
+                    $"default connection can not be established. {ex}");
+                return false;
+            }
+
+            connection.Open();
+            bool result = await EnablePackAsync(connection, true, @namespace);
+            connection.Close();
+            connection.Dispose();
+
+            return result;
         }
 
         /// <summary>
@@ -393,7 +396,7 @@ namespace Flyga.AdditionalAchievements
         /// </summary>
         /// <param name="namespace"></param>
         /// <returns></returns>
-        internal async Task<bool> EnablePackAsync(string @namespace)
+        internal async Task<bool> EnablePackAsync(SQLiteConnection connection, bool keepConnectionOpen, string @namespace)
         {
             if (string.IsNullOrWhiteSpace(@namespace))
             {
@@ -410,69 +413,47 @@ namespace Flyga.AdditionalAchievements
                 return false;
             }
 
-            if (_packsLoadedCompletionSources.ContainsKey(pack))
+            if (pack.State != PackLoadState.Unloaded)
             {
-                Logger.Debug($"Cancelling previous pack load completion source, because " +
-                $"pack was registered again before completing.");
-                _packsLoadedCompletionSources[pack]?.TrySetResult(false);
-                pack.Disable(true);
-                pack.PackLoadStateChanged -= OnPackLoadStateChanged; // probably not neccessary
-                pack.PackError -= OnPackError;
+                Logger.Warn($"Unable to enable pack with namespace {@namespace}, because the pack is currently " +
+                    $"not unloaded. Current State: {pack.State}");
+                return false;
             }
-
-            _packsLoadedCompletionSources[pack] = new TaskCompletionSource<bool>();
 
             pack.PackLoadStateChanged += OnPackLoadStateChanged;
             pack.PackError += OnPackError;
 
-            GameService.Graphics.QueueMainThreadRender(async (graphicsDevice) =>
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            Logger.Info($"Enabling pack {pack.Manifest?.GetDetailedName()}.");
+
+            try
             {
-                try
+                if (!pack.Enable(connection, keepConnectionOpen, GraphicsDeviceProvider.Instance, _hierarchyResolveContext, out Task loading))
                 {
-                    if (!pack.Enable(graphicsDevice, _hierarchyResolveContext, out Task loading))
-                    {
-                        Logger.Debug($"Attempt to enable v1Pack {pack.Manifest.Namespace} " +
-                            $"failed. v1Pack.Enable returned false.");
-                        return;
-                    }
-
-                    await loading;
-                }
-                catch (Exception ex)
-                {
-                    Logger.Warn(ex, $"Unable to enable achievement pack {pack.Manifest?.Namespace} " +
-                        $"from watch path.");
-                    _packsLoadedCompletionSources[pack]?.TrySetResult(false);
-                    return;
-                }
-            });
-
-            if (_packsLoadedCompletionSources.ContainsKey(pack) && _packsLoadedCompletionSources[pack] != null)
-            {
-                Stopwatch sw = new Stopwatch();
-                sw.Start();
-                Logger.Info("Waiting for pack completion source.");
-                bool result = await _packsLoadedCompletionSources[pack].Task;
-                _packsLoadedCompletionSources[pack] = null;
-                sw.Stop();
-                Logger.Info($"result: {result}. {sw.Elapsed.TotalMilliseconds}ms");
-
-                if (!result)
-                {
+                    Logger.Debug($"Attempt to enable v1Pack {pack.Manifest.Namespace} " +
+                        $"failed. v1Pack.Enable returned false.");
                     return false;
                 }
-
-                if (_achievementHandler?.TryAddPack(pack) != true)
+                else
                 {
-                    Logger.Warn($"Unable to add enabled pack {pack.Manifest?.GetDetailedName()} to the achievement handler.");
+                    await loading;
                 }
-
-                return result;
             }
-            else
+            catch (Exception ex)
             {
-                Logger.Error($"Unable to wait for loading of pack {pack.Manifest.Namespace}, " +
-                    $"because completion source is null.");
+                Logger.Warn(ex, $"Unable to enable achievement pack {pack.Manifest?.Namespace} " +
+                    $"from watch path.");
+                return false;
+            }
+
+            sw.Stop();
+            Logger.Info($"Successfully enabled pack after {sw.Elapsed.TotalMilliseconds}ms");
+
+            if (_achievementHandler?.TryAddPack(pack) != true)
+            {
+                Logger.Warn($"Unable to add enabled pack {pack.Manifest?.GetDetailedName()} to the achievement handler.");
+                return false;
             }
 
             return true;
@@ -511,6 +492,9 @@ namespace Flyga.AdditionalAchievements
                 Logger.Warn($"Unable to remove enabled pack {pack.Manifest?.GetDetailedName()} " +
                     $"from the achievement handler.");
             }
+
+            pack.PackLoadStateChanged -= OnPackLoadStateChanged;
+            pack.PackError -= OnPackError;
 
             return true;
         }
@@ -618,7 +602,7 @@ namespace Flyga.AdditionalAchievements
 
         private void UpdateModuleLoading(string loadingMessage)
         {
-            if (this.RunState == ModuleRunState.Loaded && _cornerIcon != null)
+            if (this.RunState == ModuleRunState.Loaded && _cornerIcon != null && _cornerIcon.Visible)
             {
                 _cornerIcon.LoadingMessage = loadingMessage;
                 bool packsLoading = !string.IsNullOrWhiteSpace(loadingMessage);
