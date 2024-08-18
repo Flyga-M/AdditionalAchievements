@@ -151,6 +151,24 @@ namespace Flyga.AdditionalAchievements.Resources.Status {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The module currently does not have a subtoken assigned..
+        /// </summary>
+        internal static string ApiSubtokenMissing {
+            get {
+                return ResourceManager.GetString("ApiSubtokenMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to determine whether the module has a subtoken assigned. Contact module author..
+        /// </summary>
+        internal static string ApiSubtokenUnknown {
+            get {
+                return ResourceManager.GetString("ApiSubtokenUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Implementation missing. Contact module author..
         /// </summary>
         internal static string GeneralImplementationMissing {

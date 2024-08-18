@@ -4,12 +4,14 @@ using ApiParser.Settings;
 using Blish_HUD;
 using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
+using Blish_HUD.Gw2WebApi;
 using Blish_HUD.Modules.Managers;
 using Flyga.AdditionalAchievements.Status.Models;
 using Gw2Sharp.WebApi.V2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Flyga.AdditionalAchievements.Status.Provider
 {
@@ -120,8 +122,7 @@ namespace Flyga.AdditionalAchievements.Status.Provider
 
         private void OnSubtokenUpdated(object _, ValueEventArgs<IEnumerable<TokenPermission>> activePermissions)
         {
-            ScreenNotification.ShowNotification("Subtoken has been updated.");
-            UpdatePermissionStatus();
+            UpdateStatus();
             SubtokenUpdated?.Invoke(this, activePermissions);
         }
 
@@ -218,7 +219,19 @@ namespace Flyga.AdditionalAchievements.Status.Provider
                 return;
             }
 
-            // TODO: use Blish 1.1.1 and then check _gw2ApiManager.HasSubtoken
+            // TODO: use Blish 1.1.1 and then check _gw2ApiManager.HasSubtoken instead 
+            // of using the extension method
+            if (!_gw2ApiManager.TryHasSubtoken(out bool hasSubtoken))
+            {
+                Status = new StatusData(AdditionalAchievements.Status.Status.Stopped, Resources.Status.Provider.ApiSubtokenUnknown);
+                return;
+            }
+
+            if (!hasSubtoken)
+            {
+                Status = new StatusData(AdditionalAchievements.Status.Status.Paused, Resources.Status.Provider.ApiSubtokenMissing);
+                return;
+            }
 
             UpdatePermissionStatus();
             UpdateApiRequestStatus();

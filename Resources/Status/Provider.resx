@@ -171,4 +171,10 @@
   <data name="MumbleNotReady" xml:space="preserve">
     <value>Mumble Link is not yet available.</value>
   </data>
+  <data name="ApiSubtokenUnknown" xml:space="preserve">
+    <value>Unable to determine whether the module has a subtoken assigned. Contact module author.</value>
+  </data>
+  <data name="ApiSubtokenMissing" xml:space="preserve">
+    <value>The module currently does not have a subtoken assigned.</value>
+  </data>
 </root>

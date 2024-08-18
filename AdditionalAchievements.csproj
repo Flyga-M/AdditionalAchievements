@@ -267,6 +267,7 @@
     <Compile Include="UI\Views\_WindowView\AchievementView.cs" />
     <Compile Include="UI\Windows\AchievementWindow.cs" />
     <Compile Include="_Extensions\ContextsServiceExtensions.cs" />
+    <Compile Include="_Extensions\Gw2ApiManagerExtensions.cs" />
     <Compile Include="_Extensions\ILocalizableExtensions.cs" />
     <Compile Include="_Extensions\ObservableCollectionsExtensions.cs" />
     <Compile Include="_Extensions\RectangleExtensions.cs" />
