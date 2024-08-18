@@ -60,11 +60,17 @@ namespace Flyga.AdditionalAchievements.Repo
 
                 if (oldValue != value)
                 {
-                    Storage.TryStoreProperty(this, nameof(KeepUpdated));
+                    if (!IsRetrieving)
+                    {
+                        Storage.TryStoreProperty(this, nameof(KeepUpdated));
+                    }
                     KeepUpdatedChanged?.Invoke(this, value);
                 }
             }
         }
+
+        [JsonIgnore]
+        public bool IsLocalOnly { get; internal set; }
 
         [JsonConstructor]
         public AchievementPackPkg(string name, string @namespace, string description, string downloadUrl, string infoUrl, string[] tags, Version version, string author, DateTime lastUpdate)

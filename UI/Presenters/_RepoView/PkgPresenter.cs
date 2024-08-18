@@ -41,8 +41,8 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
         {
             View.CanDownload = !isInstalled;
             View.CanUpdate = Model.State.IsUpdateAvailable;
-
             View.CanDelete = isInstalled;
+            View.CanEnable = isInstalled;
 
             if (isInstalled && Model.State.CurrentManager != null)
             {
@@ -62,6 +62,7 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
         {
             View.DownloadTooltip = message;
             View.CanDownload = false;
+            View.CanEnable = false;
         }
 
         private void OnModelDeleteError(object _, string message)
@@ -138,8 +139,8 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
 
             View.CanDownload = !Model.State.IsInstalled;
             View.CanUpdate = Model.State.IsUpdateAvailable;
-
             View.CanDelete = Model.State.IsInstalled;
+            View.CanEnable = Model.State.IsInstalled;
 
             View.IsEnabled = Model.State.CurrentManager?.State == AchievementLib.Pack.PackLoadState.Loaded;
         }

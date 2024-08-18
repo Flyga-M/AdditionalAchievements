@@ -39,7 +39,7 @@ namespace Flyga.AdditionalAchievements.UI.Controller
 
         private void OnModelInstalledChanged(object _, bool isInstalled)
         {
-            Control.ShowKeepUpdated = isInstalled;
+            Control.ShowKeepUpdated = isInstalled && !Model.IsLocalOnly;
             Control.IsDownloaded = isInstalled;
 
             if (isInstalled && Model.State.CurrentManager != null)
@@ -71,14 +71,12 @@ namespace Flyga.AdditionalAchievements.UI.Controller
             Control.Title = Model.Name;
             Control.Description = Model.Description.Replace(@"\n", "\n");
             Control.KeepUpdated = Model.KeepUpdated;
-            Control.ShowKeepUpdated = Model.State.IsInstalled;
+            Control.ShowKeepUpdated = Model.State.IsInstalled && !Model.IsLocalOnly;
             Control.IsDownloaded = Model.State.IsInstalled;
             Control.IsEnabled = Model.State.CurrentManager?.State == AchievementLib.Pack.PackLoadState.Loaded;
 
             // TODO: localize
             Control.LastUpdateMessage = $"Last Update: {Model.LastUpdate.ToShortDateString()}";
-
-            Control.ShowKeepUpdated = Model.State.IsInstalled;
         }
 
         protected override void Unload()

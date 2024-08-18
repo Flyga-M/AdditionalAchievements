@@ -172,9 +172,9 @@
     <value>Eliminar</value>
   </data>
   <data name="Disable" xml:space="preserve">
-    <value>Activar</value>
+    <value>Desactivar</value>
   </data>
   <data name="Enable" xml:space="preserve">
-    <value>Desactivar</value>
+    <value>Activar</value>
   </data>
 </root>

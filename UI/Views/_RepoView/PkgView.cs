@@ -26,6 +26,7 @@ namespace Flyga.AdditionalAchievements.UI.Views
         private bool _canDownload;
         private bool _canUpdate;
         private bool _canDelete;
+        private bool _canEnable;
         private bool _lockAllButtons;
 
         private bool _isEnabled;
@@ -125,6 +126,21 @@ namespace Flyga.AdditionalAchievements.UI.Views
             {
                 bool oldValue = _canDelete;
                 _canDelete = value;
+
+                if (oldValue != value)
+                {
+                    UpdateButtons();
+                }
+            }
+        }
+
+        public bool CanEnable
+        {
+            get => _canEnable;
+            set
+            {
+                bool oldValue = _canEnable;
+                _canEnable = value;
 
                 if (oldValue != value)
                 {
@@ -436,7 +452,8 @@ namespace Flyga.AdditionalAchievements.UI.Views
 
             if (_enableButton != null)
             {
-                _enableButton.Enabled = !_lockAllButtons;
+                _enableButton.Enabled = CanEnable && !_lockAllButtons;
+                _enableButton.Visible = (IsEnabled || CanEnable);
 
                 _enableButton.Text = IsEnabled ? Strings.Disable : Strings.Enable;
             }

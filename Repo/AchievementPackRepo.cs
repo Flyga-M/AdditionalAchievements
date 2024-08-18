@@ -1,8 +1,8 @@
 ﻿using AchievementLib.Pack;
 using Blish_HUD;
 using Flurl.Http;
-using Gw2Sharp.Json.Converters;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -72,30 +72,51 @@ namespace Flyga.AdditionalAchievements.Repo
 
             IManifest[] existingPacks = _initiator.Packs.Select(pack => pack.Manifest).ToArray();
 
-            foreach (AchievementPackPkg pkg in AchievementPackages)
+            foreach (IManifest manifest in existingPacks)
             {
-                IManifest existingPack = existingPacks.Where(pack => pack.Namespace == pkg.Namespace).FirstOrDefault();
+                AchievementPackPkg correspondingPkg = AchievementPackages.Where(pkg => pkg.Namespace == manifest.Namespace).FirstOrDefault();
 
-                if (existingPack == null)
+                if (correspondingPkg == null)
                 {
-                    continue;
+                    correspondingPkg = new AchievementPackPkg(
+                        // TODO: make fallback locale an option somewhere?
+                        manifest.Name.GetLocalizedForUserLocale(),
+                        manifest.Namespace,
+                        // TODO: make fallback locale an option somewhere?
+                        manifest.Description.GetLocalizedForUserLocale(),
+                        string.Empty,
+                        string.Empty,
+                        new string[] { "Local Only" },
+                        manifest.Version,
+                        manifest.Author,
+                        manifest.TryGetLastFileUpdate(out DateTime lastUpdate) ? lastUpdate : DateTime.Now
+                    )
+            {
+                        IsLocalOnly = true
+                    };
+
+                    List<AchievementPackPkg> newPackageList = new List<AchievementPackPkg>(AchievementPackages)
+                {
+                        correspondingPkg
+                    };
+                    AchievementPackages = newPackageList.ToArray();
                 }
 
-                pkg.State.IsInstalled = true;
-                pkg.State.CurrentManager = _initiator.Packs.FirstOrDefault(pack => pack.Manifest.Namespace == pkg.Namespace);
+                correspondingPkg.State.IsInstalled = true;
+                correspondingPkg.State.CurrentManager = _initiator.Packs.FirstOrDefault(pack => pack.Manifest.Namespace == correspondingPkg.Namespace);
 
-                if (existingPack.Version < pkg.Version)
+                if (manifest.Version < correspondingPkg.Version)
                 {
-                    pkg.State.IsUpdateAvailable = true;
+                    correspondingPkg.State.IsUpdateAvailable = true;
                 }
                 else
                 {
-                    pkg.State.IsUpdateAvailable = false;
+                    correspondingPkg.State.IsUpdateAvailable = false;
                 }
 
-                if (pkg.KeepUpdated && pkg.State.IsUpdateAvailable)
+                if (correspondingPkg.KeepUpdated && correspondingPkg.State.IsUpdateAvailable)
                 {
-                    await PackHandlingUtil.DownloadOrUpdatePackAsync(pkg, progress, true);
+                    await PackHandlingUtil.DownloadOrUpdatePackAsync(correspondingPkg, progress, true);
                 }
             }
         }

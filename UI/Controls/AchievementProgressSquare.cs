@@ -531,7 +531,7 @@ namespace Flyga.AdditionalAchievements.UI.Controls
 
         protected override void DisposeControl()
         {
-            _animatedFill?.Cancel();
+            _animatedFill?.CancelAndComplete();
             _animatedFill = null;
 
             base.DisposeControl();
