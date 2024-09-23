@@ -95,11 +95,11 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1.Api
 
                 if (filterApplies)
                 {
-                    filteredData.Add(data);
+                    filteredData.Add(date);
                 }
                 else
                 {
-                    discardedData.Add(data);
+                    discardedData.Add(date);
                 }
             }
 
