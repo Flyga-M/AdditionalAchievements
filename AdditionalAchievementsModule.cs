@@ -70,7 +70,8 @@ namespace Flyga.AdditionalAchievements
         Solve.Handler.AchievementHandler _achievementHandler;
         AchievementPackRepo _achievementPackRepo;
 
-        private readonly HierarchyResolveContext _hierarchyResolveContext = new HierarchyResolveContext();
+        private readonly ResolveContextCollection _resolveContextCollection = new ResolveContextCollection();
+        private HierarchyResolveContext _hierarchyResolveContext => _resolveContextCollection.GetContext<HierarchyResolveContext>();
 
         public event EventHandler<IAchievementPackManager> AchievementPackRegistered;
 
@@ -175,6 +176,9 @@ namespace Flyga.AdditionalAchievements
 
         protected override async Task LoadAsync()
         {
+            _resolveContextCollection.TryAddContext(new HierarchyResolveContext());
+            _resolveContextCollection.TryAddContext(new AssetResolveContext());
+
             ExtractSQLiteStuff();
             AddUnmanagedDllDirectory();
 
@@ -429,7 +433,7 @@ namespace Flyga.AdditionalAchievements
 
             try
             {
-                if (!pack.Enable(connection, keepConnectionOpen, GraphicsDeviceProvider.Instance, _hierarchyResolveContext, out Task loading))
+                if (!pack.Enable(connection, keepConnectionOpen, GraphicsDeviceProvider.Instance, _resolveContextCollection, out Task loading))
                 {
                     Logger.Debug($"Attempt to enable v1Pack {pack.Manifest.Namespace} " +
                         $"failed. v1Pack.Enable returned false.");

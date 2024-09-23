@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdditionalAchievementsModule.cs" />
+    <Compile Include="Integration\AssetResolveContext.cs" />
     <Compile Include="Integration\GraphicsDeviceProvider.cs" />
     <Compile Include="Integration\ModuleContextProvider.cs" />
     <Compile Include="Integration\PositionEventsContextProvider.cs" />
