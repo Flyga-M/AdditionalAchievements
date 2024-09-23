@@ -52,9 +52,37 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
 
         private void SortContent()
         {
-            View.SortContent<AchievementSelection>(SortByCompletionPercent);
-            View.SortContent<AchievementSelection>(SortByLockedStatus);
-            View.SortContent<AchievementSelection>(SortByPinnedStatus);
+            View.SortContent<AchievementSelection>(Sort);
+        }
+
+        private int Sort(AchievementSelection x, AchievementSelection y)
+        {
+            return SortCombined(x, y, new Comparison<AchievementSelection>[]
+            {
+                SortByPinnedStatus,
+                SortByLockedStatus,
+                SortByCompletionPercent,
+                SortByOriginalOrder
+            });
+        }
+
+        /// <remarks>
+        /// Assumes the priority in <paramref name="comparisons"/> to be from
+        /// highest to lowest.
+        /// </remarks>
+        private int SortCombined(AchievementSelection x, AchievementSelection y, IEnumerable<Comparison<AchievementSelection>> comparisons)
+        {
+            foreach(Comparison<AchievementSelection> comparison in comparisons)
+            {
+                int result = comparison(x, y);
+                
+                if (result != 0)
+                {
+                    return result;
+                }
+            }
+
+            return 0;
         }
 
         /// <summary>
@@ -145,6 +173,51 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
             }
 
             return 1;
+        }
+
+        private int SortByOriginalOrder(AchievementSelection x, AchievementSelection y)
+        {
+            IAchievement achievementX = x.Controller?.Model as IAchievement;
+            IAchievement achievementY = y.Controller?.Model as IAchievement;
+
+
+            IAchievementCollection collectionX = achievementX?.Parent as IAchievementCollection;
+            IAchievementCollection collectionY = achievementY?.Parent as IAchievementCollection;
+
+            if (collectionX == null && collectionY == null)
+            {
+                return 0;
+            }
+
+            if (collectionX == null)
+            {
+                return 1;
+            }
+
+            if (collectionY == null)
+            {
+                return -1;
+            }
+
+            if (collectionX != collectionY)
+            {
+                return string.Compare(collectionX.GetFullName(), collectionY.GetFullName());
+            }
+
+            foreach(IHierarchyObject achievement in collectionX.Children)
+            {
+                if (achievement == achievementX)
+                {
+                    return -1;
+                }
+
+                if (achievement == achievementY)
+                {
+                    return 1;
+                }
+            }
+
+            return 0; // TODO: mabye throw here? this shouldn't happen.
         }
 
         protected override void Unload()
