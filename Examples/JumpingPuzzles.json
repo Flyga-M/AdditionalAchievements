@@ -1,0 +1,3536 @@
+{
+  "Id": "JumpingPuzzles",
+  "AchievementCategories": [
+    {
+      "Id": "General",
+      "Name": {
+        "ByLocale": {
+          "English": "General",
+          "German": "Allgemein",
+          "Spanish": "Generales",
+          "French": "Général"
+        }
+      },
+      "AchievementCollections": [
+        {
+          "Id": "Daily",
+          "Name": {
+            "ByLocale": {
+              "English": "Daily Jumping Puzzles",
+              "German": "Tägliche Sprungrätsel",
+              "Spanish": "Pruebas de saltos diarios",
+              "French ": "Puzzles de saut quotidiens"
+            }
+          },
+          "Achievements": [
+            {
+              "Id": "AscalonLoreclawExpanse",
+              "Name": {
+                "ByLocale": {
+                  "English": "Loreclaw Expanse",
+                  "German": "Sagenklauen-Weite",
+                  "Spanish": "Extensión de Garrafolclore",
+                  "French": "Étendue de Fablegriffe"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Loreclaw Expanse\" jumping puzzle.",
+                  "German": "Schließe das \"Sagenklauen-Weite\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Extensión de Garrafolclore\".",
+                  "French": "Terminer le puzzle de saut \"Étendue de Fablegriffe\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "1027.97, -598.564, 53.589",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 19,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "AscalonCrimsonPlateau",
+              "Name": {
+                "ByLocale": {
+                  "English": "Crimson Plateau",
+                  "German": "Purpur-Plateau",
+                  "Spanish": "Meseta Carmesí",
+                  "French": "Plateau cramoisi"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Crimson Plateau\" jumping puzzle.",
+                  "German": "Schließe das \"Purpur-Plateau\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Meseta Carmesí\".",
+                  "French": "Terminer le puzzle de saut \"Plateau cramoisi\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "462.89, -382.122, 66.8475",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 32,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "AscalonGrendichGamble",
+              "Name": {
+                "ByLocale": {
+                  "English": "Grendich Gamble",
+                  "German": "Grendich-Spiel",
+                  "Spanish": "Apuesta de Grendich",
+                  "French": "Saut de Grendich"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Grendich Gamble\" jumping puzzle.",
+                  "German": "Schließe das \"Grendich-Spiel\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Apuesta de Grendich\".",
+                  "French": "Terminer le puzzle de saut \"Saut de Grendich\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-106.048, 113.564, 77.2351",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 32,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "AscalonWallBreachBlitz",
+              "Name": {
+                "ByLocale": {
+                  "English": "Wall Breach Blitz",
+                  "German": "Wallbrecherblitz",
+                  "Spanish": "Bombardeo de la Brecha del Muro",
+                  "French": "Brèche du mur en folie"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Wall Breach Blitz\" jumping puzzle.",
+                  "German": "Schließe das \"Wallbrecherblitz\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Bombardeo de la Brecha del Muro\".",
+                  "French": "Terminer le puzzle de saut \"Brèche du mur en folie\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "369.746, -564.567, 61.3301",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 32,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "AscalonBrandedMine",
+              "Name": {
+                "ByLocale": {
+                  "English": "Branded Mine",
+                  "German": "Die Gebrandmarkte Mine",
+                  "Spanish": "Mina del Marcado",
+                  "French": "Mine stigmatisée"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Branded Mine\" jumping puzzle.",
+                  "German": "Schließe das \"Die Gebrandmarkte Mine\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Mina del Marcado\".",
+                  "French": "Terminer le puzzle de saut \"Mine stigmatisée\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-928.923, 549.709, 51.7719",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 21,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "AscalonBehemGauntlet",
+              "Name": {
+                "ByLocale": {
+                  "English": "Behem Gauntlet",
+                  "German": "Behem-Spießrutenlauf",
+                  "Spanish": "Desafío de Behem",
+                  "French": "Défi de Behem"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Behem Gauntlet\" jumping puzzle.",
+                  "German": "Schließe das \"Behem-Spießrutenlauf\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Desafío de Behem\".",
+                  "French": "Terminer le puzzle de saut \"Défi de Behem\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "570.938, -520.687, 19.2033",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 20,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "AscalonCrazesFolly",
+              "Name": {
+                "ByLocale": {
+                  "English": "Craze's Folly",
+                  "German": "Crazes Torheit",
+                  "Spanish": "Capricho de Insanio",
+                  "French": "La Folie de Delirius"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Craze's Folly\" jumping puzzle.",
+                  "German": "Schließe das \"Crazes Torheit\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Capricho de Insanio\".",
+                  "French": "Terminer le puzzle de saut \"La Folie de Delirius\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "348.223, 1134.93, 55.5455",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 20,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "AscalonChaosCrystalCavern",
+              "Name": {
+                "ByLocale": {
+                  "English": "Chaos Crystal Cavern",
+                  "German": "Die Chaoskristallhöhle",
+                  "Spanish": "Caverna del Cristal del Caos",
+                  "French": "Grotte du cristal du chaos"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Chaos Crystal Cavern\" jumping puzzle.",
+                  "German": "Schließe das \"Die Chaoskristallhöhle\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Caverna del Cristal del Caos\".",
+                  "French": "Terminer le puzzle de saut \"Grotte du cristal du chaos\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-573.384, -769.484, 9.15905",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 25,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "AscalonPigIronQuarry",
+              "Name": {
+                "ByLocale": {
+                  "English": "Pig Iron Quarry",
+                  "German": "Die Roheisen-Grube",
+                  "Spanish": "Cantera de Arrabio",
+                  "French": "La Carrière de fonte brute"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Pig Iron Quarry\" jumping puzzle.",
+                  "German": "Schließe das \"Die Roheisen-Grube\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Cantera de Arrabio\".",
+                  "French": "Terminer le puzzle de saut \"La Carrière de fonte brute\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "475.732, -665.136, 36.2616",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 22,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "AscalonGauntletOfTheKhanUr",
+              "Name": {
+                "ByLocale": {
+                  "English": "Gauntlet of the Khan-Ur",
+                  "German": "Spießrutenlauf des Khan-Ur",
+                  "Spanish": "Dédalo del Khan-Ur",
+                  "French": "Défi du Khan-Ur"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Gauntlet of the Khan-Ur\" jumping puzzle.",
+                  "German": "Schließe das \"Spießrutenlauf des Khan-Ur\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Dédalo del Khan-Ur\".",
+                  "French": "Terminer le puzzle de saut \"Défi du Khan-Ur\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-15.4462, 691.103, 9.98056",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1330,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "CanthaTrialsOfTheTengu",
+              "Name": {
+                "ByLocale": {
+                  "English": "Trials of the Tengu",
+                  "German": "Prüfungen der Tengu",
+                  "Spanish": "Pruebas de los tengu",
+                  "French": "Épreuves des Tengus"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Trials of the Tengu\" jumping puzzle.",
+                  "German": "Schließe das \"Prüfungen der Tengu\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Pruebas de los tengu\".",
+                  "French": "Terminer le puzzle de saut \"Épreuves des Tengus\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-973.85, 400.803, 176.645",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1442,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "CanthaWindThroughTheWalls",
+              "Name": {
+                "ByLocale": {
+                  "English": "Wind through the Walls",
+                  "German": "Es pfeift durch die Mauern",
+                  "Spanish": "El viento entre los muros",
+                  "French": "Du vent à travers les brèches"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Wind through the Walls\" jumping puzzle.",
+                  "German": "Schließe das \"Es pfeift durch die Mauern\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"El viento entre los muros\".",
+                  "French": "Terminer le puzzle de saut \"Du vent à travers les brèches\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "981.999, 672.212, 190.609",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1438,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "HeartOfMaguumaEggBearer",
+              "Name": {
+                "ByLocale": {
+                  "English": "Egg Bearer",
+                  "German": "Träger des Eis",
+                  "Spanish": "Portador del huevo",
+                  "French": "Porteur de l'ouf"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Egg Bearer\" jumping puzzle.",
+                  "German": "Schließe das \"Träger des Eis\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Portador del huevo\".",
+                  "French": "Terminer le puzzle de saut \"Porteur de l'ouf\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "205.089, -228.589, 213.687",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1043,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "HeartOfMaguumaHighestGear",
+              "Name": {
+                "ByLocale": {
+                  "English": "Highest Gear",
+                  "German": "Luftige Höhen",
+                  "Spanish": "El Engranaje Más Alto",
+                  "French": "Équipement optimal"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Highest Gear\" jumping puzzle.",
+                  "German": "Schließe das \"Luftige Höhen\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"El Engranaje Más Alto\".",
+                  "French": "Terminer le puzzle de saut \"Équipement optimal\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-577.259, -433.663, 271.537",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1043,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "HeartOfMaguumaMasterMushroomSpelunker",
+              "Name": {
+                "ByLocale": {
+                  "English": "Master Mushroom Spelunker",
+                  "German": "Profi-Pilzhöhlen-Plünderer",
+                  "Spanish": "Maestro espeleólogo de champiñones",
+                  "French": "Spéléologue spécialiste en champignons"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Master Mushroom Spelunker\" jumping puzzle.",
+                  "German": "Schließe das \"Profi-Pilzhöhlen-Plünderer\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Maestro espeleólogo de champiñones\".",
+                  "French": "Terminer le puzzle de saut \"Spéléologue spécialiste en champignons\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "360.379, -127.242, 49.802",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1045,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "JanthirTreetopBeehive",
+              "Name": {
+                "ByLocale": {
+                  "English": "Treetop Beehive",
+                  "German": "Baumwipfel-Bienennest",
+                  "Spanish": "Colmena en la copa de los árboles",
+                  "French": "Ruche dans les arbres"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Treetop Beehive\" jumping puzzle.",
+                  "German": "Schließe das \"Baumwipfel-Bienennest\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Colmena en la copa de los árboles\".",
+                  "French": "Terminer le puzzle de saut \"Ruche dans les arbres\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "856.261, -71.6164, 337.02",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1550,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "JanthirValeBrazier",
+              "Name": {
+                "ByLocale": {
+                  "English": "Vale Brazier",
+                  "German": "Tal-Flammenschalen",
+                  "Spanish": "Brasero del valle",
+                  "French": "Brasier de la vallée"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Vale Brazier\" jumping puzzle.",
+                  "German": "Schließe das \"Tal-Flammenschalen\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Brasero del valle\".",
+                  "French": "Terminer le puzzle de saut \"Brasier de la vallée\"."
+                }
+              },
+              "Tiers": [
+                11
+              ],
+              "Objectives": [
+                {
+                  "Id": "Brazier1",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Brazier #1",
+                      "German": "Flammenschale #1",
+                      "Spanish": "Brasero #1",
+                      "French": "Brasier #1"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Light brazier #1.",
+                      "German": "Entzünde Flammenschale #1.",
+                      "Spanish": "Encender el brasero #1.",
+                      "French": "Allumez le brasier #1."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "104.996, -207.081, 229.485",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1550,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                },
+                {
+                  "Id": "Brazier2",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Brazier #2",
+                      "German": "Flammenschale #2",
+                      "Spanish": "Brasero #2",
+                      "French": "Brasier #2"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Light brazier #2.",
+                      "German": "Entzünde Flammenschale #2.",
+                      "Spanish": "Encender el brasero #2.",
+                      "French": "Allumez le brasier #2."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "125.957, -110.348, 200.68",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1550,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                },
+                {
+                  "Id": "Brazier3",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Brazier #3",
+                      "German": "Flammenschale #3",
+                      "Spanish": "Brasero #3",
+                      "French": "Brasier #3"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Light brazier #3.",
+                      "German": "Entzünde Flammenschale #3.",
+                      "Spanish": "Encender el brasero #3.",
+                      "French": "Allumez le brasier #3."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "87.088, -27.522, 153.35",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1550,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                },
+                {
+                  "Id": "Brazier4",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Brazier #4",
+                      "German": "Flammenschale #4",
+                      "Spanish": "Brasero #4",
+                      "French": "Brasier #4"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Light brazier #4.",
+                      "German": "Entzünde Flammenschale #4.",
+                      "Spanish": "Encender el brasero #4.",
+                      "French": "Allumez le brasier #4."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "162.181, 70.899, 141.173",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1550,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                },
+                {
+                  "Id": "Brazier5",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Brazier #5",
+                      "German": "Flammenschale #5",
+                      "Spanish": "Brasero #5",
+                      "French": "Brasier #5"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Light brazier #5.",
+                      "German": "Entzünde Flammenschale #5.",
+                      "Spanish": "Encender el brasero #5.",
+                      "French": "Allumez le brasier #5."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "146.908, 151.377, 137.088",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1550,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                },
+                {
+                  "Id": "Brazier6",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Brazier #6",
+                      "German": "Flammenschale #6",
+                      "Spanish": "Brasero #6",
+                      "French": "Brasier #6"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Light brazier #6.",
+                      "German": "Entzünde Flammenschale #6.",
+                      "Spanish": "Encender el brasero #6.",
+                      "French": "Allumez le brasier #6."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "77.988, 198.583, 82.178",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1550,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                },
+                {
+                  "Id": "Brazier7",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Brazier #7",
+                      "German": "Flammenschale #7",
+                      "Spanish": "Brasero #7",
+                      "French": "Brasier #7"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Light brazier #7.",
+                      "German": "Entzünde Flammenschale #7.",
+                      "Spanish": "Encender el brasero #7.",
+                      "French": "Allumez le brasier #7."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "57.123, 326.107, 48.927",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1550,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                },
+                {
+                  "Id": "Brazier8",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Brazier #8",
+                      "German": "Flammenschale #8",
+                      "Spanish": "Brasero #8",
+                      "French": "Brasier #8"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Light brazier #8.",
+                      "German": "Entzünde Flammenschale #8.",
+                      "Spanish": "Encender el brasero #8.",
+                      "French": "Allumez le brasier #8."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "41.629, 398.773, 50.675",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1550,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                },
+                {
+                  "Id": "Brazier9",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Brazier #9",
+                      "German": "Flammenschale #9",
+                      "Spanish": "Brasero #9",
+                      "French": "Brasier #9"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Light brazier #9.",
+                      "German": "Entzünde Flammenschale #9.",
+                      "Spanish": "Encender el brasero #9.",
+                      "French": "Allumez le brasier #9."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "147.66, 456.372, 8.974",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1550,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                },
+                {
+                  "Id": "Brazier10",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Brazier #10",
+                      "German": "Flammenschale #10",
+                      "Spanish": "Brasero #10",
+                      "French": "Brasier #10"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Light brazier #10.",
+                      "German": "Entzünde Flammenschale #10.",
+                      "Spanish": "Encender el brasero #10.",
+                      "French": "Allumez le brasier #10."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "244.421, 559.632, 4.805",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1550,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                },
+                {
+                  "Id": "Chest",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Chest",
+                      "German": "Truhe",
+                      "Spanish": "Cofre",
+                      "French": "Coffre"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Reach the Chest.",
+                      "German": "Erreiche die Truhe.",
+                      "Spanish": "Alcanza el cofre.",
+                      "French": "Atteignez le coffre."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "244.113, 566.835, 3.055",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1550,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "JanthirQueensConfidence",
+              "Name": {
+                "ByLocale": {
+                  "English": "Queen's Confidence",
+                  "German": "Zuversicht der Königin",
+                  "Spanish": "Confianza de la Reina",
+                  "French": "La confiance de la reine"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Queen's Confidence\" jumping puzzle.",
+                  "German": "Schließe das \"Zuversicht der Königin\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Confianza de la Reina\".",
+                  "French": "Terminer le puzzle de saut \"La confiance de la reine\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-204.523, -74.194, 155.704",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1550,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "KrytaTrollsEnd",
+              "Name": {
+                "ByLocale": {
+                  "English": "Troll's End",
+                  "German": "Die Trollgasse",
+                  "Spanish": "Final del Trol",
+                  "French": "Impasse du Troll"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Troll's End\" jumping puzzle.",
+                  "German": "Schließe das \"Die Trollgasse\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Final del Trol\".",
+                  "French": "Terminer le puzzle de saut \"Impasse du Troll\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-393.567, 336.2, 42.1283",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1483,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "KrytaTrollsRevenge",
+              "Name": {
+                "ByLocale": {
+                  "English": "Troll's Revenge",
+                  "German": "Rache des Trolls",
+                  "Spanish": "Venganza del trol",
+                  "French": "Vengeance du troll"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Troll's Revenge\" jumping puzzle.",
+                  "German": "Schließe das \"Rache des Trolls\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Venganza del trol\".",
+                  "French": "Terminer le puzzle de saut \"Vengeance du troll\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-480.226, 278.667, 77.998",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 50,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "KrytaUrmaugsSecret",
+              "Name": {
+                "ByLocale": {
+                  "English": "Urmaug's Secret",
+                  "German": "Urmaugs Geheimnis",
+                  "Spanish": "Secreto de Urmaug",
+                  "French": "Le secret d'Urmaug"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Urmaug's Secret\" jumping puzzle.",
+                  "German": "Schließe das \"Urmaugs Geheimnis\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Secreto de Urmaug\".",
+                  "French": "Terminer le puzzle de saut \"Le secret d'Urmaug\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "670.741, 374.963, 67.5205",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 50,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "KrytaWeyandtsRevenge",
+              "Name": {
+                "ByLocale": {
+                  "English": "Weyandt's Revenge",
+                  "German": "Weyandts Rache",
+                  "Spanish": "Venganza de Weyandt",
+                  "French": "La revanche de Weyandt"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Weyandt's Revenge\" jumping puzzle.",
+                  "German": "Schließe das \"Weyandts Rache\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Venganza de Weyandt\".",
+                  "French": "Terminer le puzzle de saut \"La revanche de Weyandt\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "573.327, -407.496, 2.30273",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 50,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "KrytaDemongrubPits",
+              "Name": {
+                "ByLocale": {
+                  "English": "Demongrub Pits",
+                  "German": "Dämonenraupen-Gruben",
+                  "Spanish": "Fosos Larvademonio",
+                  "French": "Fosses de l'engeance"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Demongrub Pits\" jumping puzzle.",
+                  "German": "Schließe das \"Dämonenraupen-Gruben\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Fosos Larvademonio\".",
+                  "French": "Terminer le puzzle de saut \"Fosses de l'engeance\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "1034.04, -672.352, 46.0362",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 15,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "KrytaTheCollapsedObservatory",
+              "Name": {
+                "ByLocale": {
+                  "English": "The Collapsed Observatory",
+                  "German": "Das eingestürzte Observatorium",
+                  "Spanish": "El Observatorio Derrumbado",
+                  "French": "Observatoire effondré"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"The Collapsed Observatory\" jumping puzzle.",
+                  "German": "Schließe das \"Das eingestürzte Observatorium\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"El Observatorio Derrumbado\".",
+                  "French": "Terminer le puzzle de saut \"Observatoire effondré\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "947.893, -595.739, 75.664",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 23,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "KrytaSwashbucklersCove",
+              "Name": {
+                "ByLocale": {
+                  "English": "Swashbuckler's Cove",
+                  "German": "Die Säbelrassler-Bucht",
+                  "Spanish": "Cala del Espadachín",
+                  "French": "La Crique du bretteur"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Swashbuckler's Cove\" jumping puzzle.",
+                  "German": "Schließe das \"Die Säbelrassler-Bucht\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Cala del Espadachín\".",
+                  "French": "Terminer le puzzle de saut \"La Crique du bretteur\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "688.995, -552.507, 28.1254",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 24,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "KrytaNotSoSecret",
+              "Name": {
+                "ByLocale": {
+                  "English": "Not So Secret",
+                  "German": "Nicht so geheim",
+                  "Spanish": "No tan secreta",
+                  "French": "Pas si secret"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Not So Secret\" jumping puzzle.",
+                  "German": "Schließe das \"Nicht so geheim\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"No tan secreta\".",
+                  "French": "Terminer le puzzle de saut \"Pas si secret\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-276.821, -490.332, 70.4805",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 24,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "KrytaFawcettsBounty",
+              "Name": {
+                "ByLocale": {
+                  "English": "Fawcett's Bounty",
+                  "German": "Fawcetts Beute",
+                  "Spanish": "Botín de Fawcett",
+                  "French": "Le butin de Fawcett"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Fawcett's Bounty\" jumping puzzle.",
+                  "German": "Schließe das \"Fawcetts Beute\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Botín de Fawcett\".",
+                  "French": "Terminer le puzzle de saut \"Le butin de Fawcett\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-662.024, 779.179, 3.26396",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 17,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "KrytaProfessorPortmattsLab",
+              "Name": {
+                "ByLocale": {
+                  "English": "Professor Portmatt's Lab",
+                  "German": "Professor Portmatts Labor",
+                  "Spanish": "Laboratorio del Profesor Portmatt",
+                  "French": "Labo du professeur Portmatt"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Professor Portmatt's Lab\" jumping puzzle.",
+                  "German": "Schließe das \"Professor Portmatts Labor\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Laboratorio del Profesor Portmatt\".",
+                  "French": "Terminer le puzzle de saut \"Labo du professeur Portmatt\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-427.083, 670.579, 23.6932",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 73,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "KrytaSkippingStones",
+              "Name": {
+                "ByLocale": {
+                  "English": "Skipping Stones",
+                  "German": "Steine hüpfen lassen",
+                  "Spanish": "Haciendo Patitos",
+                  "French": "Ricochets"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Skipping Stones\" jumping puzzle.",
+                  "German": "Schließe das \"Steine hüpfen lassen\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Haciendo Patitos\".",
+                  "French": "Terminer le puzzle de saut \"Ricochets\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-548.009, 298.365, 58.0439",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 873,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "KrytaUnderNewManagement",
+              "Name": {
+                "ByLocale": {
+                  "English": "Under New Management",
+                  "German": "Unter neuer Leitung",
+                  "Spanish": "Nueva Administración",
+                  "French": "La nouvelle direction"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Under New Management\" jumping puzzle.",
+                  "German": "Schließe das \"Unter neuer Leitung\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Nueva Administración\".",
+                  "French": "Terminer le puzzle de saut \"La nouvelle direction\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "677.994, -368.043, 59.0244",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 873,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "MaguumaJungleDarkReverie",
+              "Name": {
+                "ByLocale": {
+                  "English": "Dark Reverie",
+                  "German": "Finsterer Tagtraum",
+                  "Spanish": "Ensoñación Oscura",
+                  "French": "Rêverie cauchemardesque"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Dark Reverie\" jumping puzzle.",
+                  "German": "Schließe das \"Finsterer Tagtraum\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Ensoñación Oscura\".",
+                  "French": "Terminer le puzzle de saut \"Rêverie cauchemardesque\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "295.992, -531.316, 67.0896",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 34,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "MaguumaJungleMorgansLeap",
+              "Name": {
+                "ByLocale": {
+                  "English": "Morgan's Leap",
+                  "German": "Morgans Sprung",
+                  "Spanish": "Salto de Morgan",
+                  "French": "Bond de Morgan"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Morgan's Leap\" jumping puzzle.",
+                  "German": "Schließe das \"Morgans Sprung\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Salto de Morgan\".",
+                  "French": "Terminer le puzzle de saut \"Bond de Morgan\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "442.293, -627.734, 44.8859",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 34,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "MaguumaJungleSpekkssLaboratory",
+              "Name": {
+                "ByLocale": {
+                  "English": "Spekks's Laboratory",
+                  "German": "Spekks' Labor",
+                  "Spanish": "Laboratorio de Spekks",
+                  "French": "Laboratoire de Spekk"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Spekks's Laboratory\" jumping puzzle.",
+                  "German": "Schließe das \"Spekks' Labor\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Laboratorio de Spekks\".",
+                  "French": "Terminer le puzzle de saut \"Laboratoire de Spekk\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-531.549, -146.148, 43.8437",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 34,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "MaguumaJungleSpelunkersDelve",
+              "Name": {
+                "ByLocale": {
+                  "English": "Spelunker's Delve",
+                  "German": "Höhlenforscher-Senke",
+                  "Spanish": "Hondonada del Espeleólogo",
+                  "French": "Grottes du spéléologue"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Spelunker's Delve\" jumping puzzle.",
+                  "German": "Schließe das \"Höhlenforscher-Senke\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Hondonada del Espeleólogo\".",
+                  "French": "Terminer le puzzle de saut \"Grottes du spéléologue\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "463.658, -1112.27, 22.3116",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 34,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "MaguumaJungleGoemmsLab",
+              "Name": {
+                "ByLocale": {
+                  "English": "Goemm's Lab",
+                  "German": "Goemms Labor",
+                  "Spanish": "Laboratorio de Goemm",
+                  "French": "Laboratoire de Goemm"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Goemm's Lab\" jumping puzzle.",
+                  "German": "Schließe das \"Goemms Labor\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Laboratorio de Goemm\".",
+                  "French": "Terminer le puzzle de saut \"Laboratoire de Goemm\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "567.122, 746.97, 557.564",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 35,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "MaguumaJungleConundrumCubed",
+              "Name": {
+                "ByLocale": {
+                  "English": "Conundrum Cubed",
+                  "German": "Zwickmühle hoch drei",
+                  "Spanish": "Acertijo al Cubo",
+                  "French": "Enigme au carré"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Conundrum Cubed\" jumping puzzle.",
+                  "German": "Schließe das \"Zwickmühle hoch drei\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Acertijo al Cubo\".",
+                  "French": "Terminer le puzzle de saut \"Enigme au carré\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-1134.84, 752.926, 84.7241",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 39,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "MaguumaJungleHiddenGarden",
+              "Name": {
+                "ByLocale": {
+                  "English": "Hidden Garden",
+                  "German": "Verborgener Garten",
+                  "Spanish": "Jardín Oculto",
+                  "French": "Jardin caché"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Hidden Garden\" jumping puzzle.",
+                  "German": "Schließe das \"Verborgener Garten\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Jardín Oculto\".",
+                  "French": "Terminer le puzzle de saut \"Jardin caché\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "1055.68, 509.454, 63.52",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 39,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "MaguumaJungleHexfoundryUnhinged",
+              "Name": {
+                "ByLocale": {
+                  "English": "Hexfoundry Unhinged",
+                  "German": "Fluchgießerei Abgedreht",
+                  "Spanish": "Hexafundición Destartalada",
+                  "French": "Hexfonderie désaxée"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Hexfoundry Unhinged\" jumping puzzle.",
+                  "German": "Schließe das \"Fluchgießerei Abgedreht\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Hexafundición Destartalada\".",
+                  "French": "Terminer le puzzle de saut \"Hexfonderie désaxée\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "752.856, -848.627, 29.4615",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 53,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "MaguumaJungleVerariumDelves",
+              "Name": {
+                "ByLocale": {
+                  "English": "Verarium Delves",
+                  "German": "Verarium-Loch",
+                  "Spanish": "Socavones de Verarium",
+                  "French": "Fosses de Verarium"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Verarium Delves\" jumping puzzle.",
+                  "German": "Schließe das \"Verarium-Loch\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Socavones de Verarium\".",
+                  "French": "Terminer le puzzle de saut \"Fosses de Verarium\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-663.696, 336.621, 56.506",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 53,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "MaguumaWastesProspectValleyCrashSite",
+              "Name": {
+                "ByLocale": {
+                  "English": "Prospect Valley Crash Site",
+                  "German": "Schürftal-Absturzstelle",
+                  "Spanish": "Lugar del Impacto del Valle de las Promesas",
+                  "French": "Grimpeur du site du crash de la vallée du prospecteur"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Prospect Valley Crash Site\" jumping puzzle.",
+                  "German": "Schließe das \"Schürftal-Absturzstelle\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Lugar del Impacto del Valle de las Promesas\".",
+                  "French": "Terminer le puzzle de saut \"Grimpeur du site du crash de la vallée du prospecteur\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "314.733, -416.572, 135.809",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 988,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "MaguumaWastesRetrospectiveRunaround",
+              "Name": {
+                "ByLocale": {
+                  "English": "Retrospective Runaround",
+                  "German": "Retrospektives Runterspringen",
+                  "Spanish": "Exploracavernas",
+                  "French": "Course rétrospective"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Retrospective Runaround\" jumping puzzle.",
+                  "German": "Schließe das \"Retrospektives Runterspringen\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Exploracavernas\".",
+                  "French": "Terminer le puzzle de saut \"Course rétrospective\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-544.976, -348.657, 316.678",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1015,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "RingOfFireSkipUpTheVolcano",
+              "Name": {
+                "ByLocale": {
+                  "English": "Skip up the Volcano",
+                  "German": "Hüpft auf den Vulkan",
+                  "Spanish": "Ascenso volcánico",
+                  "French": "Saut de volcan"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Skip up the Volcano\" jumping puzzle.",
+                  "German": "Schließe das \"Hüpft auf den Vulkan\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Ascenso volcánico\".",
+                  "French": "Terminer le puzzle de saut \"Saut de volcan\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-538.737, -242.228, 295.357",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1175,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "RingOfFireSearingAscent",
+              "Name": {
+                "ByLocale": {
+                  "English": "Searing Ascent",
+                  "German": "Sengender Aufstieg",
+                  "Spanish": "Ascenso abrasador",
+                  "French": "Ascension brûlante"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Searing Ascent\" jumping puzzle.",
+                  "German": "Schließe das \"Sengender Aufstieg\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Ascenso abrasador\".",
+                  "French": "Terminer le puzzle de saut \"Ascension brûlante\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-437.254, -538.691, 726.946",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1195,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "RuinsOfOrrViziersTower",
+              "Name": {
+                "ByLocale": {
+                  "English": "Vizier's Tower",
+                  "German": "Der Turm des Wesirs",
+                  "Spanish": "Torre del Visir",
+                  "French": "La Tour du Vizir"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Vizier's Tower\" jumping puzzle.",
+                  "German": "Schließe das \"Der Turm des Wesirs\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Torre del Visir\".",
+                  "French": "Terminer le puzzle de saut \"La Tour du Vizir\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "178.266, -303.014, 77.502",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 51,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "RuinsOfOrrAntreOfAdjournment",
+              "Name": {
+                "ByLocale": {
+                  "English": "Antre of Adjournment",
+                  "German": "Kavernöses Refugium",
+                  "Spanish": "Caverna de la Suspensión",
+                  "French": "Antre de Suspension"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Antre of Adjournment\" jumping puzzle.",
+                  "German": "Schließe das \"Kavernöses Refugium\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Caverna de la Suspensión\".",
+                  "French": "Terminer le puzzle de saut \"Antre de Suspension\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "754.461, -373.844, 46.4396",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 65,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "RuinsOfOrrScavengersChasm",
+              "Name": {
+                "ByLocale": {
+                  "English": "Scavenger's Chasm",
+                  "German": "Der Abgrund des Plünderers",
+                  "Spanish": "Sima del Carroñero",
+                  "French": "Gouffre du charognard"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Scavenger's Chasm\" jumping puzzle.",
+                  "German": "Schließe das \"Der Abgrund des Plünderers\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Sima del Carroñero\".",
+                  "French": "Terminer le puzzle de saut \"Gouffre du charognard\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "941.82, -594.308, 52.1197",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 65,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "RuinsOfOrrBuriedArchives",
+              "Name": {
+                "ByLocale": {
+                  "English": "Buried Archives",
+                  "German": "Verschüttete Archive",
+                  "Spanish": "Archivos Enterrados",
+                  "French": "Archives ensevelies"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Buried Archives\" jumping puzzle.",
+                  "German": "Schließe das \"Verschüttete Archive\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Archivos Enterrados\".",
+                  "French": "Terminer le puzzle de saut \"Archives ensevelies\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-106.347, -937.353, 90.9376",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 62,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "RuinsOfOrrAbaddonsAscent",
+              "Name": {
+                "ByLocale": {
+                  "English": "Abaddon's Ascent",
+                  "German": "Abaddons Aufstieg",
+                  "Spanish": "Ascenso de Abaddon",
+                  "French": "Ascension d'Abaddon"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Abaddon's Ascent\" jumping puzzle.",
+                  "German": "Schließe das \"Abaddons Aufstieg\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Ascenso de Abaddon\".",
+                  "French": "Terminer le puzzle de saut \"Ascension d'Abaddon\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "569.082, 97.2403, 510.269",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1203,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "ShiverpeakMountainsShamansRookery",
+              "Name": {
+                "ByLocale": {
+                  "English": "Shaman's Rookery",
+                  "German": "Schamanen-Kolonie",
+                  "Spanish": "Colonia del Cháman",
+                  "French": "Perchoir des chamanes"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Shaman's Rookery\" jumping puzzle.",
+                  "German": "Schließe das \"Schamanen-Kolonie\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Colonia del Cháman\".",
+                  "French": "Terminer le puzzle de saut \"Perchoir des chamanes\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-507.072, 48.2611, 103.75",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 28,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "ShiverpeakMountainsKingJalissRefuge",
+              "Name": {
+                "ByLocale": {
+                  "English": "King Jalis's Refuge",
+                  "German": "König Jalis' Zuflucht",
+                  "Spanish": "Refugio del Rey Jalis",
+                  "French": "Refuge du roi Jalis"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"King Jalis's Refuge\" jumping puzzle.",
+                  "German": "Schließe das \"König Jalis' Zuflucht\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Refugio del Rey Jalis\".",
+                  "French": "Terminer le puzzle de saut \"Refuge du roi Jalis\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "1225.74, 151.722, 27.5562",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 31,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "ShiverpeakMountainsGriffonrookRun",
+              "Name": {
+                "ByLocale": {
+                  "English": "Griffonrook Run",
+                  "German": "Die Greifenturmstrecke",
+                  "Spanish": "Ruta Torre del Grifo",
+                  "French": "Piste de Griffonroc"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Griffonrook Run\" jumping puzzle.",
+                  "German": "Schließe das \"Die Greifenturmstrecke\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Ruta Torre del Grifo\".",
+                  "French": "Terminer le puzzle de saut \"Piste de Griffonroc\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-371.076, -753.286, 105.724",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 27,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "ShiverpeakMountainsTribulationCaverns",
+              "Name": {
+                "ByLocale": {
+                  "English": "Tribulation Caverns",
+                  "German": "Trübsalriss-Höhlen",
+                  "Spanish": "Cavernas de la Aflicción",
+                  "French": "Tribulations caverneuses"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Tribulation Caverns\" jumping puzzle.",
+                  "German": "Schließe das \"Trübsalriss-Höhlen\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Cavernas de la Aflicción\".",
+                  "French": "Terminer le puzzle de saut \"Tribulations caverneuses\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-626.061, -626.685, 86.9735",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 26,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "ShiverpeakMountainsTribulationRiftScaffolding",
+              "Name": {
+                "ByLocale": {
+                  "English": "Tribulation Rift Scaffolding",
+                  "German": "Trübsalriss-Gerüst",
+                  "Spanish": "Andamiaje del Abismo de la Tribulación",
+                  "French": "Ascension de la Faille de la tribulation"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Tribulation Rift Scaffolding\" jumping puzzle.",
+                  "German": "Schließe das \"Trübsalriss-Gerüst\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Andamiaje del Abismo de la Tribulación\".",
+                  "French": "Terminer le puzzle de saut \"Ascension de la Faille de la tribulation\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-581.33, -836.497, 66.5648",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 26,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "ShiverpeakMountainsCoddlersCove",
+              "Name": {
+                "ByLocale": {
+                  "English": "Coddler's Cove",
+                  "German": "Knuddlerbucht",
+                  "Spanish": "Cala del Cuidador",
+                  "French": "Gorge du dorloteur"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Coddler's Cove\" jumping puzzle.",
+                  "German": "Schließe das \"Knuddlerbucht\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Cala del Cuidador\".",
+                  "French": "Terminer le puzzle de saut \"Gorge du dorloteur\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "299.274, -911.345, 28.5118",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 29,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "ShiverpeakMountainsOnlyZuhl",
+              "Name": {
+                "ByLocale": {
+                  "English": "Only Zuhl",
+                  "German": "Nur Zuhl",
+                  "Spanish": "Solo Zuhl",
+                  "French": "Zuhl au monde"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Only Zuhl\" jumping puzzle.",
+                  "German": "Schließe das \"Nur Zuhl\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Solo Zuhl\".",
+                  "French": "Terminer le puzzle de saut \"Zuhl au monde\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "666.611, 1003.72, 25.8592",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 29,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "ShiverpeakMountainsShatteredIceRuins",
+              "Name": {
+                "ByLocale": {
+                  "English": "Shattered Ice Ruins",
+                  "German": "Die Zerschmetterten Eisruinen",
+                  "Spanish": "Ruinas de Hielo Destrozadas",
+                  "French": "Ruines de la banquise brisée"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Shattered Ice Ruins\" jumping puzzle.",
+                  "German": "Schließe das \"Die Zerschmetterten Eisruinen\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Ruinas de Hielo Destrozadas\".",
+                  "French": "Terminer le puzzle de saut \"Ruines de la banquise brisée\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-167.619, 375.535, 52.7962",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 30,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "TheMistsArmisticeBastion",
+              "Name": {
+                "ByLocale": {
+                  "English": "Armistice Bastion",
+                  "German": "Die Bastion des Waffenstillstands",
+                  "Spanish": "Bastión del Armisticio",
+                  "French": "Bastion de l'armistice"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Armistice Bastion\" jumping puzzle.",
+                  "German": "Schließe das \"Die Bastion des Waffenstillstands\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Bastión del Armisticio\".",
+                  "French": "Terminer le puzzle de saut \"Bastion de l'armistice\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "9.21825, 86.8586, 626.411",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 1315,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "TheMistsObsidianSanctum",
+              "Name": {
+                "ByLocale": {
+                  "English": "Obsidian Sanctum",
+                  "German": "Das Obsidianrefugium",
+                  "Spanish": "Sagrario de Obsidiana",
+                  "French": "Sanctuaire d'obsidienne"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Obsidian Sanctum\" jumping puzzle.",
+                  "German": "Schließe das \"Das Obsidianrefugium\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Sagrario de Obsidiana\".",
+                  "French": "Terminer le puzzle de saut \"Sanctuaire d'obsidienne\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "895.79, 349.066, 102.763",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 899,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "TheMistsMistwroughtVault",
+              "Name": {
+                "ByLocale": {
+                  "English": "Mistwrought Vault",
+                  "German": "Nebelgruft",
+                  "Spanish": "Cámara neblinosa",
+                  "French": "Caveau de Ragebrume"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Mistwrought Vault\" jumping puzzle.",
+                  "German": "Schließe das \"Nebelgruft\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Cámara neblinosa\".",
+                  "French": "Terminer le puzzle de saut \"Caveau de Ragebrume\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "GreenHome",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Emerald Sanctum",
+                      "German": "Smaragd-Refugium",
+                      "Spanish": "Sagrario de Esmeralda",
+                      "French": "Sanctuair d'émeraude"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Complete the \"Mistwrought Vault\" (Emerald Sanctum) jumping puzzle.",
+                      "German": "Schließe das \"Nebelgruft\" (Smaragd-Refugium) Sprungrätsel ab.",
+                      "Spanish": "Completa la prueba de salto \"Cámara neblinosa\" (Sagrario de Esmeralda).",
+                      "French": "Terminer le puzzle de saut \"Caveau de Ragebrume\" (Sanctuair d'émeraude)."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-753.986, 367.726, 34.6066",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 95,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                },
+                {
+                  "Id": "BlueHome",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Sapphire Sanctum",
+                      "German": "Saphir-Refugium",
+                      "Spanish": "Sagrario de Zafiro",
+                      "French": "Sanctuair de saphir"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Complete the \"Mistwrought Vault\" (Sapphire Sanctum) jumping puzzle.",
+                      "German": "Schließe das \"Nebelgruft\" (Saphir-Refugium) Sprungrätsel ab.",
+                      "Spanish": "Completa la prueba de salto \"Cámara neblinosa\" (Sagrario de Zafiro).",
+                      "French": "Terminer le puzzle de saut \"Caveau de Ragebrume\" (Sanctuair de saphir)."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "-753.986, 367.726, 34.6066",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 96,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            },
+            {
+              "Id": "TheMistsMistlockMountaineer",
+              "Name": {
+                "ByLocale": {
+                  "English": "Mistlock Mountaineer",
+                  "German": "Nebelsperren-Bergsteiger",
+                  "Spanish": "Montañero del Bloqueo de la Niebla",
+                  "French": "Montagnard de Gardebrume"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Complete the \"Mistlock Mountaineer\" jumping puzzle.",
+                  "German": "Schließe das \"Nebelsperren-Bergsteiger\" Sprungrätsel ab.",
+                  "Spanish": "Completa la prueba de salto \"Montañero del Bloqueo de la Niebla\".",
+                  "French": "Terminer le puzzle de saut \"Montagnard de Gardebrume\"."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Area": {
+                        "Sphere": {
+                          "Center": "102.134, -118.383, 243.25",
+                          "Radius": 5
+                        },
+                        "$typeString": "sphere"
+                      },
+                      "MapId": 872,
+                      "$typeString": "positionArea"
+                    }
+                  }
+                }
+              ],
+              "ResetType": 1
+            }
+          ],
+          "Icon": {
+            "AssetId": 498982,
+            "$typeString": "asset"
+          },
+          "Color": {
+            "B": 144,
+            "G": 238,
+            "R": 144,
+            "A": 255
+          }
+        }
+      ]
+    }
+  ]
+}
