@@ -242,6 +242,47 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
             ResetOccured?.Invoke(this, id);
         }
 
+        private void ResetIfNecessary(IAchievement achievement)
+        {
+            if (achievement.ResetType == ResetType.Permanent)
+            {
+                return;
+            }
+
+            switch(achievement.ResetType)
+            {
+                case ResetType.Daily:
+                    {
+                        if (_resetManager.ResetOccured("daily", achievement.LastCompletion))
+                        {
+                            achievement.ResetProgress();
+                        }
+                        break;
+                    }
+                case ResetType.Weekly:
+                    {
+                        if (_resetManager.ResetOccured("weekly", achievement.LastCompletion))
+                        {
+                            achievement.ResetProgress();
+                        }
+                        break;
+                    }
+                case ResetType.Monthly:
+                    {
+                        if (_resetManager.ResetOccured("monthly", achievement.LastCompletion))
+                        {
+                            achievement.ResetProgress();
+                        }
+                        break;
+                    }
+                default:
+                    {
+                        Logger.Error($"ResetType not implemented {new NotImplementedException()}");
+                        return;
+                    }
+            }
+        }
+
         private void OnAchievementFulfilled(object _, IAchievement achievement)
         {
             // TODO: free memory where possible (maybe add a "shallow" version of the Achievement, without all the condition data etc)
@@ -362,6 +403,11 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
                     // TODO: this currently excludes objectives that grant partial completion from being able to be 
                     // fully completed, if achievement.MaxObjectives < the sum of potential objective.MaxAmount(s)
                     continue;
+                }
+
+                if (achievement.IsFulfilled && achievement.ResetType != ResetType.Permanent)
+                {
+                    ResetIfNecessary(achievement);
                 }
 
                 IAction[] actions = achievement.GetActions();
