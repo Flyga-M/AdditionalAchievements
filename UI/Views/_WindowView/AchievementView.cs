@@ -65,8 +65,8 @@ namespace Flyga.AdditionalAchievements.UI.Views
                 if (_leftColumn != null)
                 {
                     _progressIndicator.Parent = _leftColumn;
-                    _progressIndicator.Width = _leftColumn.Width;
-                    _progressIndicator.Height = _leftColumn.Width;
+                    _progressIndicator.Width = _leftColumn.ContentRegion.Width;
+                    _progressIndicator.Height = _leftColumn.ContentRegion.Width;
                 }
             }
         }
@@ -249,8 +249,8 @@ namespace Flyga.AdditionalAchievements.UI.Views
             if (_progressIndicator != null)
             {
                 _progressIndicator.Parent = leftColumn;
-                _progressIndicator.Width = leftColumn.Width;
-                _progressIndicator.Height = leftColumn.Width;
+                _progressIndicator.Width = leftColumn.ContentRegion.Width;
+                _progressIndicator.Height = leftColumn.ContentRegion.Width;
             }
 
             return leftColumn;
