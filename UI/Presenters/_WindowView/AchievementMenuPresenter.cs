@@ -28,13 +28,11 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
 
         private void RecalculateCategories(Gw2Sharp.WebApi.Locale fallbackLocale)
         {
-            string[] categories = Model.GetCategoryNamesForUserLocale(fallbackLocale);
-
-            //Dictionary<string, CollectionMenuData[]> result = new Dictionary<string, CollectionMenuData[]>();
-
             Dictionary<string, MenuItem> categoryItems = new Dictionary<string, MenuItem>();
+            Dictionary<string, (MenuItemWithData<Func<IView>> Item, IEnumerable<IAchievementCollection> Collections)> collectionItems = new Dictionary<string, (MenuItemWithData<Func<IView>> Item, IEnumerable<IAchievementCollection> Collections)>();
 
             IEnumerable<ILocalizable> categoryNames = Model.CurrentCategories.Select(category => category.Name);
+            IEnumerable<ILocalizable> collectionNames = Model.CurrentCategories.SelectMany(category => category.AchievementCollections).Select(collection => collection.Name);
 
             foreach (IAchievementCategory category in Model.CurrentCategories)
             {
@@ -50,23 +48,41 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
 
                 foreach (IAchievementCollection collection in category.AchievementCollections.ToArray())
                 {
-                    MenuItemWithData<Func<IView>> collectionItem = new MenuItemWithData<Func<IView>>()
+                    string collectionName = collection.Name.GetLocalizedForUserLocale(collectionNames, fallbackLocale);
+
+                    string key = $"{categoryName}.{collectionName}";
+
+                    if (!collectionItems.ContainsKey(key))
                     {
-                        // TODO: make fallback locale an option
-                        Text = collection.Name.GetLocalizedForUserLocale(),
-                        Icon = collection.Icon,
-                        Parent = categoryItems[categoryName],
-                        Data = () => GetCollectionView(collection)
+                        collectionItems[key] = (new MenuItemWithData<Func<IView>>()
+                        {
+                            Text = collectionName,
+                            Icon = collection.Icon,
+                            Parent = categoryItems[categoryName],
+                            Data = () => null
+                        }, Array.Empty<IAchievementCollection>());
+                    }
+
+                    List<IAchievementCollection> collections = new List<IAchievementCollection>(collectionItems[key].Collections)
+                    {
+                        collection
                     };
+
+                    collectionItems[key] = (collectionItems[key].Item, collections);
                 }
+            }
+
+            foreach ((MenuItemWithData<Func<IView>> Item, IEnumerable<IAchievementCollection> Collections) in collectionItems.Values)
+            {
+                Item.Data = () => GetCollectionView(Collections);
             }
 
             View.SetContent(categoryItems.Values);
         }
 
-        private IView GetCollectionView(IAchievementCollection collection)
+        private IView GetCollectionView(IEnumerable<IAchievementCollection> collections)
         {
-            return new AchievementCollectionView(collection);
+            return new AchievementCollectionView(collections);
         }
 
         private void OnPackLoadedOrUnloaded(object _, bool added)

@@ -2,21 +2,32 @@
 using Blish_HUD.Graphics.UI;
 using Flyga.AdditionalAchievements.UI.Controls;
 using Flyga.AdditionalAchievements.UI.Views;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Flyga.AdditionalAchievements.UI.Presenters
 {
-    public class AchievementCollectionPresenter : Presenter<AchievementCollectionView, IAchievementCollection>
+    public class AchievementCollectionPresenter : Presenter<AchievementCollectionView, IEnumerable<IAchievement>>
     {
-        public AchievementCollectionPresenter(AchievementCollectionView view, IAchievementCollection model) : base(view, model)
+        public AchievementCollectionPresenter(AchievementCollectionView view, IAchievementCollection model) : this(view, model.Achievements, model.Name.GetLocalizedForUserLocale(), model.Icon)
+        {
+            /** NOOP **/
+        }
+
+        public AchievementCollectionPresenter(AchievementCollectionView view, IEnumerable<IAchievementCollection> collections) : this(view, collections.SelectMany(collection => collection.Achievements), collections.FirstOrDefault()?.Name.GetLocalizedForUserLocale() ?? "N/A", collections.FirstOrDefault()?.Icon)
+        {
+            /** NOOP **/
+        }
+
+        public AchievementCollectionPresenter(AchievementCollectionView view, IEnumerable<IAchievement> achievements, string title, Texture2D icon) : base(view, achievements)
         {
             // TODO: make fallback locale an option
-            View.Title = Model.Name.GetLocalizedForUserLocale();
-            View.Icon = Model.Icon;
+            View.Title = title;
+            View.Icon = icon;
 
-            foreach (IAchievement achievement in Model.Achievements.ToArray())
+            foreach (IAchievement achievement in achievements.ToArray())
             {
                 achievement.CurrentObjectivesChanged += OnAchievementCurrentObjectivesChanged;
             }
@@ -34,7 +45,7 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
 
         private void SetContent()
         {
-            IAchievement[] achievements = Model.Achievements.ToArray();
+            IAchievement[] achievements = Model.ToArray();
 
             List<AchievementSelection> achievementSelections = new List<AchievementSelection>();
 
@@ -203,7 +214,7 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
 
         protected override void Unload()
         {
-            foreach (IAchievement achievement in Model.Achievements.ToArray())
+            foreach (IAchievement achievement in Model.ToArray())
             {
                 achievement.CurrentObjectivesChanged -= OnAchievementCurrentObjectivesChanged;
             }
