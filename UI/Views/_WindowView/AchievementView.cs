@@ -18,13 +18,15 @@ namespace Flyga.AdditionalAchievements.UI.Views
         private static readonly Logger Logger = Logger.GetLogger<AchievementView>();
 
         //private IAchievement _achievement;
-        private BackData _backData;
+        private readonly BackData _backData;
 
         private Container _parent;
 
         private BackBar _backBar;
 
         private Image _achievementCompletedHighlight;
+        private Image _achievementCompletedShine;
+        private Image _achievementCompletedShine2;
 
         private Panel _content;
         private Panel _leftColumn;
@@ -114,6 +116,15 @@ namespace Flyga.AdditionalAchievements.UI.Views
                 if (_achievementCompletedHighlight != null)
                 {
                     _achievementCompletedHighlight.Visible = value;
+                }
+
+                if (_achievementCompletedShine != null)
+                {
+                    _achievementCompletedShine.Visible = value;
+                }
+                if (_achievementCompletedShine2 != null)
+                {
+                    _achievementCompletedShine2.Visible = value;
                 }
             }
         }
@@ -209,6 +220,20 @@ namespace Flyga.AdditionalAchievements.UI.Views
                 _achievementCompletedHighlight.Height = spaceHeigt - _backBar.Height;
                 _achievementCompletedHighlight.Width = spaceWidth;
             }
+
+            if (_achievementCompletedShine != null)
+            {
+                _achievementCompletedShine.Location = new Point(0, _backBar.Height);
+                _achievementCompletedShine.Height = (int)((spaceWidth / 5.0f) * 1.5f);
+                _achievementCompletedShine.Width = (int)((spaceWidth / 5.0f) * 1.5f);
+            }
+
+            if (_achievementCompletedShine2 != null)
+            {
+                _achievementCompletedShine2.Location = new Point(0, _backBar.Height);
+                _achievementCompletedShine2.Height = (int)((spaceWidth / 5.0f) * 1.5f);
+                _achievementCompletedShine2.Width = (int)((spaceWidth / 5.0f) * 1.5f);
+            }
         }
 
         private void OnParentResized(object _, ResizedEventArgs _1)
@@ -291,6 +316,28 @@ namespace Flyga.AdditionalAchievements.UI.Views
                 Tint = CompletedHighlightColor * 0.5f
             };
 
+            _achievementCompletedShine = new Image()
+            {
+                Parent = buildPanel,
+                Texture = TextureManager.Display.Selection.CompletedShineHighlight,
+                ClipsBounds = false,
+                Location = new Point(0, _backBar.Height),
+                Height = (int)((buildPanel.Width / 5.0f) * 1.5f),
+                Width = (int)((buildPanel.Width / 5.0f) * 1.5f),
+                Visible = ShowCompletedHighlight
+            };
+
+            _achievementCompletedShine2 = new Image()
+            {
+                Parent = buildPanel,
+                Texture = TextureManager.Display.Selection.CompletedShine2Highlight,
+                ClipsBounds = false,
+                Location = new Point(0, _backBar.Height),
+                Height = (int)((buildPanel.Width / 5.0f) * 1.5f),
+                Width = (int)((buildPanel.Width / 5.0f) * 1.5f),
+                Visible = ShowCompletedHighlight
+            };
+
             Panel contentContainer = new Panel()
             {
                 Parent = buildPanel,
@@ -331,6 +378,18 @@ namespace Flyga.AdditionalAchievements.UI.Views
             {
                 _achievementCompletedHighlight.Dispose();
                 _achievementCompletedHighlight = null;
+            }
+
+            if (_achievementCompletedShine != null)
+            {
+                _achievementCompletedShine.Dispose();
+                _achievementCompletedShine = null;
+            }
+
+            if (_achievementCompletedShine2 != null)
+            {
+                _achievementCompletedShine2.Dispose();
+                _achievementCompletedShine2 = null;
             }
 
             if (_leftColumn != null)
