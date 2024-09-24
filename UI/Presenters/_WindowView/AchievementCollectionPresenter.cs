@@ -52,37 +52,18 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
 
         private void SortContent()
         {
-            View.SortContent<AchievementSelection>(Sort);
+            View.SortContent<AchievementSelection>(SortCombined);
         }
 
-        private int Sort(AchievementSelection x, AchievementSelection y)
+        private int SortCombined(AchievementSelection x, AchievementSelection y)
         {
-            return SortCombined(x, y, new Comparison<AchievementSelection>[]
+            return SystemComparisonUtil.CombineComparisons(x, y, new Comparison<AchievementSelection>[]
             {
                 SortByPinnedStatus,
                 SortByLockedStatus,
                 SortByCompletionPercent,
                 SortByOriginalOrder
             });
-        }
-
-        /// <remarks>
-        /// Assumes the priority in <paramref name="comparisons"/> to be from
-        /// highest to lowest.
-        /// </remarks>
-        private int SortCombined(AchievementSelection x, AchievementSelection y, IEnumerable<Comparison<AchievementSelection>> comparisons)
-        {
-            foreach(Comparison<AchievementSelection> comparison in comparisons)
-            {
-                int result = comparison(x, y);
-                
-                if (result != 0)
-                {
-                    return result;
-                }
-            }
-
-            return 0;
         }
 
         /// <summary>

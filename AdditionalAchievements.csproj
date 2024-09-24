@@ -278,6 +278,7 @@
     <Compile Include="_Extensions\RectangleExtensions.cs" />
     <Compile Include="_Extensions\SpriteBatchExtensions.cs" />
     <Compile Include="_Extensions\Texture2DExtensions.cs" />
+    <Compile Include="_Util\SystemComparisonUtil.cs" />
     <Compile Include="_Util\RomanNumeralUtil.cs" />
   </ItemGroup>
   <ItemGroup>
