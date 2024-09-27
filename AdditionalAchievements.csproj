@@ -170,6 +170,11 @@
     <Compile Include="Repo\AchievementPackRepo.cs" />
     <Compile Include="Repo\PkgState.cs" />
     <Compile Include="Repo\_Util\PackHandlingUtil.cs" />
+    <Compile Include="Resources\Achievements\Categories.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Categories.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Status\Provider.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -487,6 +492,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Achievements\Categories.de.resx" />
+    <EmbeddedResource Include="Resources\Achievements\Categories.es.resx" />
+    <EmbeddedResource Include="Resources\Achievements\Categories.fr.resx" />
+    <EmbeddedResource Include="Resources\Achievements\Categories.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Categories.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Status\Provider.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Provider.Designer.cs</LastGenOutput>

@@ -11,14 +11,32 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
 {
     public class AchievementCollectionPresenter : Presenter<AchievementCollectionView, IEnumerable<IAchievement>>
     {
-        public AchievementCollectionPresenter(AchievementCollectionView view, IAchievementCollection model) : this(view, model.Achievements, model.Name.GetLocalizedForUserLocale(), model.Icon)
+        private readonly Func<IAchievement, bool> _achievementFilter = (achievement) => true;
+
+        public AchievementCollectionPresenter(AchievementCollectionView view, IAchievementCollection collection) : this(view, collection.Achievements, collection.Name.GetLocalizedForUserLocale(), collection.Icon)
         {
             /** NOOP **/
+        }
+
+        public AchievementCollectionPresenter(AchievementCollectionView view, IAchievementCollection collection, Func<IAchievement, bool> filter) : this(view, collection)
+        {
+            if (filter != null)
+            {
+                _achievementFilter = filter;
+            }
         }
 
         public AchievementCollectionPresenter(AchievementCollectionView view, IEnumerable<IAchievementCollection> collections) : this(view, collections.SelectMany(collection => collection.Achievements), collections.FirstOrDefault()?.Name.GetLocalizedForUserLocale() ?? "N/A", collections.FirstOrDefault()?.Icon)
         {
             /** NOOP **/
+        }
+
+        public AchievementCollectionPresenter(AchievementCollectionView view, IEnumerable<IAchievementCollection> collections, Func<IAchievement, bool> filter) : this(view, collections)
+        {
+            if (filter != null)
+            {
+                _achievementFilter = filter;
+            }
         }
 
         public AchievementCollectionPresenter(AchievementCollectionView view, IEnumerable<IAchievement> achievements, string title, Texture2D icon) : base(view, achievements)
@@ -30,6 +48,14 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
             foreach (IAchievement achievement in achievements.ToArray())
             {
                 achievement.CurrentObjectivesChanged += OnAchievementCurrentObjectivesChanged;
+            }
+        }
+
+        public AchievementCollectionPresenter(AchievementCollectionView view, IEnumerable<IAchievement> achievements, string title, Texture2D icon, Func<IAchievement, bool> filter) : this(view, achievements, title, icon)
+        {
+            if (filter != null)
+            {
+                _achievementFilter = filter;
             }
         }
 
@@ -46,6 +72,8 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
         private void SetContent()
         {
             IAchievement[] achievements = Model.ToArray();
+
+            achievements = achievements.Where(achievement => _achievementFilter(achievement)).ToArray();
 
             List<AchievementSelection> achievementSelections = new List<AchievementSelection>();
 

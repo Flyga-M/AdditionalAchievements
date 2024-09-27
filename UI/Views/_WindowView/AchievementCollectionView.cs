@@ -81,14 +81,29 @@ namespace Flyga.AdditionalAchievements.UI.Views
             this.WithPresenter(new AchievementCollectionPresenter(this, collection));
         }
 
+        public AchievementCollectionView(IAchievementCollection collection, Func<IAchievement, bool> filter) : this()
+        {
+            this.WithPresenter(new AchievementCollectionPresenter(this, collection, filter));
+        }
+
         public AchievementCollectionView(IEnumerable<IAchievementCollection> collections) : this()
         {
             this.WithPresenter(new AchievementCollectionPresenter(this, collections));
         }
 
+        public AchievementCollectionView(IEnumerable<IAchievementCollection> collections, Func<IAchievement, bool> filter) : this()
+        {
+            this.WithPresenter(new AchievementCollectionPresenter(this, collections, filter));
+        }
+
         public AchievementCollectionView(IEnumerable<IAchievement> achievements, string title, Texture2D icon) : this()
         {
             this.WithPresenter(new AchievementCollectionPresenter(this, achievements, title, icon));
+        }
+
+        public AchievementCollectionView(IEnumerable<IAchievement> achievements, string title, Texture2D icon, Func<IAchievement, bool> filter) : this()
+        {
+            this.WithPresenter(new AchievementCollectionPresenter(this, achievements, title, icon, filter));
         }
 
         private void RecalculateLayout()
