@@ -4,8 +4,10 @@ using Blish_HUD.Graphics.UI;
 using Flyga.AdditionalAchievements.Solve.Handler;
 using Flyga.AdditionalAchievements.UI.Models;
 using Flyga.AdditionalAchievements.UI.Presenters;
+using Flyga.AdditionalAchievements.UI.Views._Interface;
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,11 +25,14 @@ namespace Flyga.AdditionalAchievements.UI.Views
         private int _contentWidth;
         private int _contentHeight;
 
-        private IViewSelection _menuView;
+        private IMenuView _menuView;
 
         private ViewContainer _menuViewContainer;
 
         private ViewContainer _contentViewContainer;
+
+        private ConcurrentStack<Func<IView>> _contentViewStack = new ConcurrentStack<Func<IView>>();
+        private bool _isCurrentContentViewBuilt = false;
 
         private Stack<ViewCreationData> _history;
 
@@ -35,7 +40,7 @@ namespace Flyga.AdditionalAchievements.UI.Views
         /// Will unload the previous <see cref="MenuView"/> when overwritten. 
         /// Will be unloaded when the <see cref="AchievementWindowView"/> is unloaded.
         /// </remarks>
-        public IViewSelection MenuView
+        public IMenuView MenuView
         {
             get => _menuView;
             set
@@ -87,7 +92,7 @@ namespace Flyga.AdditionalAchievements.UI.Views
             _contentViewContainer.Show(newView);
         }
 
-        private void OnSubViewClearSelected(object sender, Func<IView> getSubView)
+        internal void OnSubViewClearSelected(object sender, Func<IView> getSubView)
         {
             _history.Clear();
 
@@ -98,11 +103,34 @@ namespace Flyga.AdditionalAchievements.UI.Views
         {
             ClearContentViewEventListeners(_contentViewContainer.CurrentView);
 
-            IView subView = getSubView();
-            AddContentViewEventListeners(subView);
-            _contentViewContainer.Show(subView);
+            _contentViewStack.Push(getSubView);
+            HandleViewStack();
 
             _history.Push(new ViewCreationData(getSubView));
+        }
+
+        private void HandleViewStack()
+        {
+            if (!_contentViewStack.Any()) return;
+
+            if (!_isCurrentContentViewBuilt && _contentViewContainer.CurrentView != null) return;
+
+            if (_contentViewStack.TryPop(out Func<IView> getView))
+            {
+                _contentViewStack.Clear();
+                ShowView(getView());
+            }
+        }
+
+        private void ShowView(IView view)
+        {
+            _isCurrentContentViewBuilt = false;
+            _contentViewContainer?.Clear();
+
+            AddContentViewEventListeners(view);
+
+            view.Built += (s, e) => { _isCurrentContentViewBuilt = true; HandleViewStack(); };
+            _contentViewContainer.Show(view);
         }
 
         private void AddContentViewEventListeners(IView subView)
@@ -240,6 +268,8 @@ namespace Flyga.AdditionalAchievements.UI.Views
                 _contentViewContainer?.Dispose();
                 _contentViewContainer = null;
             }
+
+            _contentViewStack?.Clear();
         }
     }
 }

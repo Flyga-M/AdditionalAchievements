@@ -5,6 +5,7 @@ using Flyga.AdditionalAchievements.Resources;
 using Flyga.AdditionalAchievements.Solve.Handler;
 using Flyga.AdditionalAchievements.UI.Controls;
 using Flyga.AdditionalAchievements.UI.Presenters;
+using Flyga.AdditionalAchievements.UI.Views._Interface;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Linq;
 
 namespace Flyga.AdditionalAchievements.UI.Views
 {
-    public class AchievementMenuView : View, IViewSelection
+    public class AchievementMenuView : View, IMenuView
     {
         private static Logger Logger = Logger.GetLogger<AchievementMenuView>();
 
@@ -25,6 +26,14 @@ namespace Flyga.AdditionalAchievements.UI.Views
         private Menu _menu;
 
         public event EventHandler<Func<IView>> Selected;
+
+        public event EventHandler<string> SearchTextChanged;
+
+        private void OnTextBoxTextChanged(object _, EventArgs _1)
+        {
+            _menu?.SelectedMenuItem?.Deselect();
+            SearchTextChanged?.Invoke(this, _searchBox.Text);
+        }
 
         public AchievementMenuView(AchievementHandler achievementHandler)
         {
@@ -47,6 +56,8 @@ namespace Flyga.AdditionalAchievements.UI.Views
                 Location = new Point(0, 0),
                 Parent = buildPanel
             };
+
+            _searchBox.TextChanged += OnTextBoxTextChanged;
 
             _menuPanel = new Panel()
             {
@@ -142,6 +153,7 @@ namespace Flyga.AdditionalAchievements.UI.Views
         protected override void Unload()
         {
             Selected = null;
+            SearchTextChanged = null;
 
             if (_parent != null)
             {
@@ -151,6 +163,7 @@ namespace Flyga.AdditionalAchievements.UI.Views
 
             if (_searchBox != null)
             {
+                _searchBox.TextChanged -= OnTextBoxTextChanged;
                 _searchBox.Parent = null;
                 _searchBox?.Dispose();
                 _searchBox = null;

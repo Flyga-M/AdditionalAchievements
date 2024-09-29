@@ -1,6 +1,7 @@
 ﻿using AchievementLib.Pack;
 using Blish_HUD;
 using Blish_HUD.Controls;
+using Flyga.AdditionalAchievements;
 using Flyga.AdditionalAchievements.Textures;
 using Flyga.AdditionalAchievements.Textures.Colors;
 using Flyga.AdditionalAchievements.UI.Controller;
@@ -316,15 +317,17 @@ namespace Flyga.AdditionalAchievements.UI.Controls
 
             if (oldFillHeight != _currentFillHeight)
             {
-                _animatedFill?.Cancel();
+                _animatedFill?.CancelAndComplete();
                 _animatedFill = null;
 
                 _animatedCurrentFillHeight = oldFillHeight;
 
-                _animatedFill = Animation.Tweener.Tween(this, new { _animatedCurrentFillHeight = _currentFillHeight }, 0.65f)
+                _animatedFill = Animation.Tweener
+                    .GetIsolatedTween(this, new { _animatedCurrentFillHeight = _currentFillHeight }, 0.65f, 0.0f)
                     .Ease(Glide.Ease.QuintIn);
 
                 _animatedFill.OnUpdate(OnAnimationUpdate);
+                _animatedFill.OnComplete(() => _animatedFill.Pause());
             }
         }
 
@@ -397,6 +400,11 @@ namespace Flyga.AdditionalAchievements.UI.Controls
             }
 
             return (float)(FillHeight - _iconPadding) / (float)_iconHeight;
+        }
+
+        public override void DoUpdate(GameTime gameTime)
+        {
+            _animatedFill?.UpdateManually((float)gameTime.ElapsedGameTime.TotalSeconds);
         }
 
         protected override void Paint(SpriteBatch spriteBatch, Rectangle bounds)

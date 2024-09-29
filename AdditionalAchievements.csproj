@@ -267,6 +267,7 @@
     <Compile Include="UI\Views\RepoView.cs" />
     <Compile Include="UI\Views\StatusView.cs" />
     <Compile Include="UI\Views\_Interface\IBack.cs" />
+    <Compile Include="UI\Views\_Interface\IMenuView.cs" />
     <Compile Include="UI\Views\_Interface\IViewSelection.cs" />
     <Compile Include="UI\Views\_RepoView\PkgView.cs" />
     <Compile Include="UI\Views\_WindowView\AchievementCollectionView.cs" />
@@ -283,6 +284,7 @@
     <Compile Include="_Extensions\RectangleExtensions.cs" />
     <Compile Include="_Extensions\SpriteBatchExtensions.cs" />
     <Compile Include="_Extensions\Texture2DExtensions.cs" />
+    <Compile Include="_Extensions\TweenExtensions.cs" />
     <Compile Include="_Util\SystemComparisonUtil.cs" />
     <Compile Include="_Util\RomanNumeralUtil.cs" />
   </ItemGroup>
