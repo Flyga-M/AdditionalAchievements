@@ -1,6 +1,7 @@
 ﻿using Flyga.AdditionalAchievements.Status.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Flyga.AdditionalAchievements.Status
 {
@@ -9,6 +10,10 @@ namespace Flyga.AdditionalAchievements.Status
         private const string NO_CATEGORY_IDENTIFIER = "__NONE";
         
         internal Dictionary<string, List<IStatusProvider>> Statuses;
+        
+        public IEnumerable<IStatusProvider> StatusProviders => Statuses.Values.SelectMany(list => list);
+
+        public Status HighestStatus => StatusProviders.Select(provider => provider.Status.Status).Max();
 
         public event EventHandler StatusChanged;
 

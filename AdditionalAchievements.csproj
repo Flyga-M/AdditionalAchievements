@@ -236,6 +236,7 @@
     <Compile Include="UI\Controls\AchievementSelection.cs" />
     <Compile Include="UI\Controls\BackBar.cs" />
     <Compile Include="UI\Controls\Checklist.cs" />
+    <Compile Include="UI\Controls\_CoreOverrides\CornerIconWithStatus.cs" />
     <Compile Include="UI\Controls\_CoreOverrides\FlowPanelWithoutCaptureBlock.cs" />
     <Compile Include="UI\Controls\_CoreOverrides\MenuItemWithData.cs" />
     <Compile Include="UI\Controls\_CoreOverrides\PanelWithRightBorder.cs" />

@@ -46,7 +46,7 @@ namespace Flyga.AdditionalAchievements
 
         private AchievementWindow _achievementWindow;
 
-        private CornerIcon _cornerIcon;
+        private CornerIconWithStatus _cornerIcon;
 
         internal ApiStatusProvider ApiStatusProvider;
         internal PositionEventsModuleStatusProvider PositionEventsModuleStatusProvider;
@@ -155,6 +155,32 @@ namespace Flyga.AdditionalAchievements
         {
             Instance = this;
             StatusManager = new StatusManager();
+
+            StatusManager.StatusChanged += OnStatusChanged;
+        }
+
+        private void OnStatusChanged(object _, EventArgs _1)
+        {
+            RecalculateCornerIconStatus();
+        }
+
+        private void RecalculateCornerIconStatus()
+        {
+            if (_cornerIcon == null || StatusManager == null)
+            {
+                return;
+            }
+
+            if (StatusManager.HighestStatus != Status.Status.Normal)
+            {
+                _cornerIcon.ShowStatus = true;
+                _cornerIcon.Status = CornerIconStatus.Yellow;
+            }
+            else
+            {
+                _cornerIcon.ShowStatus = false;
+                _cornerIcon.Status = CornerIconStatus.Green;
+            }
         }
 
         private void OnPackAddedOrRemoved(object _, bool added)
@@ -711,13 +737,24 @@ namespace Flyga.AdditionalAchievements
                 return;
             }
 
-            _cornerIcon = new CornerIcon()
+            //_cornerIcon = new CornerIcon()
+            //{
+            //    IconName = this.Name, // TODO: localization relevant?
+            //    Priority = 3,
+            //    Icon = TextureManager.Display.IconCorner,
+            //    HoverIcon = TextureManager.Display.IconCornerHover
+            //};
+
+            _cornerIcon = new CornerIconWithStatus()
             {
                 IconName = this.Name, // TODO: localization relevant?
                 Priority = 3,
                 Icon = TextureManager.Display.IconCorner,
-                HoverIcon = TextureManager.Display.IconCornerHover
+                ShowStatus = true,
+                Status = CornerIconStatus.Green
             };
+
+            RecalculateCornerIconStatus();
 
             _cornerIcon.Click += OnCornerIconClick;
         }
@@ -768,6 +805,7 @@ namespace Flyga.AdditionalAchievements
                 MumbleStatusProvider.UiChanged -= OnUiChanged;
             }
 
+            StatusManager.StatusChanged -= OnStatusChanged;
             StatusManager?.Dispose();
 
             Storage.ClearEvents();
