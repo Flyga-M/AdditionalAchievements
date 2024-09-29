@@ -163,8 +163,10 @@
     <Compile Include="Integration\AssetResolveContext.cs" />
     <Compile Include="Integration\GraphicsDeviceProvider.cs" />
     <Compile Include="Integration\ModuleContextProvider.cs" />
+    <Compile Include="Integration\ModuleContextProvider2.cs" />
     <Compile Include="Integration\PositionEventsContextProvider.cs" />
     <Compile Include="Integration\_Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Integration\_Interface\IModuleContextProvider.cs" />
     <Compile Include="Integration\_Type\IntegrationState.cs" />
     <Compile Include="Repo\AchievementPackPkg.cs" />
     <Compile Include="Repo\AchievementPackRepo.cs" />
@@ -265,7 +267,6 @@
     <Compile Include="UI\Presenters\StatusPresenter.cs" />
     <Compile Include="UI\Presenters\_WindowView\AchievementCollectionPresenter.cs" />
     <Compile Include="UI\Presenters\_WindowView\AchievementPresenter.cs" />
-    <Compile Include="UI\Views\ActionDebugView.cs" />
     <Compile Include="UI\Views\RepoView.cs" />
     <Compile Include="UI\Views\StatusView.cs" />
     <Compile Include="UI\Views\_Interface\IBack.cs" />

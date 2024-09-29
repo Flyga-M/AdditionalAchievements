@@ -8,7 +8,7 @@ namespace Flyga.AdditionalAchievements.Status.Provider
 {
     public class ModuleDependencyStatusProvider : IStatusProvider
     {
-        protected ModuleContextProvider _contextProvider;
+        protected IModuleContextProvider _contextProvider;
 
         private StatusData _statusData;
 
@@ -48,7 +48,7 @@ namespace Flyga.AdditionalAchievements.Status.Provider
         /// <remarks>
         /// The <paramref name="contextProvider"/> will be disposed when <see cref="Dispose"/> is called.
         /// </remarks>
-        public ModuleDependencyStatusProvider(ModuleContextProvider contextProvider)
+        public ModuleDependencyStatusProvider(IModuleContextProvider contextProvider)
         {
             _statusData = new StatusData(AdditionalAchievements.Status.Status.Unknown, Resources.Status.Provider.GeneralUnknown);
             
@@ -97,7 +97,7 @@ namespace Flyga.AdditionalAchievements.Status.Provider
         }
 
         /// <remarks>
-        /// Will dispose the provided <see cref="ModuleContextProvider"/>.
+        /// Will dispose the provided <see cref="IModuleContextProvider"/>.
         /// </remarks>
         public virtual void Dispose()
         {
