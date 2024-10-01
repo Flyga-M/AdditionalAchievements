@@ -161,10 +161,10 @@ namespace Flyga.AdditionalAchievements
 
         private void OnStatusChanged(object _, EventArgs _1)
         {
-            RecalculateCornerIconStatus();
+            RecalculateDisplayedStatus();
         }
 
-        private void RecalculateCornerIconStatus()
+        private void RecalculateDisplayedStatus()
         {
             if (_cornerIcon == null || StatusManager == null)
             {
@@ -174,12 +174,12 @@ namespace Flyga.AdditionalAchievements
             if (StatusManager.HighestStatus != Status.Status.Normal)
             {
                 _cornerIcon.ShowStatus = true;
-                _cornerIcon.Status = CornerIconStatus.Yellow;
+                _achievementWindow?.SetTabStatus(2, true);
             }
             else
             {
                 _cornerIcon.ShowStatus = false;
-                _cornerIcon.Status = CornerIconStatus.Green;
+                _achievementWindow?.SetTabStatus(2, false);
             }
         }
 
@@ -750,11 +750,12 @@ namespace Flyga.AdditionalAchievements
                 IconName = this.Name, // TODO: localization relevant?
                 Priority = 3,
                 Icon = TextureManager.Display.IconCorner,
-                ShowStatus = true,
-                Status = CornerIconStatus.Green
+                HoverIcon = TextureManager.Display.IconCornerHover,
+                ShowStatus = false,
+                StatusTexture = TextureManager.Display.ExclamationMark
             };
 
-            RecalculateCornerIconStatus();
+            RecalculateDisplayedStatus();
 
             _cornerIcon.Click += OnCornerIconClick;
         }
@@ -768,8 +769,11 @@ namespace Flyga.AdditionalAchievements
         {
             _achievementWindow = new AchievementWindow(_achievementHandler, _achievementPackRepo)
             {
+                StatusTexture = TextureManager.Display.ExclamationMark,
                 Parent = GameService.Graphics.SpriteScreen
             };
+
+            RecalculateDisplayedStatus();
         }
 
         private void RemoveCornerIcon()

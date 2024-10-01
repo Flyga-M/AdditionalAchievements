@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace Flyga.AdditionalAchievements.UI.Windows
 {
-    public class AchievementWindow : TabbedWindow2
+    public class AchievementWindow : TabbedWindow2WithStatus
     {
         private static readonly Logger Logger = Logger.GetLogger<AchievementWindow>();
 

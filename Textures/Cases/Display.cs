@@ -26,6 +26,8 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
         private readonly TextureReference _watchIconSelected;
         private readonly TextureReference _watchBackgroundHighlight;
 
+        private readonly TextureReference _exclamationMark;
+
         public Progress Progress => _progress;
 
         public Back Back => _back;
@@ -75,6 +77,8 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
         public Texture2D WatchIconSelected => _watchIconSelected;
         public Texture2D WatchBackgroundHighlight => _watchBackgroundHighlight;
 
+        public Texture2D ExclamationMark => _exclamationMark;
+
         public Display()
         {
             _progress = new Progress();
@@ -97,6 +101,8 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
             _watchIcon = new TextureReference(605021);
             _watchIconSelected = new TextureReference(605019);
             _watchBackgroundHighlight = new TextureReference(605000);
+
+            _exclamationMark = new TextureReference("png/exclamation16.png");
         }
 
         public async Task WaitUntilResolved()
@@ -120,6 +126,8 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
             await _watchIcon.WaitUntilResolved();
             await _watchIconSelected.WaitUntilResolved();
             await _watchBackgroundHighlight.WaitUntilResolved();
+
+            await _exclamationMark.WaitUntilResolved();
         }
 
         public void Dispose()
@@ -143,6 +151,8 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
             _watchIcon?.Dispose();
             _watchIconSelected?.Dispose();
             _watchBackgroundHighlight?.Dispose();
+
+            _exclamationMark?.Dispose();
         }
     }
 }

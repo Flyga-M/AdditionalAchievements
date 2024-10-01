@@ -280,6 +280,7 @@
     <Compile Include="UI\Views\_Type\PkgVersionRelationship.cs" />
     <Compile Include="UI\Views\_WindowView\AchievementView.cs" />
     <Compile Include="UI\Windows\AchievementWindow.cs" />
+    <Compile Include="UI\Windows\_CoreOverrides\TabbedWindow2WithStatus.cs" />
     <Compile Include="_Extensions\ContextsServiceExtensions.cs" />
     <Compile Include="_Extensions\Gw2ApiManagerExtensions.cs" />
     <Compile Include="_Extensions\ILocalizableExtensions.cs" />
