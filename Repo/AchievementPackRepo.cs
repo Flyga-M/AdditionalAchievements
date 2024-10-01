@@ -116,7 +116,7 @@ namespace Flyga.AdditionalAchievements.Repo
 
                 if (correspondingPkg.KeepUpdated && correspondingPkg.State.IsUpdateAvailable)
                 {
-                    await PackHandlingUtil.DownloadOrUpdatePackAsync(correspondingPkg, progress, true);
+                    await PackHandlingUtil.DownloadOrUpdatePackAsync(correspondingPkg, progress);
                 }
             }
         }

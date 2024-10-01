@@ -20,10 +20,10 @@ namespace Flyga.AdditionalAchievements.UI.Controller
                 {
                     OnPackLoaded(null, null);
                 }
-                else
-                {
-                    Model.State.CurrentManager.PackLoaded += OnPackLoaded;
-                }
+
+                // needs to be subscribed to at all times, because a pack can be disabled and then 
+                // enabled again
+                Model.State.CurrentManager.PackLoaded += OnPackLoaded;
             }
         }
 

@@ -5,6 +5,7 @@ using Flyga.AdditionalAchievements.UI.Controls;
 using Flyga.AdditionalAchievements.UI.Views;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.UI.Presenters
 {
@@ -112,8 +113,14 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
                 }
                 else if (Model.State.CurrentManager.State == AchievementLib.Pack.PackLoadState.Unloaded)
                 {
-                    // TODO: inform user if this returns false
-                    await AdditionalAchievementsModule.Instance.EnablePackAsync(Model.Namespace);
+                    // this needs to be done, so the resolving of asset textures used in a pack
+                    // happens on a different thread. Otherwise it blocks the main thread which results 
+                    // in the asset texture not being able to be loaded.
+                    await Task.Run(async () =>
+                    {
+                        // TODO: inform user if this returns false
+                        await AdditionalAchievementsModule.Instance.EnablePackAsync(Model.Namespace);
+                    });
                 }
 
                 // TODO: give user some feedback why nothing is happening

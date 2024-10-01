@@ -9,6 +9,8 @@ namespace Flyga.AdditionalAchievements.Integration
 {
     public class AssetResolveContext : ITextureResolveContext
     {
+        private Logger Logger = Logger.GetLogger<AssetResolveContext>();
+
         public bool CanResolve(object resolvable)
         {
             if (resolvable == null)
@@ -36,11 +38,17 @@ namespace Flyga.AdditionalAchievements.Integration
             }
             else
             {
-                texture.TextureSwapped += (s, e) => completionSource.SetResult(e.NewValue != null);
+                texture.TextureSwapped += (s, e) =>
+                {
+                    completionSource.SetResult(e.NewValue != null);
+                };
             }
 
-            // TODO: give user feedback if this time is exceeded
-            completionSource.Task.Wait(2_000);
+            if (!completionSource.Task.Wait(2_000))
+            {
+                Logger.Warn($"Unable to resolve texture with asset id {resolvable.AssetId} " +
+                    $"for achievement pack, because the loading time exceeded 2 seconds.");
+            }
 
             return texture;
         }

@@ -27,7 +27,7 @@ namespace Flyga.AdditionalAchievements.Repo
         /// <param name="funcOnComplete"></param>
         /// <param name="skipReload">Will reload all achievement packs, if <see langword="true"/>.</param>
         /// <returns></returns>
-        public static async Task DownloadOrUpdatePackAsync(AchievementPackPkg achievementPackPkg, IProgress<string> progress, bool skipReload = false)
+        public static async Task DownloadOrUpdatePackAsync(AchievementPackPkg achievementPackPkg, IProgress<string> progress)
         {
             if (achievementPackPkg.State.InProgress)
             {
@@ -143,17 +143,6 @@ namespace Flyga.AdditionalAchievements.Repo
 
             string @namespace = newPack.Manifest.Namespace;
 
-            if (!skipReload)
-            {
-                // TODO: localize
-                progress.Report("Reloading all packs...");
-
-                // TODO: this way all externally added (e.g. via context) packs will be lost.
-                //       They need to be saved in the main module. This needs to be addressed, when
-                //       a context is added.
-                await _module.InitializeAchievementsFromWatchPath();
-            }
-
             if (existingPackEnabled)
             {
                 // TODO: inform user if this returns false
@@ -161,6 +150,7 @@ namespace Flyga.AdditionalAchievements.Repo
             }
 
             progress.Report(null);
+            achievementPackPkg.State.CurrentManager = newPack;
             achievementPackPkg.State.IsUpdateAvailable = false;
             achievementPackPkg.State.CurrentManager = newPack;
             achievementPackPkg.State.IsInstalled = true;
