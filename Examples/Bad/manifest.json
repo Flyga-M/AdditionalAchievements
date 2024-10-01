@@ -1,0 +1,29 @@
+{
+  "Version": {
+    "Major": 1,
+    "Minor": 0,
+    "Build": 0,
+    "Revision": 0,
+    "MajorRevision": 0,
+    "MinorRevision": 0
+  },
+  "PackVersion": 1,
+  "Author": "Flyga-M",
+  "Name": {
+    "ByLocale": {
+      "English": "Miscellaneous (bad example)",
+      "German": "Verschiedenes (schlechtes Beispiel)",
+      "Spanish": "Varios (mal ejemplo)",
+      "French": "Divers (mauvais exemple)"
+    }
+  },
+  "Description": {
+    "ByLocale": {
+      "English": "An Achievement Pack example to showcase different achievements.\n\nThis is considered a bad example, because it groups achievements together that have nothing in common.\n\nContains:\n - >I'm poor you know< achievement\n - >Living up to your title< achievement",
+      "German": "Ein Achievementpaket Beispiel, das verschiedene Erfolge zeigt.\n\nDies wird als ein schlechtes Beispiel bezeichnet, weil es Erfolge zusammenfasst, die nichts miteinander zu tun haben.\n\nEnthält:\n - >Ich bin bitterarm< Erfolg\n - >Deinem Titel gerecht werden< Erfolg",
+      "Spanish": "Un ejemplo de paquete de logros para mostrar diferentes logros.\n\nSe considera un mal ejemplo, porque agrupa logros que no tienen nada en común.\n\nContiene:\n - Logro >Soy pobre, ¿sabes?<\n - Logro >A la altura de su título<",
+      "French": "Un exemple de pack à succès pour présenter différents succès.\n\nCet exemple est considéré comme mauvais, car il regroupe des réalisations qui n'ont rien en commun.\n\nContient:\n - Succès >Je suis pauvre, vous savez?<\n - Succès >À la hauteur de son titre<"
+    }
+  },
+  "Namespace": "AdditionalAchievements.Examples.Miscellaneous"
+}

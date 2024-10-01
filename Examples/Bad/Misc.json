@@ -1,0 +1,213 @@
+{
+  "Id": "Misc",
+  "AchievementCategories": [
+    {
+      "Id": "General",
+      "Name": {
+        "ByLocale": {
+          "English": "General",
+          "German": "Allgemein",
+          "Spanish": "Generales",
+          "French": "Général"
+        }
+      },
+      "AchievementCollections": [
+        {
+          "Id": "Tradesman",
+          "Name": {
+            "ByLocale": {
+              "English": "Tradesman",
+              "German": "Händler",
+              "Spanish": "Comerciante",
+              "French": "Marchand"
+            }
+          },
+          "Achievements": [
+            {
+              "Id": "Poor",
+              "Name": {
+                "ByLocale": {
+                  "English": "I'm poor, you know",
+                  "German": "Ich bin bitterarm",
+                  "Spanish": "Soy pobre, ¿sabes?",
+                  "French": "Je suis pauvre, vous savez?"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Have less than 1 gold coin to your name.",
+                  "German": "Habe weniger als eine Goldmünze in der Tasche.",
+                  "Spanish": "Posee menos de una moneda de oro.",
+                  "French": "Possédez moins d'une pièce d'or."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Objective",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "Objective"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "Key": "Value",
+                      "Value": "10000",
+                      "Comparison": 2,
+                      "Endpoint": "Account.Wallet[INTEGER:0]",
+                      "$typeString": "apiComparison"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "Icon": {
+            "AssetId": 42678,
+            "$typeString": "asset"
+          },
+          "Color": {
+            "R": 255,
+            "G": 253,
+            "B": 40,
+            "A": 255
+          }
+        }
+      ]
+    },
+    {
+      "Id": "WvW",
+      "Name": {
+        "ByLocale": {
+          "English": "World vs. World",
+          "German": "Welt gegen Welt",
+          "Spanish": "Mundo contra Mundo",
+          "French": "Monde contre Monde"
+        }
+      },
+      "AchievementCollections": [
+        {
+          "Id": "EotM",
+          "Name": {
+            "ByLocale": {
+              "English": "Edge of the Mists",
+              "German": "Rand der Nebel",
+              "Spanish": "El Borde de la Niebla",
+              "French": "La lisière des Brumes"
+            }
+          },
+          "Achievements": [
+            {
+              "Id": "commander",
+              "Name": {
+                "ByLocale": {
+                  "English": "Living up to your title",
+                  "German": "Deinem Titel gerecht werden",
+                  "Spanish": "A la altura de su título",
+                  "French": "À la hauteur de son titre"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Don't just follow others around. Use your commander tag in WvW.",
+                  "German": "Lauf nicht nur anderen hinterher. Benutze deine Kommilampe in WvW.",
+                  "Spanish": "No te limites a seguir a los demás. Usa tu chapa de comandante en McM.",
+                  "French": "Ne vous contentez pas de suivre les autres. Utilisez votre tag de commandant dans McM."
+                }
+              },
+              "Tiers": [
+                1
+              ],
+              "Objectives": [
+                {
+                  "Id": "Obj",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "N/A"
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "OrCondition": null,
+                    "AndCondition": {
+                      "OrCondition": {
+                        "OrCondition": {
+                          "OrCondition": {
+                            "OrCondition": {
+                              "OrCondition": {
+                                "OrCondition": {
+                                  "Action": {
+                                    "MapType": 18,
+                                    "$typeString": "map"
+                                  }
+                                },
+                                "Action": {
+                                  "MapType": 15,
+                                  "$typeString": "map"
+                                }
+                              },
+                              "Action": {
+                                "MapType": 14,
+                                "$typeString": "map"
+                              }
+                            },
+                            "Action": {
+                              "MapType": 12,
+                              "$typeString": "map"
+                            }
+                          },
+                          "Action": {
+                            "MapType": 11,
+                            "$typeString": "map"
+                          }
+                        },
+                        "AndCondition": null,
+                        "Action": {
+                          "MapType": 10,
+                          "$typeString": "map"
+                        }
+                      },
+                      "AndCondition": null,
+                      "Action": {
+                        "MapType": 9,
+                        "$typeString": "map"
+                      }
+                    },
+                    "Action": {
+                      "ActiveCommanderTag": true,
+                      "$typeString": "identity"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "Icon": {
+            "AssetId": 338457,
+            "$typeString": "asset"
+          },
+          "Color": {
+            "B": 46,
+            "G": 46,
+            "R": 230,
+            "A": 255
+          }
+        }
+      ]
+    }
+  ]
+}

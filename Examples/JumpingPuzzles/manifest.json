@@ -1,0 +1,29 @@
+{
+  "Version": {
+    "Major": 1,
+    "Minor": 0,
+    "Build": 0,
+    "Revision": 0,
+    "MajorRevision": 0,
+    "MinorRevision": 0
+  },
+  "PackVersion": 1,
+  "Author": "Flyga-M",
+  "Name": {
+    "ByLocale": {
+      "English": "Jumping puzzles (example)",
+      "German": "Sprungrätsel (Beispiel)",
+      "Spanish": "Pruebas de salto (ejemplo)",
+      "French": "Puzzles de saut (exemple)"
+    }
+  },
+  "Description": {
+    "ByLocale": {
+      "English": "An Achievement Pack example to showcase a simple use for position-based achievements. Also showcases daily achievements.\n\nSpecial thanks go out to Tekkit's all-in-one marker pack, where I got most of the locations from!\n\nContains:\n - Daily achievements for all jumping puzzles",
+      "German": "Ein Achievementpaket Beispiel, das eine einfache Verwendungsmöglichkeit für positions-basierte Erfolge aufzeigt. Außerdem werden Tägliche Erfolge gezeigt.\n\nEin besonderer Dank geht an Tekkits All-in-One Marker-Pack, von dem ich die meisten Orte habe!\n\nEnthält:\n - Tägliche Erfolge für alle Sprungrätsel",
+      "Spanish": "Un ejemplo de paquete de logros para mostrar un uso sencillo de los logros basados en la posición. También muestra logros diarios.\n\nUn agradecimiento especial al pack All-in-One de Tekkit, de donde saqué la mayoría de las localizaciones.\n\nContiene:\n - Logros diarios en todos las pruebas de salto",
+      "French": "Un exemple de pack à succès pour présenter une utilisation simple des succès basés sur la position. Il présente également des succès quotidiens.\n\nJe remercie tout particulièrement Tekkit pour son pack All-in-One, qui m'a permis d'obtenir la plupart des emplacements.\n\nContient:\n - Succès quotidiens pour tous les puzzles de saut"
+    }
+  },
+  "Namespace": "AdditionalAchievements.Examples.JumpingPuzzles"
+}

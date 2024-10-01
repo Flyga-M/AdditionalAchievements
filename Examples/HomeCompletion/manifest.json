@@ -1,0 +1,29 @@
+{
+  "Version": {
+    "Major": 1,
+    "Minor": 0,
+    "Build": 0,
+    "Revision": 0,
+    "MajorRevision": 0,
+    "MinorRevision": 0
+  },
+  "PackVersion": 1,
+  "Author": "Flyga-M",
+  "Name": {
+    "ByLocale": {
+      "English": "Home Completion (example)",
+      "German": "Heimat Vervollständigung (Beispiel)",
+      "Spanish": "Completar la vivienda (ejemplo)",
+      "French": "Achèvement de l'instance personnelle (exemple)"
+    }
+  },
+  "Description": {
+    "ByLocale": {
+      "English": "An Achievement Pack example to showcase a simple use for API-based achievements. Also showcases meta achievements.\n\nContains:\n - Achievements for all cats and a meta achievement\n - Achievements for all improvements and a meta achievement",
+      "German": "Ein Achievementpaket Beispiel, das eine einfache Verwendungsmöglichkeit für API-basierte Erfolge aufzeigt. Außerdem werden Meta-Erfolge gezeigt.\n\nEnthält:\n - Erfolge für alle Katzen und ein Meta-Erfolg\n - Erfolge für alle Verbesserungen und ein Meta-Erfolg",
+      "Spanish": "Un ejemplo de paquete de logros para mostrar un uso sencillo de los logros basados en la API. También muestra metalogros.\n\nContiene:\n - Logros para todos los gatos y un metalogro\n - Logros para todas las mejoras y un metalogro",
+      "French": "Un exemple de pack à succès pour présenter une utilisation simple des succès basés sur l'API. Il présente également des méta-succès.\n\nContient:\n - Des succès pour tous les chats et un méta-succès\n - Des succès pour toutes les améliorations et un méta-succès"
+    }
+  },
+  "Namespace": "AdditionalAchievements.Examples.HomeCompletion"
+}
