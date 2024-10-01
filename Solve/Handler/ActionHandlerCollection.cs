@@ -2,6 +2,7 @@
 using Blish_HUD;
 using Flyga.AdditionalAchievements.Status.Provider;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,7 +13,15 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
         private static readonly Logger Logger = Logger.GetLogger<ActionHandlerCollection>();
 
         private readonly SafeList<IActionHandler> _handlers = new SafeList<IActionHandler>();
-        
+
+        private V1.ApiHandler _apiHandler;
+
+        /// <inheritdoc cref="V1.ApiHandler.LastApiUpdate"/>
+        public DateTime LastApiUpdate => _apiHandler.LastApiUpdate;
+
+        /// <inheritdoc cref="V1.ApiHandler.PreviousApiUpdate"/>
+        public DateTime PreviousApiUpdate => _apiHandler.PreviousApiUpdate;
+
         public override IEnumerable<IAction> Actions => _handlers.SelectMany(handler => handler.Actions);
 
         //{ "achievement", typeof(AchievementAction) }, // solves itself
@@ -63,7 +72,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
             V1.Mumble.MapHandler mapHandler = new V1.Mumble.MapHandler(mumbleStatusProvider);
             V1.Mumble.IdentityHandler identityHandler = new V1.Mumble.IdentityHandler(mumbleStatusProvider);
             V1.PositionAreaHandler positionAreaHandler = new V1.PositionAreaHandler(positionEventsModuleStatusProvider);
-            V1.ApiHandler apiHandler = new V1.ApiHandler(apiStatusProvider);
+            _apiHandler = new V1.ApiHandler(apiStatusProvider);
             V1.AchievementActionHandler achievementActionHandler = new V1.AchievementActionHandler();
 
             _handlers.Add(lookingAtHandler);
@@ -71,7 +80,7 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
             _handlers.Add(mapHandler);
             _handlers.Add(identityHandler);
             _handlers.Add(positionAreaHandler);
-            _handlers.Add(apiHandler);
+            _handlers.Add(_apiHandler);
             _handlers.Add(achievementActionHandler);
         }
 

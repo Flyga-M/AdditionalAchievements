@@ -149,10 +149,13 @@
     <None Include="Content\bin\Windows\Content\fonts\newkrytan\newkrytan-12-regular.xnb" />
     <None Include="Content\bin\Windows\Content\fonts\newkrytan\newkrytan-12-regular_0.xnb" />
     <None Include="Content\bin\Windows\Content\fonts\newkrytan\newkrytan-12-regular_1.xnb" />
-    <None Include="Examples\Cats.json" />
-    <None Include="Examples\JumpingPuzzles.json" />
-    <None Include="Examples\Misc.json" />
-    <None Include="Examples\Nodes.json" />
+    <None Include="Examples\Bad\manifest.json" />
+    <None Include="Examples\HomeCompletion\Cats.json" />
+    <None Include="Examples\HomeCompletion\manifest.json" />
+    <None Include="Examples\JumpingPuzzles\JumpingPuzzles.json" />
+    <None Include="Examples\JumpingPuzzles\manifest.json" />
+    <None Include="Examples\Bad\Misc.json" />
+    <None Include="Examples\HomeCompletion\Nodes.json" />
     <None Include="manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

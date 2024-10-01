@@ -28,6 +28,13 @@ namespace Flyga.AdditionalAchievements.Solve.Handler
 
         public int CurrentPackCount => _packs.Count;
 
+        /// <inheritdoc cref="ActionHandlerCollection.LastApiUpdate"/>
+        public DateTime LastApiUpdate => _actionHandlers.LastApiUpdate;
+
+
+        /// <inheritdoc cref="ActionHandlerCollection.PreviousApiUpdate"/>
+        public DateTime PreviousApiUpdate => _actionHandlers.PreviousApiUpdate;
+
         /// <summary>
         /// Currently registered categories (from enabled achievement packs).
         /// </summary>

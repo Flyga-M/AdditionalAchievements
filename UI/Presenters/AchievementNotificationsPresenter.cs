@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using AchievementLib.Pack;
+﻿using AchievementLib.Pack;
 using Blish_HUD;
 using Blish_HUD.Graphics.UI;
 using Flyga.AdditionalAchievements.Solve.Handler;
 using Flyga.AdditionalAchievements.UI.Controls;
 using Flyga.AdditionalAchievements.UI.Views;
+using System;
+using System.Threading.Tasks;
 
 namespace Flyga.AdditionalAchievements.UI.Presenters
 {
@@ -19,7 +19,12 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
         { /** NOOP **/ }
 
         private void OnAchievementCompleted(object _, IAchievement achievement)
-        {   
+        {
+            if (SkipNotification(achievement))
+            {
+                return;
+            }
+
             AchievementCompletedNotification notification = new AchievementCompletedNotification(achievement.Icon ?? ((IAchievementCollection)achievement.Parent).Icon, achievement.Name.GetLocalizedForUserLocale())
             {
                 Parent = View.NotificationsFlowPanel,
@@ -29,6 +34,29 @@ namespace Flyga.AdditionalAchievements.UI.Presenters
             View.NotificationsFlowPanel.AddChild(notification);
 
             notification.LifetimeEnd += OnNotificationLifetimeEnd;
+        }
+
+        private bool SkipNotification(IAchievement achievement)
+        {
+            if (!achievement.UsesApi)
+            {
+                return false;
+            }
+
+            if (!(achievement.GetRoot() is IAchievementPackManager manager))
+            {
+                Logger.Warn("Unable to determine if notification should be skipped, because " +
+                    "achievement root is not IAchievementPackManager.");
+                return false;
+            }
+
+            if (Model.PreviousApiUpdate == DateTime.MaxValue)
+            {
+                return true;
+            }
+
+            // skip notification, if this is the first API update for the pack (previous api update > pack enabled > current api update)
+            return Model.PreviousApiUpdate < manager.LastEnabled;
         }
 
         private void OnNotificationLifetimeEnd(object sender, EventArgs _)

@@ -28,9 +28,30 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1
 
         private double _elapsed;
 
+        private DateTime _lastApiUpdate = DateTime.MaxValue;
+        private DateTime _previousApiUpdate = DateTime.MaxValue;
+
         public int ApiRefreshRate => _apiStatusProvider.Context.Settings.Cooldown;
 
         public ApiState ApiState => _apiStatusProvider.Context.State;
+
+        /// <remarks>
+        /// Might be <see cref="DateTime.MaxValue"/>, if no update has happened yet.
+        /// </remarks>
+        public DateTime LastApiUpdate
+        {
+            get => _lastApiUpdate;
+            set
+            {
+                _previousApiUpdate = _lastApiUpdate;
+                _lastApiUpdate = value;
+            }
+        }
+
+        /// <remarks>
+        /// Might be <see cref="DateTime.MaxValue"/>, if no 2 updates have happened yet.
+        /// </remarks>
+        public DateTime PreviousApiUpdate => _previousApiUpdate;
 
         /// <remarks>
         /// Will not dispose of the <paramref name="apiStatusProvider"/> when disposed.
@@ -177,11 +198,23 @@ namespace Flyga.AdditionalAchievements.Solve.Handler.V1
                 return;
             }
 
+            LastApiUpdate = DateTime.Now;
+
             _elapsed = 0;
+
+            int wait = 0;
 
             foreach (ApiAction action in Actions)
             {
-                _ = UpdateActionAsync(action);
+                // spread the actions out a bit, so Blish does not freeze when they all fire at
+                // the same time
+                Task.Run(async () =>
+                {
+                    await Task.Delay(wait);
+                    await UpdateActionAsync(action);
+                });
+
+                wait += 10;
             }
         }
 
