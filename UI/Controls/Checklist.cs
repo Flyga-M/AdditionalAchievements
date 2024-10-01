@@ -38,6 +38,7 @@ namespace Flyga.AdditionalAchievements.UI.Controls
         {
             MenuItem menuItem = _innerMenu.AddMenuItem(title, @checked ? TextureManager.Display.Description.CheckmarkGreen : TextureManager.Display.Description.Dash);
             RecalculateLayout();
+            _innerMenu.UpdateContainer(null); // to force the height of the inner menu to be updated. There are probably better ways to do this ¯\_(ツ)_/¯
             return menuItem;
         }
 
