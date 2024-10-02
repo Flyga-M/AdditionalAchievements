@@ -81,6 +81,188 @@
             "B": 40,
             "A": 255
           }
+        },
+        {
+          "Id": "Explorer",
+          "Name": {
+            "ByLocale": {
+              "English": "Explorer",
+              "German": "Explorator",
+              "Spanish": "Pionero",
+              "French": "Explorateur"
+            }
+          },
+          "Achievements": [
+            {
+              "Id": "Warclaw",
+              "Name": {
+                "ByLocale": {
+                  "English": "Fused",
+                  "German": "Verschmolzen",
+                  "Spanish": "Fusionado",
+                  "French": "Fusionné"
+                }
+              },
+              "Description": {
+                "ByLocale": {
+                  "English": "Spend at least 5 consecutive minutes on your Warclaw.",
+                  "German": "Verbringe mindestens 5 ununterbrochene Minuten mit deiner Kriegsklaue.",
+                  "Spanish": "Dedica al menos 5 minutos consecutivos a tu Garrabélica.",
+                  "French": "Passez au moins 5 minutes consécutives sur votre Razziafelis."
+                }
+              },
+              "Tiers": [
+                1, 2, 3, 4, 5
+              ],
+              "Objectives": [
+                {
+                  "Id": "Minute1",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "1 minute",
+                      "German": "1 Minute",
+                      "Spanish": "1 minuto",
+                      "French": "1 minute"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Spend at least 1 consecutive minute on your Warclaw.",
+                      "German": "Verbringe mindestens 1 ununterbrochene Minute mit deiner Kriegsklaue.",
+                      "Spanish": "Dedica al menos 1 minuto consecutivo a tu Garrabélica.",
+                      "French": "Passez au moins 1 minute consécutive sur votre Razziafelis."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "MountType": 7,
+                      "MinimumDuration": 60000,
+                      "$typeString": "mount"
+                    }
+                  }
+                },
+                {
+                  "Id": "Minute2",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "2 minutes",
+                      "German": "2 Minuten",
+                      "Spanish": "2 minutos",
+                      "French": "2 minutes"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Spend at least 2 consecutive minutes on your Warclaw.",
+                      "German": "Verbringe mindestens 2 ununterbrochene Minuten mit deiner Kriegsklaue.",
+                      "Spanish": "Dedica al menos 2 minutos consecutivos a tu Garrabélica.",
+                      "French": "Passez au moins 2 minutes consécutives sur votre Razziafelis."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "MountType": 7,
+                      "MinimumDuration": 120000,
+                      "$typeString": "mount"
+                    }
+                  }
+                },
+                {
+                  "Id": "Minute3",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "3 minutes",
+                      "German": "3 Minuten",
+                      "Spanish": "3 minutos",
+                      "French": "3 minutes"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Spend at least 3 consecutive minutes on your Warclaw.",
+                      "German": "Verbringe mindestens 3 ununterbrochene Minuten mit deiner Kriegsklaue.",
+                      "Spanish": "Dedica al menos 3 minutos consecutivos a tu Garrabélica.",
+                      "French": "Passez au moins 3 minutes consécutives sur votre Razziafelis."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "MountType": 7,
+                      "MinimumDuration": 180000,
+                      "$typeString": "mount"
+                    }
+                  }
+                },
+                {
+                  "Id": "Minute4",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "4 minutes",
+                      "German": "4 Minuten",
+                      "Spanish": "4 minutos",
+                      "French": "4 minutes"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Spend at least 4 consecutive minutes on your Warclaw.",
+                      "German": "Verbringe mindestens 4 ununterbrochene Minuten mit deiner Kriegsklaue.",
+                      "Spanish": "Dedica al menos 4 minutos consecutivos a tu Garrabélica.",
+                      "French": "Passez au moins 4 minutes consécutives sur votre Razziafelis."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "MountType": 7,
+                      "MinimumDuration": 240000,
+                      "$typeString": "mount"
+                    }
+                  }
+                },
+                {
+                  "Id": "Minute5",
+                  "Name": {
+                    "ByLocale": {
+                      "English": "5 minutes",
+                      "German": "5 Minuten",
+                      "Spanish": "5 minutos",
+                      "French": "5 minutes"
+                    }
+                  },
+                  "Description": {
+                    "ByLocale": {
+                      "English": "Spend at least 5 consecutive minutes on your Warclaw.",
+                      "German": "Verbringe mindestens 5 ununterbrochene Minuten mit deiner Kriegsklaue.",
+                      "Spanish": "Dedica al menos 5 minutos consecutivos a tu Garrabélica.",
+                      "French": "Passez au moins 5 minutes consécutives sur votre Razziafelis."
+                    }
+                  },
+                  "MaxAmount": 1,
+                  "Condition": {
+                    "Action": {
+                      "MountType": 7,
+                      "MinimumDuration": 300000,
+                      "$typeString": "mount"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "Icon": {
+            "AssetId": 42680,
+            "$typeString": "asset"
+          },
+          "Color": {
+            "R": 90,
+            "G": 161,
+            "B": 122,
+            "A": 255
+          }
         }
       ]
     },
@@ -175,13 +357,11 @@
                             "$typeString": "map"
                           }
                         },
-                        "AndCondition": null,
                         "Action": {
                           "MapType": 10,
                           "$typeString": "map"
                         }
                       },
-                      "AndCondition": null,
                       "Action": {
                         "MapType": 9,
                         "$typeString": "map"
