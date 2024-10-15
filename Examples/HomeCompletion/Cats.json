@@ -48,10 +48,22 @@
                 "A": 255
               },
               "Tiers": [
-                1,
-                10,
-                20,
-                35
+                {
+                  "Count": 1,
+                  "Points": 1
+                },
+                {
+                  "Count": 10,
+                  "Points": 2
+                },
+                {
+                  "Count": 20,
+                  "Points": 3
+                },
+                {
+                  "Count": 35,
+                  "Points": 4
+                }
               ],
               "ObjectiveDisplay": 1,
               "IsPinned": true,
@@ -182,7 +194,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -228,7 +243,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -274,7 +292,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -320,7 +341,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -366,7 +390,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -412,7 +439,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -458,7 +488,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -504,7 +537,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -550,7 +586,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -596,7 +635,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -642,7 +684,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -688,7 +733,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -734,7 +782,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -780,7 +831,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -826,7 +880,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -872,7 +929,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -918,7 +978,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -964,7 +1027,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1010,7 +1076,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1056,7 +1125,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1102,7 +1174,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1148,7 +1223,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1194,7 +1272,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1240,7 +1321,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1286,7 +1370,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1332,7 +1419,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1378,7 +1468,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1424,7 +1517,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1470,7 +1566,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1516,7 +1615,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1562,7 +1664,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1608,7 +1713,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1654,7 +1762,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1700,7 +1811,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -1746,7 +1860,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {

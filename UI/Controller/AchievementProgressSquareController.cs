@@ -87,11 +87,11 @@ namespace Flyga.AdditionalAchievements.UI.Controller
 
             if (ShowFillForCurrentTier)
             {
-                Control.MaxFill = Model.Tiers.ElementAt(Model.CurrentTier - 1);
+                Control.MaxFill = Model.Tiers.ElementAt(Model.CurrentTier - 1).Count;
             }
             else
             {
-                Control.MaxFill = Model.Tiers.ElementAt(Model.GetMaxTier() - 1);
+                Control.MaxFill = Model.Tiers.ElementAt(Model.GetMaxTier() - 1).Count;
             }
         }
 

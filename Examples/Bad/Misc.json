@@ -42,7 +42,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -112,7 +115,26 @@
                 }
               },
               "Tiers": [
-                1, 2, 3, 4, 5
+                {
+                  "Count": 1,
+                  "Points": 1
+                },
+                {
+                  "Count": 2,
+                  "Points": 1
+                },
+                {
+                  "Count": 3,
+                  "Points": 1
+                },
+                {
+                  "Count": 4,
+                  "Points": 1
+                },
+                {
+                  "Count": 5,
+                  "Points": 1
+                }
               ],
               "Objectives": [
                 {
@@ -307,7 +329,10 @@
                 }
               },
               "Tiers": [
-                1
+                {
+                  "Count": 1,
+                  "Points": 3
+                }
               ],
               "Objectives": [
                 {
