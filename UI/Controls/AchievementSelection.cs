@@ -11,6 +11,8 @@ using Flyga.AdditionalAchievements.UI.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Flyga.AdditionalAchievements.UI.Controls
 {
@@ -46,6 +48,9 @@ namespace Flyga.AdditionalAchievements.UI.Controls
         protected WatchIcon _watchIcon;
 
         private bool _isWatched;
+
+        private FlowPanel _additionalIcons;
+        private readonly object _additionalIconsLock = new object();
 
         public event EventHandler<bool> WatchedChanged;
 
@@ -181,6 +186,10 @@ namespace Flyga.AdditionalAchievements.UI.Controls
 
                 _progressIndicator = value;
                 _progressIndicator.Parent = this;
+
+                // some calculations depend on the indicator
+                // TODO: maybe save calculated values instead of relying on the control being set.
+                RecalculateLayout();
             }
         }
 
@@ -254,6 +263,11 @@ namespace Flyga.AdditionalAchievements.UI.Controls
             _watchIcon.SelectedChanged += OnWatchIconSelectedChanged;
             _watchIcon.Parent = this;
 
+            _additionalIcons = new FlowPanel
+            {
+                Parent = this
+            };
+
             _scrollEffect = new ScrollingHighlightEffect(this);
 
             this.EffectBehind = _scrollEffect;
@@ -308,6 +322,7 @@ namespace Flyga.AdditionalAchievements.UI.Controls
             _completedBackgroundHighlightBounds = new Rectangle(0, 0, Width, (int)(Height * 1.3f));
 
             RecalculateWatchIconLayout();
+            RecalculateAdditionalIconsLayout();
         }
 
         private void RecalculateWatchIconLayout()
@@ -320,6 +335,30 @@ namespace Flyga.AdditionalAchievements.UI.Controls
             _watchIcon.Size = new Point(_bottomHeight);
             _watchIcon.Bottom = Height;
             _watchIcon.Right = Width - _watchIconPaddingRight;
+        }
+
+        private void RecalculateAdditionalIconsLayout()
+        {
+            if (_additionalIcons == null || _watchIcon == null || _progressIndicator == null)
+            {
+                return;
+            }
+
+            _additionalIcons.Size = new Point(_watchIcon.Left - _progressIndicator.Right, _bottomHeight);
+
+            _additionalIcons.Left = _progressIndicator.Right;
+            _additionalIcons.Bottom = Height;
+
+            if (_additionalIcons.Children.Any())
+            {
+                lock (_additionalIconsLock)
+                {
+                    foreach (Control icon in _additionalIcons.Children)
+                    {
+                        icon.Height = _bottomHeight;
+                    }
+                }
+            }
         }
 
         protected override void OnMouseMoved(MouseEventArgs e)
@@ -348,6 +387,25 @@ namespace Flyga.AdditionalAchievements.UI.Controls
             }
 
             base.OnClick(e);
+        }
+
+        public void SetAdditionalIcons(IEnumerable<Control> icons)
+        {
+            lock (_additionalIconsLock)
+            {
+                foreach (Control child in _additionalIcons.Children)
+                {
+                    child.Parent = null;
+                    child.Dispose();
+                }
+
+                foreach (Control icon in icons)
+                {
+                    icon.Parent = _additionalIcons;
+                }
+
+                RecalculateAdditionalIconsLayout();
+            }
         }
 
         public override void PaintBeforeChildren(SpriteBatch spriteBatch, Rectangle bounds)
@@ -483,6 +541,13 @@ namespace Flyga.AdditionalAchievements.UI.Controls
                 RemoveChild(_watchIcon);
                 _watchIcon.Dispose();
                 _watchIcon = null;
+            }
+
+            if (_additionalIcons != null)
+            {
+                RemoveChild(_additionalIcons);
+                _additionalIcons.Dispose();
+                _additionalIcons = null;
             }
 
             base.DisposeControl();

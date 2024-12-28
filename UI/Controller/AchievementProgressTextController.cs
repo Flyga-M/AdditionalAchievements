@@ -27,7 +27,7 @@ namespace Flyga.AdditionalAchievements.UI.Controller
                 result.Add(($"{Strings.AchievementTier}:", $"{Model.CurrentTier}/{Model.GetMaxTier()}"));
             }
 
-            result.Add(($"{Strings.AchievementObjectives}:", $"{Model.CurrentObjectives}/{Model.Tiers.ElementAt(Model.CurrentTier - 1)}"));
+            result.Add(($"{Strings.AchievementObjectives}:", $"{Model.CurrentObjectives}/{Model.Tiers.ElementAt(Model.CurrentTier - 1).Count}"));
 
             Control.SetValues(result);
         }

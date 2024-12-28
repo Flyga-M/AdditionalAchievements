@@ -28,6 +28,8 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
 
         private readonly TextureReference _exclamationMark;
 
+        private readonly TextureReference _achievementPoint;
+
         public Progress Progress => _progress;
 
         public Back Back => _back;
@@ -79,6 +81,8 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
 
         public Texture2D ExclamationMark => _exclamationMark;
 
+        public Texture2D AchievementPoint => _achievementPoint;
+
         public Display()
         {
             _progress = new Progress();
@@ -103,6 +107,7 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
             _watchBackgroundHighlight = new TextureReference(605000);
 
             _exclamationMark = new TextureReference("png/exclamation16.png");
+            _achievementPoint = new TextureReference(155865); // maybe try 155059 (a bit less padding)
         }
 
         public async Task WaitUntilResolved()
@@ -128,6 +133,8 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
             await _watchBackgroundHighlight.WaitUntilResolved();
 
             await _exclamationMark.WaitUntilResolved();
+
+            await _achievementPoint.WaitUntilResolved();
         }
 
         public void Dispose()
@@ -153,6 +160,8 @@ namespace Flyga.AdditionalAchievements.Textures.Cases
             _watchBackgroundHighlight?.Dispose();
 
             _exclamationMark?.Dispose();
+
+            _achievementPoint?.Dispose();
         }
     }
 }

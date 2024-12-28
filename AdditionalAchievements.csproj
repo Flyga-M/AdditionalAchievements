@@ -236,6 +236,7 @@
     <Compile Include="UI\Controller\StatusDisplayController.cs" />
     <Compile Include="UI\Controls\AchievementCompletedNotification.cs" />
     <Compile Include="UI\Controls\AchievementDescription.cs" />
+    <Compile Include="UI\Controls\AchievementPointsDisplay.cs" />
     <Compile Include="UI\Controls\AchievementProgressSquare.cs" />
     <Compile Include="UI\Controls\AchievementProgressText.cs" />
     <Compile Include="UI\Controls\AchievementSelection.cs" />

@@ -4,6 +4,9 @@ using Flyga.AdditionalAchievements.Textures.Colors;
 using Flyga.AdditionalAchievements.UI.Controls;
 using Flyga.AdditionalAchievements.UI.Models;
 using Flyga.AdditionalAchievements.UI.Views;
+using System.Linq;
+using Blish_HUD.Controls;
+using System;
 
 namespace Flyga.AdditionalAchievements.UI.Controller
 {
@@ -13,6 +16,7 @@ namespace Flyga.AdditionalAchievements.UI.Controller
         {
             Model.FulfilledChanged += OnAchievementCompleted;
             Model.IsWatchedChanged += OnAchievementIsWatchedChanged;
+            Model.CurrentObjectivesChanged += OnAchievementCurrentObjectivesChanged;
 
             Control.WatchedChanged += OnControlWatchedChanged;
 
@@ -23,6 +27,8 @@ namespace Flyga.AdditionalAchievements.UI.Controller
             Control.ProgressIndicator = new AchievementProgressSquare(Model, false);
 
             Control.GetSelectedView = GetAchievementView;
+
+            UpdateAchievementPointsForCurrentTier();
 
             if (autoHide)
             {
@@ -79,14 +85,36 @@ namespace Flyga.AdditionalAchievements.UI.Controller
             Control.Visible = !Model.IsHidden || Model.IsUnlocked;
         }
 
+        private void UpdateAchievementPointsForCurrentTier()
+        {
+            int currentTierPoints = Model.Tiers.ElementAt(Model.CurrentTier - 1).Points;
+
+            Control[] icons = Array.Empty<Control>();
+
+            if (currentTierPoints > 0 && !Model.IsFulfilled)
+            {
+                icons = new Control[] { new AchievementPointsDisplay(){
+                    Points = currentTierPoints
+                }};
+            }
+
+            Control.SetAdditionalIcons(icons);
+        }
+
         private void OnAchievementCompleted(object _, bool _1)
         {
             UpdateCompletedStatus();
+            UpdateAchievementPointsForCurrentTier();
         }
 
         private void OnAchievementIsWatchedChanged(object _, bool _1)
         {
             UpdateIsWatchedStatus();
+        }
+
+        private void OnAchievementCurrentObjectivesChanged(object _, int _1)
+        {
+            UpdateAchievementPointsForCurrentTier();
         }
 
         private void OnAchievementIsUnlockedChanged(object _, bool _1)
@@ -119,6 +147,7 @@ namespace Flyga.AdditionalAchievements.UI.Controller
         {
             Model.FulfilledChanged -= OnAchievementCompleted;
             Model.IsWatchedChanged -= OnAchievementIsWatchedChanged;
+            Model.CurrentObjectivesChanged -= OnAchievementCurrentObjectivesChanged;
             Model.IsUnlockedChanged -= OnAchievementIsUnlockedChanged;
 
             Control.WatchedChanged -= OnControlWatchedChanged;

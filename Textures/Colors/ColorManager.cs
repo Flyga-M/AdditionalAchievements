@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Blish_HUD;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -21,5 +22,10 @@ namespace Flyga.AdditionalAchievements.Textures.Colors
                 { Flyga.AdditionalAchievements.Status.Status.Stopped, Color.Red }
             }
         );
+
+        /// <summary>
+        /// The <see cref="Color"/> that is used for the achievement points font.
+        /// </summary>
+        public static readonly Color AchievementPointsHighlightColor = ContentService.Colors.ColonialWhite;
     }
 }

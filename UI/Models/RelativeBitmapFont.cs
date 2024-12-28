@@ -83,13 +83,13 @@ namespace Flyga.AdditionalAchievements.UI.Models
         }
 
         /// <summary>
-        /// Returns the value of the <see cref="RelativeInt"/>.
+        /// Returns the value of the <see cref="RelativeBitmapFont"/>.
         /// </summary>
         /// <remarks>
         /// If <see cref="CacheValue"/> is set to <see langword="true"/>, the value is only as recent as the last call 
         /// to <see cref="Update"/>.
         /// </remarks>
-        /// <returns>The value of the <see cref="RelativeInt"/>.</returns>
+        /// <returns>The value of the <see cref="RelativeBitmapFont"/>.</returns>
         public BitmapFont GetValue()
         {
             return GetValue(false);
